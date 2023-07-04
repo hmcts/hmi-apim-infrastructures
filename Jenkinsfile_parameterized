@@ -1,0 +1,11 @@
+#!groovy
+
+@Library("Infrastructure")
+
+def type = "java"
+def product = "hmi"
+def component = "apim"
+
+
+withParameterizedPipeline(type, product, component, 'sbox', 'sbox') {
+}
