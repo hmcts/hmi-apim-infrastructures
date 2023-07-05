@@ -8,9 +8,6 @@ variable "component" {
 variable "location" {
   default = "UK South"
 }
-variable "component" {
-  default = "hmi"
-}
 variable "env" {}
 variable "subscription" {
   default = ""
