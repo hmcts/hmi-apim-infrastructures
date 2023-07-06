@@ -1,6 +1,6 @@
 locals {
   api_resource_group = "ss-${var.env}-network-rg"
-  api_mgmt_product_name   = "${var.product}-${var.component}"
+  api_mgmt_product_name   = "${var.product}-${var.component}-api"
   api_base_path           = var.product
 }
 
