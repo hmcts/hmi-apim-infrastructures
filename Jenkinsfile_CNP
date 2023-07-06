@@ -2,6 +2,7 @@
 //noinspection GroovyUnusedAssignment
 @Library("Infrastructure") _
 
-def product = "hmi-apim"
+def product = "hmi"
+def component = "apim"
 
-withInfraPipeline(product) {}
+withInfraPipeline(product, component) {}
