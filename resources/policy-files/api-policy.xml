@@ -1,9 +1,7 @@
 <policies>
     <inbound>
-        <base />
-        <set-header exists-action="override" name="Forwarded">
-            <value>@("proto=" + context.Request.OriginalUrl.Scheme + ";host=" + context.Request.OriginalUrl.Host + ";")</value>
-        </set-header>
+        <rewrite-uri template="/" copy-unmatched-params="true" />
+        <set-backend-service base-url="https://hmi-apim.test.platform.hmcts.net/hmi/" />
     </inbound>
     <backend>
         <base />
