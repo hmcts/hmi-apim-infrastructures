@@ -14,7 +14,7 @@ module "apim_api" {
   api_mgmt_rg           = local.api_resource_group
   display_name          = "HMI"
   name                  = local.api_mgmt_api_name
-  path                  = api_base_path
+  path                  = "${var.product}/${var.component}"
   product_id            = data.azurerm_api_management_product.apim_product[0].product_id
   protocols             = ["http", "https"]
   revision              = "1"
