@@ -2,8 +2,18 @@ locals {
   apim_api_name           = "sds-api-mgmt-${var.env}"
   api_policy_raw = file("./resources/policy-files/api-policy.xml")
   api_resource_group = "ss-${var.env}-network-rg"
+  api_mgmt_product_name   = "${var.product}-${var.component}"
   api_mgmt_api_name       = "${var.product}-${var.component}-api"
   api_base_path           = var.product
+}
+
+module "api_mgmt_product" {
+  source                = "git@github.com:hmcts/cnp-module-api-mgmt-product?ref=master"
+  name                  = local.api_mgmt_product_name
+  approval_required     = "false"
+  subscription_required = "false"
+  api_mgmt_name         = local.apim_api_name
+  api_mgmt_rg           = local.api_resource_group
 }
 
 module "apim_api" {
@@ -15,7 +25,7 @@ module "apim_api" {
   display_name          = "HMI"
   name                  = local.api_mgmt_api_name
   path                  = "${var.product}/${var.component}"
-  product_id            = data.azurerm_api_management_product.apim_product[0].product_id
+  product_id            = module.api_mgmt_product.product_id
   protocols             = ["http", "https"]
   revision              = "1"
   service_url           = "https://${local.base_url}"
