@@ -1,3 +1,7 @@
+provider "azurerm" {
+  features {}
+}
+
 locals {
   env = (var.env == "aat") ? "stg" : (var.env == "sandbox") ? "sbox" : "${(var.env == "perftest") ? "test" : "${var.env}"}"
 
