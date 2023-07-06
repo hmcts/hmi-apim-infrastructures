@@ -1,9 +1,9 @@
 ## Defaults
 variable "product" {
-  default = "hmi"
+  default = "hmi-apim"
 }
 variable "component" {
-  default = "apim"
+  default = "api"
 }
 variable "location" {
   default = "UK South"

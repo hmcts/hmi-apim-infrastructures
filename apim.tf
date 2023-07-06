@@ -3,7 +3,6 @@ locals {
   api_policy_raw = file("${path.module}/resources/policy-files/api-policy.xml")
   api_resource_group = "ss-${var.env}-network-rg"
   api_mgmt_product_name   = "${var.product}-${var.component}"
-  api_mgmt_api_name       = "${var.product}-${var.component}-api"
   api_base_path           = var.product
 }
 
@@ -23,7 +22,7 @@ module "apim_api" {
   api_mgmt_name         = local.apim_api_name
   api_mgmt_rg           = local.api_resource_group
   display_name          = "HMI"
-  name                  = local.api_mgmt_api_name
+  name                  = local.api_mgmt_product_name
   path                  = "${var.product}/${var.component}"
   product_id            = module.api_mgmt_product.product_id
   protocols             = ["http", "https"]
