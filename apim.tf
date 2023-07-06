@@ -30,7 +30,7 @@ module "apim_api_policy" {
   api_mgmt_name          = local.apim_name
   api_mgmt_rg            = local.apim_rg
   api_name               = local.apim_api_name
-  api_policy_xml_content = local.api_policy
+  api_policy_xml_content = local.api_policy_raw
 
   depends_on = [
     module.apim_api
