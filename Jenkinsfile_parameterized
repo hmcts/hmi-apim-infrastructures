@@ -1,11 +1,10 @@
 #!groovy
 
-@Library("Infrastructure")
+@Library('Infrastructure') _
 
-def type = "java"
 def product = "hmi"
 def component = "apim"
 
 
-withParameterizedPipeline(type, product, component, 'sbox', 'sbox') {
+withParameterizedInfraPipeline(product, component, 'sbox', 'sbox') {
 }
