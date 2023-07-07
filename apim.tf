@@ -1,7 +1,17 @@
 locals {
   api_resource_group = "ss-${var.env}-network-rg"
   api_mgmt_product_name   = "${var.product}-${var.component}-api"
+  api-mgmt-prod-name = "${var.product}-product-${var.env}"
   api_base_path           = var.product
+}
+
+module "api_mgmt_product" {
+  source                = "git@github.com:hmcts/cnp-module-api-mgmt-product?ref=master"
+  name                  = local.api-mgmt-prod-name
+  approval_required     = "false"
+  subscription_required = "false"
+  api_mgmt_name         = local.apim_name
+  api_mgmt_rg           = local.api_resource_group
 }
 
 module "apim_apis" {
@@ -29,5 +39,9 @@ module "apim_apis" {
       url_template = "/example"
       description  = "Operation as example"
     }
+  ]
+
+  depends_on = [
+    module.api_mgmt_product
   ]
 }
