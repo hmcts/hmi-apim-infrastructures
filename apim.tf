@@ -6,7 +6,7 @@ locals {
 
 module "apim_apis" {
   source      = "git::https://github.com/hmcts/terraform-module-apim-api?ref=master"
-  environment = var.env
+  env = var.env
   product     = var.product
   department  = "sds"
 
