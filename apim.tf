@@ -34,9 +34,17 @@ module "apim_apis" {
     {
       operation_id = "opt-1"
       xml_content  = "<xml></xml>"
-      display_name = "Example Operation"
+      display_name = "Example Operation 1"
       method       = "GET"
-      url_template = "/example"
+      url_template = "/example1"
+      description  = "Operation as example"
+    },
+    {
+      operation_id = "opt-2"
+      xml_content  = "<xml></xml>"
+      display_name = "Example Operation 2"
+      method       = "GET"
+      url_template = "/example2"
       description  = "Operation as example"
     }
   ]
