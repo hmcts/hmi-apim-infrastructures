@@ -1,6 +1,6 @@
 locals {
   api_resource_group = "ss-${var.env}-network-rg"
-  api_mgmt_product_name   = "${var.product}-${var.component}-api"
+  api_mgmt_product_name   = "APIM"
   api-mgmt-prod-name = "${var.product}-product-${var.env}"
   api_base_path           = var.product
 }
@@ -29,23 +29,23 @@ module "apim_apis" {
   api_content_value         = file("${path.module}/resources/api-spec/hmi-api-health.json")
 
 
-  policy_xml_content = "<xml></xml>"
+  policy_xml_content = file("${path.module}/resources/policy-files/api-policy.xml")
   api_operations = [
     {
-      operation_id = "opt-1"
-      xml_content  = "<xml></xml>"
-      display_name = "Example Operation 1"
-      method       = "GET"
-      url_template = "/example1"
-      description  = "Operation as example"
+      operation_id = "update-publication"
+      xml_content  = file("${path.module}/resources/policy-files/CaTH/publication.xml")
+      display_name = "Publication"
+      method       = "POST"
+      url_template = "/pih/publication"
+      description  = "Publication of an artefact"
     },
     {
-      operation_id = "opt-2"
-      xml_content  = "<xml></xml>"
-      display_name = "Example Operation 2"
+      operation_id = "publication-health"
+      xml_content  = file("${path.module}/resources/policy-files/CaTH/health-check.xml")
+      display_name = "Publication Health"
       method       = "GET"
-      url_template = "/example2"
-      description  = "Operation as example"
+      url_template = "/pih/health"
+      description  = "Health check for CaTH"
     }
   ]
 

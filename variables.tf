@@ -1,6 +1,6 @@
 ## Defaults
 variable "product" {
-  default = "hmi-apim"
+  default = "HMI"
 }
 variable "component" {
   default = "api"

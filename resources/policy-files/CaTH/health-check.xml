@@ -1,7 +1,7 @@
 <policies>
     <inbound>
         <rewrite-uri template="/" copy-unmatched-params="true" />
-        <set-backend-service base-url="https://hmi-apim.test.policy.platform.hmcts.net/hmi/" />
+        <set-backend-service base-url="https://hmi-apim.test.cathHealthCheck.platform.hmcts.net/hmi/" />
     </inbound>
     <backend>
         <base />
