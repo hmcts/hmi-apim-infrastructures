@@ -1,6 +1,6 @@
 locals {
   api_resource_group = "ss-${var.env}-network-rg"
-  api_mgmt_product_name   = "APIM"
+  api_mgmt_product_name   = var.product_name
   api-mgmt-prod-name = "${var.product}-product-${var.env}"
   api_base_path           = var.product
 }
@@ -18,11 +18,11 @@ module "apim_apis" {
   source      = "git::https://github.com/hmcts/terraform-module-apim-api?ref=master"
   env = var.env
   product     = var.product
-  department  = "sds"
+  department  = var.department
 
   api_name                  = local.api_mgmt_product_name
   api_revision              = "1"
-  api_protocols             = ["https"]
+  api_protocols             = ["http", "https"]
   api_service_url           = "https://${local.base_url}"
   api_subscription_required = false
   api_content_format        = "openapi+json"
@@ -30,24 +30,7 @@ module "apim_apis" {
 
 
   policy_xml_content = file("${path.module}/resources/policy-files/api-policy.xml")
-  api_operations = [
-    {
-      operation_id = "update-publication"
-      xml_content  = file("${path.module}/resources/policy-files/CaTH/publication.xml")
-      display_name = "Publication"
-      method       = "POST"
-      url_template = "/pih/publication"
-      description  = "Publication of an artefact"
-    },
-    {
-      operation_id = "publication-health"
-      xml_content  = file("${path.module}/resources/policy-files/CaTH/health-check.xml")
-      display_name = "Publication Health"
-      method       = "GET"
-      url_template = "/pih/health"
-      description  = "Health check for CaTH"
-    }
-  ]
+  api_operations = file("${path.module}/resources/policy-files/policies.json")
 
   depends_on = [
     module.api_mgmt_product

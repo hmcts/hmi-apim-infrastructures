@@ -1,9 +1,12 @@
 ## Defaults
+variable "department" {
+  default = "sds"
+}
 variable "product" {
   default = "HMI"
 }
-variable "component" {
-  default = "api"
+variable "product_name" {
+  default = "APIM"
 }
 variable "location" {
   default = "UK South"
