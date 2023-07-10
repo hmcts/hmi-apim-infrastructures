@@ -8,6 +8,9 @@ variable "product" {
 variable "product_name" {
   default = "APIM"
 }
+variable "component" {
+  default = "api"
+}
 variable "location" {
   default = "UK South"
 }
