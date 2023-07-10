@@ -30,7 +30,24 @@ module "apim_apis" {
 
 
   policy_xml_content = file("${path.module}/resources/policy-files/api-policy.xml")
-  api_operations = file("${path.module}/resources/policy-files/policies.json")
+  api_operations = [
+    {
+      operation_id = "update-publication"
+      xml_content  = file("${path.module}/resources/policy-files/CaTH/publication.xml")
+      display_name = "Publication"
+      method       = "POST"
+      url_template = "/pih/publication"
+      description  = "Publication of an artefact"
+    },
+    {
+      operation_id = "publication-health"
+      xml_content  = file("${path.module}/resources/policy-files/CaTH/health-check.xml")
+      display_name = "Publication Health"
+      method       = "GET"
+      url_template = "/pih/health"
+      description  = "Health check for CaTH"
+    }
+  ]
 
   depends_on = [
     module.api_mgmt_product
