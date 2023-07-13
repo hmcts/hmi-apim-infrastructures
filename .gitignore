@@ -1,3 +1,5 @@
 ### IntelliJ IDEA ###
 .idea
+.idea/.gitignore
+.idea/misc.xml
 .DS_Store
