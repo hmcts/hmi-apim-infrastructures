@@ -13,7 +13,7 @@ module "api_mgmt_product" {
 }
 
 module "apim_apis" {
-  source      = "git::https://github.com/hmcts/terraform-module-apim-api?ref=master"
+  source      = "git@github.com:hmcts/terraform-module-apim-api?ref=master"
   env = var.env
   product     = var.product
   department  = var.department
