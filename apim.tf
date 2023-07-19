@@ -10,6 +10,7 @@ module "api_mgmt_product" {
   subscription_required = "false"
   api_mgmt_name         = local.apim_name
   api_mgmt_rg           = local.api_resource_group
+  product_policy        = file("${path.module}/resources/policy-files/product-policy.xml")
 }
 
 module "apim_apis" {
@@ -23,14 +24,14 @@ module "apim_apis" {
   api_protocols             = ["http", "https"]
   api_service_url           = "https://${local.base_url}"
   api_subscription_required = false
-  api_content_format        = "openapi+json"
-  api_content_value         = file("${path.module}/resources/api-spec/hmi-api-health.json")
+  api_content_format        = "swagger-link-json"
+  api_content_value         = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/future-hearings-hmi-api.json"
 
   policy_xml_content = file("${path.module}/resources/policy-files/api-policy.xml")
   api_operations = [
     {
       operation_id = "update-publication"
-      xml_content  = file("${path.module}/resources/policy-files/CaTH/publication.xml")
+      xml_content  = file("${path.module}/resources/policy-files/CaTH/api-op-publication-policy.xml")
       display_name = "Publication"
       method       = "POST"
       url_template = "/pih/publication"
@@ -38,7 +39,7 @@ module "apim_apis" {
     },
     {
       operation_id = "publication-health"
-      xml_content  = file("${path.module}/resources/policy-files/CaTH/health-check.xml")
+      xml_content  = file("${path.module}/resources/policy-files/CaTH/api-op-publication-health-policy.xml")
       display_name = "Publication Health"
       method       = "GET"
       url_template = "/pih/health"
