@@ -3,16 +3,6 @@ locals {
   api-mgmt-prod-name = "${var.product}-product-${var.env}"
 }
 
-module "api_mgmt_product" {
-  source                = "git@github.com:hmcts/cnp-module-api-mgmt-product?ref=master"
-  name                  = local.api-mgmt-prod-name
-  approval_required     = "false"
-  subscription_required = "false"
-  api_mgmt_name         = local.apim_name
-  api_mgmt_rg           = local.api_resource_group
-  product_policy        = file("${path.module}/resources/policy-files/product-policy.xml")
-}
-
 module "apim_apis" {
   source      = "git@github.com:hmcts/terraform-module-apim-api?ref=master"
   env = var.env
@@ -31,7 +21,10 @@ module "apim_apis" {
   api_operations = [
     {
       operation_id = "update-publication"
-      xml_content  = file("${path.module}/resources/policy-files/CaTH/api-op-publication-policy.xml")
+      xml_content  = replace(replace(replace(file("${path.module}/resources/policy-files/CaTH/api-op-publication-policy.xml"),
+        "#keyVaultHost#", var.key_vault_host),
+        "#pihHost#", var.pih_host),
+        "#snowHost#", var.snow_host)
       display_name = "Publication"
       method       = "POST"
       url_template = "/pih/publication"
@@ -39,7 +32,10 @@ module "apim_apis" {
     },
     {
       operation_id = "publication-health"
-      xml_content  = file("${path.module}/resources/policy-files/CaTH/api-op-publication-health-policy.xml")
+      xml_content  = replace(replace(replace(file("${path.module}/resources/policy-files/CaTH/api-op-publication-health-policy.xml"),
+        "#keyVaultHost#", var.key_vault_host),
+        "#pihHost#", var.pih_host),
+        "#snowHost#", var.snow_host)
       display_name = "Publication Health"
       method       = "GET"
       url_template = "/pih/health"
