@@ -19,9 +19,9 @@ module "apim_apis" {
   api_content_value         = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/future-hearings-hmi-api.json"
 
   policy_xml_content = file("${path.module}/resources/policy-files/api-policy.xml")
-  for_each = { for p in local.policies_data.policies : p.operationId => p }
   api_operations = [
     {
+      for_each = { for p in local.policies_data.policies : p.operationId => p }
       operation_id = each.value.operationId
       xml_content  = replace(replace(replace(file("${path.module}/resources/policy-files/${each.value.templateFile}"),
         "#keyVaultHost#", var.key_vault_host),
