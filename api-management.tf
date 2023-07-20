@@ -4,6 +4,20 @@ locals {
   policies_data = jsondecode(file("${path.module}/resources/policy-files/policies.json"))
 }
 
+data "policy_file" "api_operation_template" {
+  for_each = { for p in local.policies_data.policies : p.operationId => p }
+
+  operation_id = each.value.operationId
+  xml_content  = replace(replace(replace(file("${path.module}/resources/policy-files/${each.value.templateFile}"),
+    "#keyVaultHost#", var.key_vault_host),
+    "#pihHost#", var.pih_host),
+    "#snowHost#", var.snow_host)
+  display_name = each.value.display_name
+  method       = each.value.method
+  url_template = each.value.url_template
+  description  = each.value.description
+}
+
 module "apim_apis" {
   source      = "git@github.com:hmcts/terraform-module-apim-api?ref=master"
   env = var.env
@@ -19,20 +33,7 @@ module "apim_apis" {
   api_content_value         = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/future-hearings-hmi-api.json"
 
   policy_xml_content = file("${path.module}/resources/policy-files/api-policy.xml")
-  api_operations = [
-    {
-      for_each = { for p in local.policies_data.policies : p.operationId => p }
-      operation_id = each.value.operationId
-      xml_content  = replace(replace(replace(file("${path.module}/resources/policy-files/${each.value.templateFile}"),
-        "#keyVaultHost#", var.key_vault_host),
-        "#pihHost#", var.pih_host),
-        "#snowHost#", var.snow_host)
-      display_name = each.value.display_name
-      method       = each.value.method
-      url_template = each.value.url_template
-      description  = each.value.description
-    }
-  ]
+  api_operations = data.policy_file.api_operation_template
 
   depends_on = [
     module.api_mgmt_product
