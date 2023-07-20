@@ -1,7 +1,7 @@
 locals {
   api_resource_group = "ss-${var.env}-network-rg"
   api-mgmt-prod-name = "${var.product}-product-${var.env}"
-  policies_data = jsondecode(file("${path.module}/policies.json"))
+  policies_data = jsondecode(file("${path.module}/resources/policy-files/policies.json"))
 }
 
 module "apim_apis" {
@@ -26,6 +26,10 @@ module "apim_apis" {
         "#keyVaultHost#", var.key_vault_host),
         "#pihHost#", var.pih_host),
         "#snowHost#", var.snow_host)
+      display_name = "Publication"
+      method       = "POST"
+      url_template = "/pih/publication"
+      description  = "Publication of an artefact"
     },
     {
       operation_id = "publication-health"
@@ -33,6 +37,10 @@ module "apim_apis" {
         "#keyVaultHost#", var.key_vault_host),
         "#pihHost#", var.pih_host),
         "#snowHost#", var.snow_host)
+      display_name = "Publication Health"
+      method       = "GET"
+      url_template = "/pih/health"
+      description  = "Health check for CaTH"
     }
   ]
 

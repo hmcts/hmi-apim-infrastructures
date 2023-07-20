@@ -2,11 +2,19 @@
   "policies": [
     {
       "operationId": "update-publication",
-      "templateFile": "/CaTH/api-op-publication-policy.xml"
+      "templateFile": "/CaTH/api-op-publication-policy.xml",
+      "display_name": "Publication",
+      "method": "POST",
+      "url_template": "/pih/publication",
+      "description": "Publication of an artefact"
     },
     {
       "operationId": "publication-health",
-      "templateFile": "/CaTH/api-op-publication-health-policy.xml"
+      "templateFile": "/CaTH/api-op-publication-health-policy.xml",
+      "display_name": "Publication Health",
+      "method": "GET",
+      "url_template": "/pih/health",
+      "description": "Health check for CaTH"
     }
   ]
 }
