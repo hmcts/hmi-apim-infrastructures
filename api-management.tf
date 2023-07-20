@@ -23,7 +23,7 @@ module "apim_apis" {
   api_operations = [
     {
       operation_id = each.value.operationId
-      xml_content  = replace(replace(replace(file("${path.module}/resources/policy-files" + each.value.templateFile),
+      xml_content  = replace(replace(replace(file("${path.module}/resources/policy-files/${each.value.templateFile}"),
         "#keyVaultHost#", var.key_vault_host),
         "#pihHost#", var.pih_host),
         "#snowHost#", var.snow_host)
