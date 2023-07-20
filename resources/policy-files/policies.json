@@ -6,7 +6,8 @@
       "display_name": "Publication",
       "method": "POST",
       "url_template": "/pih/publication",
-      "description": "Publication of an artefact"
+      "description": "Publication of an artefact",
+      "key_vault_host": "hmi-cath-kv-#env#.vault.azure.net"
     },
     {
       "operationId": "publication-health",
@@ -14,7 +15,8 @@
       "display_name": "Publication Health",
       "method": "GET",
       "url_template": "/pih/health",
-      "description": "Health check for CaTH"
+      "description": "Health check for CaTH",
+      "key_vault_host": "hmi-cath-kv-#env#.vault.azure.net"
     }
   ]
 }

@@ -1,7 +1,6 @@
 locals {
   api_resource_group = "ss-${var.env}-network-rg"
   api-mgmt-prod-name = "${var.product}-product-${var.env}"
-  policies_data = jsondecode(file("${path.module}/resources/policy-files/policies.json"))
 }
 
 module "apim_apis" {
