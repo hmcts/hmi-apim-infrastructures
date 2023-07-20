@@ -1,0 +1,12 @@
+{
+  "policies": [
+    {
+      "operationId": "update-publication",
+      "templateFile": "/CaTH/api-op-publication-policy.xml"
+    },
+    {
+      "operationId": "publication-health",
+      "templateFile": "/CaTH/api-op-publication-health-policy.xml"
+    }
+  ]
+}
