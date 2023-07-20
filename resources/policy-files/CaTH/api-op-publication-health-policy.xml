@@ -1,6 +1,6 @@
 <policies>
     <inbound>
-<!--
+
             <send-request ignore-error="false" timeout="20" response-variable-name="pipClientResponse" mode="new">
                 <set-url>https://#keyVaultHost#/secrets/pip-client-id/?api-version=7.0</set-url>
                 <set-method>GET</set-method>
@@ -43,7 +43,7 @@
                 <value>@((String)context.Variables["pipAuthToken"])</value>
             </set-header>
             <rewrite-uri template="/" copy-unmatched-params="true" />
-            <set-backend-service base-url="https://#pihHost#/pip/data-management" />-->
+            <set-backend-service base-url="https://#pihHost#/pip/data-management" />
     </inbound>
     <backend>
         <base />
