@@ -19,7 +19,7 @@ module "apim_apis" {
   api_content_value         = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/future-hearings-hmi-api.json"
 
   policy_xml_content = file("${path.module}/resources/policy-files/api-policy.xml")
-  for_each = { for p in local.policies_data : p.operationId => p }
+  for_each = { for p in local.policies_data.policies : p.operationId => p }
   api_operations = [
     {
       operation_id = each.value.operationId
