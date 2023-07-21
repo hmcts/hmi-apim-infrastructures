@@ -12,14 +12,7 @@ locals {
       method       = policy.method
       url_template = policy.url_template
       description  = policy.description
-      headers = [for header in policy.headers :
-        {
-          name = header.name
-          required = header.required
-          type = header.type
-          default_value = header.default_value
-        }
-      ]
+      headers = "test"
     }
   ]
 }
