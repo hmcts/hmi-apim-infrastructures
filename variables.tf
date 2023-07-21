@@ -36,3 +36,7 @@ variable "snow_host" {
   type        = string
   description = "Snow Service hostname"
 }
+variable "policy_file_template" {
+  type        = string
+  description = "api policy file template to inject in apim module"
+}

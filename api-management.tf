@@ -18,30 +18,7 @@ module "apim_apis" {
   api_content_value         = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/future-hearings-hmi-api.json"
 
   policy_xml_content = file("${path.module}/resources/policy-files/api-policy.xml")
-  api_operations = [
-    {
-      operation_id = "update-publication"
-      xml_content  = replace(replace(replace(file("${path.module}/resources/policy-files/CaTH/api-op-publication-policy.xml"),
-        "#keyVaultHost#", var.key_vault_host),
-        "#pihHost#", var.pih_host),
-        "#snowHost#", var.snow_host)
-      display_name = "Publication"
-      method       = "POST"
-      url_template = "/pih/publication"
-      description  = "Publication of an artefact"
-    },
-    {
-      operation_id = "publication-health"
-      xml_content  = replace(replace(replace(file("${path.module}/resources/policy-files/CaTH/api-op-publication-health-policy.xml"),
-        "#keyVaultHost#", var.key_vault_host),
-        "#pihHost#", var.pih_host),
-        "#snowHost#", var.snow_host)
-      display_name = "Publication Health"
-      method       = "GET"
-      url_template = "/pih/health"
-      description  = "Health check for CaTH"
-    }
-  ]
+  api_operations = var.policy_file_template
 
   depends_on = [
     module.api_mgmt_product
