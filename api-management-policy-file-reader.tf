@@ -1,9 +1,7 @@
 locals {
   policies_data = jsondecode(file("${path.module}/resources/policy-files/policies.json"))
-}
 
-locals {
-  value = [for policy in local.policies_data.policies :
+  policy_file_template = [for policy in local.policies_data.policies :
     {
       operation_id = policy.operationId
       xml_content  = replace(replace(replace(file("${path.module}/resources/policy-files/${policy.templateFile}"),
