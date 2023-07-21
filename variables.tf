@@ -6,7 +6,7 @@ variable "product" {
   default = "HMI"
 }
 variable "product_name" {
-  default = "APIM"
+  default = "apim"
 }
 variable "component" {
   default = "api"
