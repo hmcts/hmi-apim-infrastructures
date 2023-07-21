@@ -38,5 +38,6 @@ variable "snow_host" {
 }
 variable "policy_file_template" {
   type        = string
+  default = ""
   description = "api policy file template to inject in apim module"
 }
