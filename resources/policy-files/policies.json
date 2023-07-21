@@ -6,7 +6,21 @@
       "display_name": "Publication",
       "method": "POST",
       "url_template": "/pih/publication",
-      "description": "Publication of an artefact"
+      "description": "Publication of an artefact",
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        }
+      ]
     },
     {
       "operationId": "publication-health",
