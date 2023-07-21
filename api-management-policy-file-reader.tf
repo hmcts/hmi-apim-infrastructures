@@ -2,7 +2,7 @@ locals {
   policies_data = jsondecode(file("${path.module}/resources/policy-files/policies.json"))
 }
 
-local {
+locals {
   value = [for policy in local.policies_data.policies :
     {
       operation_id = policy.operationId
