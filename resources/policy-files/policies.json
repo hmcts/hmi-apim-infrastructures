@@ -28,7 +28,21 @@
       "display_name": "Publication Health",
       "method": "GET",
       "url_template": "/pih/health",
-      "description": "Health check for CaTH"
+      "description": "Health check for CaTH",
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        }
+      ]
     }
   ]
 }
