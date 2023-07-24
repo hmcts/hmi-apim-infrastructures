@@ -6,44 +6,7 @@
       "display_name": "Publication",
       "method": "POST",
       "url_template": "/pih/publication",
-      "description": "Publication of an artefact",
-      "headers": [
-        {
-          "name": "Source-System",
-          "required": "true",
-          "type": "string",
-          "default_value": "CFT"
-        },
-        {
-          "name": "Destination-System",
-          "required": "true",
-          "type": "string",
-          "default_value": "CFT"
-        },
-        {
-          "name": "Request-Created-At",
-          "required": "true",
-          "type": "string",
-          "default_value": "2019-10-12T07:20:00Z"
-        },
-        {
-          "name": "Accept",
-          "required": "true",
-          "type": "string",
-          "default_value": "application/json"
-        },
-        {
-          "name": "Content-Type",
-          "required": "true",
-          "type": "string",
-          "default_value": "application/json"
-        }
-      ],
-      "response":
-      {
-        "status_code": "201",
-        "description": ""
-      }
+      "description": "Publication of an artefact"
     },
     {
       "operationId": "publication-health",
@@ -51,20 +14,7 @@
       "display_name": "Publication Health",
       "method": "GET",
       "url_template": "/pih/health",
-      "description": "Health check for CaTH",
-      "response":
-      {
-        "status_code": "200",
-        "description": ""
-      },
-      "query_parameters": [
-        {
-          "name": "artefact_id",
-          "required": "true",
-          "type": "string",
-          "default_value": "123"
-        }
-      ]
+      "description": "Health check for CaTH"
     }
   ]
 }
