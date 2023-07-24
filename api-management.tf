@@ -4,7 +4,7 @@ locals {
 }
 
 module "apim_apis" {
-  source      = "git@github.com:hmcts/terraform-module-apim-api?ref=master"
+  source      = "git@github.com:hmcts/terraform-module-apim-api?ref=add-request-response-tag-functionality"
   env = var.env
   product     = var.product
   department  = var.department
@@ -19,17 +19,6 @@ module "apim_apis" {
 
   policy_xml_content = file("${path.module}/resources/policy-files/api-policy.xml")
   api_operations = local.policy_file_template
-
-  request {
-    dynamic "header" {
-      for_each = local.policy_file_template.headers
-      content {
-        name     = header.value["name"]
-        required = header.value["required"]
-        type     = header.value["type"]
-      }
-    }
-  }
 
   depends_on = [
     module.api_mgmt_product
