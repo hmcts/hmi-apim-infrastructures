@@ -17,9 +17,27 @@ locals {
           name = header.name
           required = header.required
           type = header.type
-          default_value = header.default_value
+          default_value = can(header.default_value) ? header.default_value : ""
         }
       ] : []
+      response = can(policy.response) ? {
+        status_code = policy.response.status_code
+        description = policy.response.description
+      } : []
+      query_parameters =  can(policy.query_parameters) ? [for query_parameter in policy.query_parameters :
+      {
+        name = query_parameter.name
+        required = query_parameter.required
+        type = query_parameter.type
+        default_value = can(query_parameter.default_value) ? query_parameter.default_value : ""
+      }
+      ] : []
+      template_parameter =  can(policy.template_parameter) ? {
+        name = policy.template_parameter.name
+        required = policy.template_parameter.required
+        type = policy.template_parameter.type
+        default_value = can(policy.template_parameter.default_value) ? template_parameter.default_value : ""
+      } : []
     }
   ]
 }
