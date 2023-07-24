@@ -12,6 +12,10 @@ locals {
       method       = policy.method
       url_template = policy.url_template
       description  = policy.description
+      tag = can(policy.tag) ? {
+        name = policy.tag.name
+        display_name = policy.tag.display_name
+      } : null
       headers = can(policy.headers)  ? [for header in policy.headers :
         {
           name = header.name
