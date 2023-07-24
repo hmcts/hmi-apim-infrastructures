@@ -19,11 +19,11 @@ locals {
           type = header.type
           default_value = header.default_value
         }
-      ] : []
+      ] : null
       response = can(policy.response) ? {
         status_code = policy.response.status_code
         description = policy.response.description
-      } : []
+      } : null
       query_parameters =  can(policy.query_parameters) ? [for query_parameter in policy.query_parameters :
       {
         name = query_parameter.name
@@ -31,13 +31,13 @@ locals {
         type = query_parameter.type
         default_value = query_parameter.default_value
       }
-      ] : []
+      ] : null
       template_parameter =  can(policy.template_parameter) ? {
         name = policy.template_parameter.name
         required = policy.template_parameter.required
         type = policy.template_parameter.type
         default_value = policy.template_parameter.default_value
-      } : []
+      } : null
     }
   ]
 }
