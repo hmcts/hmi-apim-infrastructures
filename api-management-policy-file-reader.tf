@@ -22,7 +22,7 @@ locals {
       ] : []
       response = can(policy.response) ? {
         status_code = policy.response.status_code
-        description = can(policy.response.description) ? can(policy.response.description) : ""
+        description = can(policy.response.description) ? policy.response.description : ""
       } : []
       query_parameters =  can(policy.query_parameters) ? [for query_parameter in policy.query_parameters :
       {
