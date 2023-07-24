@@ -23,14 +23,3 @@ locals {
     }
   ]
 }
-
-output test {
-  dynamic "header" {
-    for_each = local.policy_file_template.headers
-    request {
-      name = header.value["name"]
-      required = header.value["required"]
-      type = header.value["type"]
-    }
-  }
-}
