@@ -58,7 +58,7 @@
                 </set-header>
                 <rewrite-uri template="/" copy-unmatched-params="true" />
                 <set-variable name="backend-service_url" value="https://api.acc.azurewebsites.net" />
-                <set-backend-service base-url="@((String)context.Variables["backend-service_url"])" />
+                <set-backend-service base-url=(String)context.Variables["backend-service_url"] />
             </when>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
                 <mock-response status-code="201" content-type="application/json" />
