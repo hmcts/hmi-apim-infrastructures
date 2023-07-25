@@ -7,10 +7,6 @@
       "method": "POST",
       "url_template": "/pih/publication",
       "description": "Publication of an artefact",
-      "tag": {
-        "name": "CaTH",
-        "display_name": "CaTH"
-      },
       "headers": [
         {
           "name": "Source-System",
@@ -56,10 +52,6 @@
       "method": "GET",
       "url_template": "/pih/health",
       "description": "Health check for CaTH",
-      "tag": {
-        "name": "CaTH",
-        "display_name": "CaTH"
-      },
       "response":
       {
         "status_code": "200",
