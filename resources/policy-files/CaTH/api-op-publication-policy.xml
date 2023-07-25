@@ -60,7 +60,7 @@
                     return "https://www.google.com";
                 }" />
                 <rewrite-uri template="/" copy-unmatched-params="true" />
-                <set-backend-service base-url="@((String)context.Variables["pipHost"])" />
+                <set-backend-service base-url="@("https://api.acc.azurewebsites.net" + context.Api.Path)" />
             </when>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
                 <mock-response status-code="201" content-type="application/json" />
