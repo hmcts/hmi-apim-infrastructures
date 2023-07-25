@@ -57,7 +57,7 @@
                     <value>@(context.Request.Headers.GetValueOrDefault("Source-System","unknown"))</value>
                 </set-header>
                 <set-variable name="backend-service-url" value="@{
-                    return  "https://" + (string)context.Variables["pipHost"] + "/pip/data-management/publication";
+                    return "https://www.google.com";
                 }" />
                 <rewrite-uri template="/" copy-unmatched-params="true" />
                 <set-backend-service base-url="@(string)context.Variables["backend-service-url"]" />
