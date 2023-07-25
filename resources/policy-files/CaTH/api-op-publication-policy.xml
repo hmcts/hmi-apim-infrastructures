@@ -56,11 +56,9 @@
                 <set-header name="x-provenance" exists-action="override">
                     <value>@(context.Request.Headers.GetValueOrDefault("Source-System","unknown"))</value>
                 </set-header>
-                <set-variable name="backend-service-url" value="@{
-                    return "https://www.google.com";
-                }" />
                 <rewrite-uri template="/" copy-unmatched-params="true" />
-                <set-backend-service base-url="@("https://api.acc.azurewebsites.net" + context.Api.Path)" />
+                <set-variable name="backend-service_url" value="https://api.acc.azurewebsites.net" />
+                <set-backend-service base-url="@(context.Variables["backend-service_url"])" />
             </when>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
                 <mock-response status-code="201" content-type="application/json" />
