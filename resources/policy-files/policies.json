@@ -68,7 +68,11 @@
           "type": "string",
           "default_value": "123"
         }
-      ]
+      ],
+      "tag": {
+        "name": "CaTH",
+        "display_name": "CaTH"
+      }
     }
   ]
 }
