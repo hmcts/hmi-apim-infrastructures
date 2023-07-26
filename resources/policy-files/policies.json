@@ -45,7 +45,7 @@
         "description": ""
       },
       "tag": {
-        "name": "CaTH_Publication",
+        "name": "CaTH",
         "display_name": "CaTH"
       }
     },
@@ -70,7 +70,7 @@
         }
       ],
       "tag": {
-        "name": "CaTH_Healthcheck",
+        "name": "CaTH",
         "display_name": "CaTH"
       }
     }
