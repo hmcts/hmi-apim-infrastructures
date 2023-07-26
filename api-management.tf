@@ -14,8 +14,8 @@ module "apim_apis" {
   api_protocols             = ["http", "https"]
   api_service_url           = "https://${local.base_url}"
   api_subscription_required = false
-  api_content_format        = "swagger-link-json"
-  api_content_value         = "https://raw.githubusercontent.com/hmcts/reform-api-docs/master/docs/specs/future-hearings-hmi-api.json"
+  api_content_format        = "openapi+json"
+  api_content_value         = file("${path.module}/resources/api-spec/hmi-api-health.json")
 
   policy_xml_content = file("${path.module}/resources/policy-files/api-policy.xml")
   api_operations = local.policy_file_template
