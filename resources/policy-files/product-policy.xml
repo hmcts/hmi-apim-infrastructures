@@ -10,7 +10,7 @@
                 var secret = ((IResponse)context.Variables["rateCallLimit"]).Body.As<JObject>();
                 return secret["value"].ToString();
             }" />
-        <rate-limit-by-key calls="2000" renewal-period="60" counter-key="@(context.Request.Headers.GetValueOrDefault("X-Forwarded-For",""))" />
+        <rate-limit-by-key calls="@(string)context.Variables["rateCallLimit"])" renewal-period="60" counter-key="@(context.Request.Headers.GetValueOrDefault("X-Forwarded-For",""))" />
     </inbound>
     <backend>
         <base />
