@@ -76,7 +76,7 @@
     },
     {
       "operationId": "hmi-health-check",
-      "templateFile": "HMI-Health-Check/pi-op-health-check-policy.xml",
+      "templateFile": "HMI-Health-Check/api-op-health-check-policy.xml",
       "display_name": "HMI Health Check",
       "method": "GET",
       "url_template": "/",
