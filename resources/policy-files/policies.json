@@ -43,6 +43,10 @@
       {
         "status_code": "201",
         "description": ""
+      },
+      "tag": {
+        "name": "CaTH",
+        "display_name": "CaTH"
       }
     },
     {
@@ -64,7 +68,11 @@
           "type": "string",
           "default_value": "123"
         }
-      ]
+      ],
+      "tag": {
+        "name": "CaTH",
+        "display_name": "CaTH"
+      }
     }
   ]
 }

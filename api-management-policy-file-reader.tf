@@ -38,6 +38,10 @@ locals {
         type = policy.template_parameter.type
         default_value = policy.template_parameter.default_value
       } : null
+      tag = can(policy.tag) ? {
+        name = policy.tag.name
+        display_name = policy.tag.display_name
+      } : null
     }
   ]
 }
