@@ -3,7 +3,7 @@ variable "department" {
   default = "sds"
 }
 variable "product" {
-  default = "HMI"
+  default = "hmi"
 }
 variable "product_name" {
   default = "apim"
