@@ -5,5 +5,5 @@ module "api_mgmt_product" {
   subscription_required = "false"
   api_mgmt_name         = local.apim_name
   api_mgmt_rg           = local.api_resource_group
-  product_policy        = file("${path.module}/resources/policy-files/product-policy.xml")
+  product_policy        = replace(file("${path.module}/resources/policy-files/product-policy.xml"), "#keyVaultHost#", var.key_vault_host)
 }
