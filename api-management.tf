@@ -4,7 +4,7 @@ locals {
 }
 
 module "apim_apis" {
-  source      = "git@github.com:hmcts/terraform-module-apim-api?ref=add-request-response-tag-functionality"
+  source      = "git@github.com:hmcts/terraform-module-apim-api?ref=master"
   env = var.env
   product     = var.product
   department  = var.department
