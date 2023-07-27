@@ -6,8 +6,8 @@ locals {
       operation_id = policy.operationId
       xml_content  = replace(replace(replace(file("${path.module}/resources/policy-files/${policy.templateFile}"),
         "#keyVaultHost#", var.key_vault_host),
-        "#pihHost#", var.pih_host),
-        "#snowHost#", var.snow_host)
+        "#pihHost#", length(data.azurerm_key_vault_secret.pip_host) > 0 ? data.azurerm_key_vault_secret.pip_host[0].value : ""),
+        "#snowHost#", length(data.azurerm_key_vault_secret.snow_host) > 0 ? data.azurerm_key_vault_secret.snow_host[0].value : "")
       display_name = policy.display_name
       method       = policy.method
       url_template = policy.url_template

@@ -28,11 +28,3 @@ variable "key_vault_host" {
   type        = string
   description = "Keyvault host for a environment"
 }
-variable "pih_host" {
-  type        = string
-  description = "Publication (CaTH) hostname"
-}
-variable "snow_host" {
-  type        = string
-  description = "Snow Service hostname"
-}
