@@ -16,5 +16,5 @@ locals {
 
   deploy_apim = local.env == "stg" || local.env == "sbox" || local.env == "prod" ? 1 : 0
 
-  prefix            = "${var.product}-ss"
+  prefix            = var.product
 }
