@@ -1,6 +1,6 @@
 locals {
 
-  resource_group_name = "${local.prefix}-${var.env}-rg"
+  resource_group_name = "${local.prefix}-sharedinfra-${var.env}-rg"
   key_vault_name      = "${local.prefix}-kv-${var.env}"
 }
 
