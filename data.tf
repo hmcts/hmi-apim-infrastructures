@@ -13,12 +13,12 @@ data "azurerm_key_vault" "kv" {
 
 data "azurerm_key_vault_secret" "pip_host" {
   count        = local.deploy_apim
-  name         = "pih_host"
+  name         = "pih-host"
   key_vault_id = data.azurerm_key_vault.kv.id
 }
 
 data "azurerm_key_vault_secret" "snow_host" {
   count        = local.deploy_apim
-  name         = "snow_host"
+  name         = "snow-host"
   key_vault_id = data.azurerm_key_vault.kv.id
 }
