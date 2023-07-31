@@ -1,16 +1,7 @@
 <policies>
     <inbound>
         <base />
-        <send-request ignore-error="false" timeout="20" response-variable-name="rateCallLimit" mode="new">
-            <set-url>https://#keyVaultHost#/secrets/rate-call-limit/?api-version=7.0</set-url>
-            <set-method>GET</set-method>
-            <authentication-managed-identity resource="https://vault.azure.net" />
-        </send-request>
-        <set-variable name="rateCallLimit" value="@{
-                var secret = ((IResponse)context.Variables["rateCallLimit"]).Body.As<JObject>();
-                return secret["value"].ToString();
-            }" />
-        <rate-limit-by-key calls="@((int)context.Variables["rateCallLimit"])" renewal-period="60" counter-key="@(context.Request.Headers.GetValueOrDefault("X-Forwarded-For",""))" />
+        <rate-limit-by-key calls="#rateCallLimit#" renewal-period="60" counter-key="@(context.Request.Headers.GetValueOrDefault("X-Forwarded-For",""))" />
     </inbound>
     <backend>
         <base />
