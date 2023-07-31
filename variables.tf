@@ -3,10 +3,10 @@ variable "department" {
   default = "sds"
 }
 variable "product" {
-  default = "HMI"
+  default = "hmi"
 }
 variable "product_name" {
-  default = "APIM"
+  default = "apim"
 }
 variable "component" {
   default = "api"
@@ -23,4 +23,8 @@ variable "deployment_namespace" {
 }
 variable "common_tags" {
   type = map(string)
+}
+variable "key_vault_host" {
+  type        = string
+  description = "Keyvault host for a environment"
 }
