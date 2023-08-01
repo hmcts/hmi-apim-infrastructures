@@ -28,3 +28,7 @@ variable "key_vault_host" {
   type        = string
   description = "Keyvault host for a environment"
 }
+variable "rate-call-limit" {
+  type        = string
+  description = "rate limit for apim"
+}

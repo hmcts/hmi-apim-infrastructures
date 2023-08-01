@@ -61,14 +61,6 @@
         "status_code": "200",
         "description": ""
       },
-      "query_parameters": [
-        {
-          "name": "artefact_id",
-          "required": "true",
-          "type": "string",
-          "default_value": "123"
-        }
-      ],
       "tag": {
         "name": "CaTH",
         "display_name": "CaTH"
