@@ -14,7 +14,7 @@ locals {
   apim_rg       = "ss-${local.env}-network-rg"
 
 
-  deploy_apim = local.env == "stg" || local.env == "sbox" || local.env == "prod" ? 1 : 0
+  deploy_apim = local.env == "test" ||local.env == "stg" || local.env == "sbox" || local.env == "prod" ? 1 : 0
 
   prefix            = var.product
 }
