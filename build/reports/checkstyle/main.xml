@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<checkstyle version="10.12.0">
-<file name="/Users/josh.blackmoor/IdeaProjects/hmi-apim-infrastructures/src/main/java/uk/gov/hmcts/reform/hmi/Application.java">
-</file>
-<file name="/Users/josh.blackmoor/IdeaProjects/hmi-apim-infrastructures/src/main/java/uk/gov/hmcts/reform/hmi/config/OpenAPIConfiguration.java">
-</file>
-<file name="/Users/josh.blackmoor/IdeaProjects/hmi-apim-infrastructures/src/main/java/uk/gov/hmcts/reform/hmi/controllers/RootController.java">
-</file>
-</checkstyle>

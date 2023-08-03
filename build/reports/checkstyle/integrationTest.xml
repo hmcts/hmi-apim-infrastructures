@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<checkstyle version="10.12.0">
-<file name="/Users/josh.blackmoor/IdeaProjects/hmi-apim-infrastructures/src/integrationTest/java/uk/gov/hmcts/reform/hmi/openapi/OpenAPIPublisherTest.java">
-</file>
-<file name="/Users/josh.blackmoor/IdeaProjects/hmi-apim-infrastructures/src/integrationTest/java/uk/gov/hmcts/reform/hmi/controllers/GetWelcomeTest.java">
-</file>
-</checkstyle>
