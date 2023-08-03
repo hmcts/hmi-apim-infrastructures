@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="uk.gov.hmcts.reform.hmi.controllers.GetWelcomeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-08-03T09:29:28" hostname="MJ003754" time="1.028">
+  <properties/>
+  <testcase name="Should welcome upon root request with 200 response code" classname="uk.gov.hmcts.reform.hmi.controllers.GetWelcomeTest" time="1.028"/>
+  <system-out><![CDATA[Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+10:29:26,120 |-INFO in ch.qos.logback.classic.LoggerContext[default] - This is logback-classic version 1.4.8
+10:29:26,145 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+10:29:26,147 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [jar:file:/Users/josh.blackmoor/.gradle/caches/modules-2/files-2.1/com.github.hmcts.java-logging/logging/6.0.1/5789c9e413e7e9c37c094ffb378bd0648682019e/logging-6.0.1.jar!/logback.xml]
+10:29:26,161 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@5e8cda75 - URL [jar:file:/Users/josh.blackmoor/.gradle/caches/modules-2/files-2.1/com.github.hmcts.java-logging/logging/6.0.1/5789c9e413e7e9c37c094ffb378bd0648682019e/logging-6.0.1.jar!/logback.xml] is not of type file
+10:29:26,228 |-INFO in ch.qos.logback.core.joran.util.ConfigurationWatchListUtil@3f049056 - Adding [jar:file:/Users/josh.blackmoor/.gradle/caches/modules-2/files-2.1/com.github.hmcts.java-logging/logging/6.0.1/5789c9e413e7e9c37c094ffb378bd0648682019e/logging-6.0.1.jar!/reform-base.xml] to configuration watch list.
+10:29:26,228 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@5e8cda75 - URL [jar:file:/Users/josh.blackmoor/.gradle/caches/modules-2/files-2.1/com.github.hmcts.java-logging/logging/6.0.1/5789c9e413e7e9c37c094ffb378bd0648682019e/logging-6.0.1.jar!/reform-base.xml] is not of type file
+10:29:26,232 |-INFO in ch.qos.logback.core.joran.util.ConfigurationWatchListUtil@3f049056 - Adding [jar:file:/Users/josh.blackmoor/.gradle/caches/modules-2/files-2.1/com.github.hmcts.java-logging/logging/6.0.1/5789c9e413e7e9c37c094ffb378bd0648682019e/logging-6.0.1.jar!/reform-console-appender.xml] to configuration watch list.
+10:29:26,232 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@5e8cda75 - URL [jar:file:/Users/josh.blackmoor/.gradle/caches/modules-2/files-2.1/com.github.hmcts.java-logging/logging/6.0.1/5789c9e413e7e9c37c094ffb378bd0648682019e/logging-6.0.1.jar!/reform-console-appender.xml] is not of type file
+10:29:26,289 |-INFO in ch.qos.logback.classic.model.processor.LoggerContextListenerModelHandler - Adding LoggerContextListener of type [ch.qos.logback.classic.jul.LevelChangePropagator] to the object stack
+10:29:26,290 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@64968732 - Propagating INFO level on Logger[ROOT] onto the JUL framework
+10:29:26,291 |-INFO in ch.qos.logback.classic.model.processor.LoggerContextListenerModelHandler - Starting LoggerContextListener
+10:29:26,294 |-WARN in ch.qos.logback.core.model.processor.ShutdownHookModelHandler - ch.qos.logback.core.hook.DelayingShutdownHook was renamed as ch.qos.logback.core.hook.DefaultShutdownHook
+10:29:26,294 |-WARN in ch.qos.logback.core.model.processor.ShutdownHookModelHandler - Please use the new class name
+10:29:26,294 |-INFO in ch.qos.logback.core.model.processor.ShutdownHookModelHandler - About to instantiate shutdown hook of type [ch.qos.logback.core.hook.DefaultShutdownHook]
+10:29:26,294 |-INFO in ch.qos.logback.core.model.processor.ShutdownHookModelHandler - Registering shutdown hook with JVM runtime.
+10:29:26,296 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [CONSOLE]
+10:29:26,296 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+10:29:26,309 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+10:29:26,353 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ASYNC_CONSOLE]
+10:29:26,353 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+10:29:26,356 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to ch.qos.logback.classic.AsyncAppender[ASYNC_CONSOLE]
+10:29:26,356 |-INFO in ch.qos.logback.classic.AsyncAppender[ASYNC_CONSOLE] - Attaching appender named [CONSOLE] to AsyncAppender.
+10:29:26,358 |-INFO in ch.qos.logback.classic.AsyncAppender[ASYNC_CONSOLE] - Setting discardingThreshold to 51
+10:29:26,358 |-INFO in ch.qos.logback.classic.model.processor.RootLoggerModelHandler - Setting level of ROOT logger to INFO
+10:29:26,358 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ASYNC_CONSOLE] to Logger[ROOT]
+10:29:26,358 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@3e1a3801 - End of configuration.
+10:29:26,360 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@6fd12c5 - Registering current configuration as safe fallback point
+
+2023-08-03T10:29:26.551 INFO  [Test worker] o.s.t.c.support.AnnotationConfigContextLoaderUtils Could not detect default configuration classes for test class [uk.gov.hmcts.reform.hmi.controllers.GetWelcomeTest]: GetWelcomeTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-08-03T10:29:26.743 INFO  [Test worker] o.s.b.t.context.SpringBootTestContextBootstrapper Found @SpringBootConfiguration uk.gov.hmcts.reform.hmi.Application for test class uk.gov.hmcts.reform.hmi.controllers.GetWelcomeTest
+10:29:27,255 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@300a38e7 - URL [jar:file:/Users/josh.blackmoor/.gradle/caches/modules-2/files-2.1/com.github.hmcts.java-logging/logging/6.0.1/5789c9e413e7e9c37c094ffb378bd0648682019e/logging-6.0.1.jar!/logback.xml] is not of type file
+10:29:27,258 |-INFO in ch.qos.logback.core.joran.util.ConfigurationWatchListUtil@3f049056 - Adding [jar:file:/Users/josh.blackmoor/.gradle/caches/modules-2/files-2.1/com.github.hmcts.java-logging/logging/6.0.1/5789c9e413e7e9c37c094ffb378bd0648682019e/logging-6.0.1.jar!/reform-base.xml] to configuration watch list.
+10:29:27,258 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@300a38e7 - URL [jar:file:/Users/josh.blackmoor/.gradle/caches/modules-2/files-2.1/com.github.hmcts.java-logging/logging/6.0.1/5789c9e413e7e9c37c094ffb378bd0648682019e/logging-6.0.1.jar!/reform-base.xml] is not of type file
+10:29:27,260 |-INFO in ch.qos.logback.core.joran.util.ConfigurationWatchListUtil@3f049056 - Adding [jar:file:/Users/josh.blackmoor/.gradle/caches/modules-2/files-2.1/com.github.hmcts.java-logging/logging/6.0.1/5789c9e413e7e9c37c094ffb378bd0648682019e/logging-6.0.1.jar!/reform-console-appender.xml] to configuration watch list.
+10:29:27,260 |-INFO in ch.qos.logback.core.joran.spi.ConfigurationWatchList@300a38e7 - URL [jar:file:/Users/josh.blackmoor/.gradle/caches/modules-2/files-2.1/com.github.hmcts.java-logging/logging/6.0.1/5789c9e413e7e9c37c094ffb378bd0648682019e/logging-6.0.1.jar!/reform-console-appender.xml] is not of type file
+10:29:27,263 |-INFO in ch.qos.logback.classic.model.processor.LoggerContextListenerModelHandler - Adding LoggerContextListener of type [ch.qos.logback.classic.jul.LevelChangePropagator] to the object stack
+10:29:27,263 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@5c9a4f3b - Propagating DEBUG level on Logger[ROOT] onto the JUL framework
+10:29:27,263 |-INFO in ch.qos.logback.classic.model.processor.LoggerContextListenerModelHandler - Starting LoggerContextListener
+10:29:27,263 |-WARN in ch.qos.logback.core.model.processor.ShutdownHookModelHandler - ch.qos.logback.core.hook.DelayingShutdownHook was renamed as ch.qos.logback.core.hook.DefaultShutdownHook
+10:29:27,263 |-WARN in ch.qos.logback.core.model.processor.ShutdownHookModelHandler - Please use the new class name
+10:29:27,263 |-INFO in ch.qos.logback.core.model.processor.ShutdownHookModelHandler - About to instantiate shutdown hook of type [ch.qos.logback.core.hook.DefaultShutdownHook]
+10:29:27,264 |-INFO in ch.qos.logback.core.model.processor.ShutdownHookModelHandler - Registering shutdown hook with JVM runtime.
+10:29:27,264 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [CONSOLE]
+10:29:27,264 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+10:29:27,264 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+10:29:27,264 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ASYNC_CONSOLE]
+10:29:27,264 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+10:29:27,264 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLE] to ch.qos.logback.classic.AsyncAppender[ASYNC_CONSOLE]
+10:29:27,264 |-INFO in ch.qos.logback.classic.AsyncAppender[ASYNC_CONSOLE] - Attaching appender named [CONSOLE] to AsyncAppender.
+10:29:27,264 |-INFO in ch.qos.logback.classic.AsyncAppender[ASYNC_CONSOLE] - Setting discardingThreshold to 51
+10:29:27,265 |-INFO in ch.qos.logback.classic.model.processor.RootLoggerModelHandler - Setting level of ROOT logger to INFO
+10:29:27,265 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@2bb0e277 - Propagating INFO level on Logger[ROOT] onto the JUL framework
+10:29:27,265 |-INFO in ch.qos.logback.classic.jul.LevelChangePropagator@5c9a4f3b - Propagating INFO level on Logger[ROOT] onto the JUL framework
+10:29:27,265 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ASYNC_CONSOLE] to Logger[ROOT]
+10:29:27,265 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@6f24ce45 - End of configuration.
+10:29:27,265 |-INFO in org.springframework.boot.logging.logback.SpringBootJoranConfigurator@e881e46 - Registering current configuration as safe fallback point
+
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.1.1)
+
+2023-08-03T10:29:27.423 INFO  [Test worker] u.gov.hmcts.reform.hmi.controllers.GetWelcomeTest Starting GetWelcomeTest using Java 17.0.5 with PID 26893 (started by josh.blackmoor in /Users/josh.blackmoor/IdeaProjects/hmi-apim-infrastructures)
+2023-08-03T10:29:27.424 INFO  [Test worker] u.gov.hmcts.reform.hmi.controllers.GetWelcomeTest No active profile set, falling back to 1 default profile: "default"
+2023-08-03T10:29:28.680 INFO  [Test worker] o.s.b.test.mock.web.SpringBootMockServletContext Initializing Spring TestDispatcherServlet ''
+2023-08-03T10:29:28.680 INFO  [Test worker] o.s.test.web.servlet.TestDispatcherServlet Initializing Servlet ''
+2023-08-03T10:29:28.683 INFO  [Test worker] o.s.test.web.servlet.TestDispatcherServlet Completed initialization in 1 ms
+2023-08-03T10:29:28.714 INFO  [Test worker] u.gov.hmcts.reform.hmi.controllers.GetWelcomeTest Started GetWelcomeTest in 1.849 seconds (process running for 8.889)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

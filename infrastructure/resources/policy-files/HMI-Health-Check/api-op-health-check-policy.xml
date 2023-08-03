@@ -1,0 +1,25 @@
+<policies>
+    <inbound>
+        <return-response>
+            <set-status code="200" />
+            <set-header name="Content-Type">
+                <value>application/json</value>
+            </set-header>
+            <set-body>@{
+            return new JObject(
+                new JProperty("status", "Up")
+                ).ToString();
+            }
+            </set-body>
+        </return-response>
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>

@@ -1,8 +1,9 @@
 #!groovy
-//noinspection GroovyUnusedAssignment
-@Library("Infrastructure") _
 
+@Library("Infrastructure")
+
+def type = "java"
 def product = "hmi"
 def component = "apim"
 
-withInfraPipeline(product, component) {}
+withPipeline(type, product, component) {}
