@@ -1,7 +1,7 @@
 apiVersion: v2
 appVersion: "1.0"
-description: A Helm chart for hmi-apim-infrastructures App
-name: hmi-hmi-apim-infrastructures
+description: A Helm chart for hmi-apim App
+name: hmi-apim
 home: https://github.com/hmcts/hmi-apim-infrastructures
 version: 0.0.8
 maintainers:
