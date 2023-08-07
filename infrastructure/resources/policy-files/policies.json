@@ -18,7 +18,7 @@
           "name": "Destination-System",
           "required": "true",
           "type": "string",
-          "default_value": "CFT"
+          "default_value": "PIH"
         },
         {
           "name": "Request-Created-At",
@@ -34,7 +34,7 @@
         },
         {
           "name": "Content-Type",
-          "required": "true",
+          "required": "false",
           "type": "string",
           "default_value": "application/json"
         }
