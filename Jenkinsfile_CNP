@@ -9,7 +9,7 @@ def component = "apim"
 def setupTestSecrets() {
     def kv_env = env.ENV == "prod" || env.ENV == "demo" || env.ENV == "sbox" ? env.ENV : "stg"
     azureKeyVault(
-            keyVaultURL: "https://hmi-kv-${kv_env}-kv.vault.azure.net/",
+            keyVaultURL: "https://hmi-kv-${kv_env}.vault.azure.net/",
             secrets: [
                     secret('hmi-dtu-id', 'CLIENT_ID'),
                     secret('hmi-dtu-pwd', 'CLIENT_SECRET'),
