@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.hmi.controllers;
+package uk.gov.hmcts.reform.hmi.pip;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -27,11 +27,11 @@ class SampleFunctionalTest {
     @Test
     void functionalTest() {
         Response response = given()
-            .contentType(ContentType.JSON)
-            .when()
-            .get()
-            .then()
-            .extract().response();
+                .contentType(ContentType.JSON)
+                .when()
+                .get()
+                .then()
+                .extract().response();
 
         Assertions.assertEquals(200, response.statusCode());
         Assertions.assertTrue(response.asString().startsWith("Welcome"));

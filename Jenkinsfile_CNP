@@ -6,4 +6,30 @@ def type = "java"
 def product = "hmi"
 def component = "apim"
 
-withPipeline(type, product, component) {}
+def setupTestSecrets() {
+    def kv_env = env.ENV == "prod" || env.ENV == "demo" || env.ENV == "sbox" ? env.ENV : "stg"
+    azureKeyVault(
+            keyVaultURL: "https://hmi-kv-${kv_env}.vault.azure.net/",
+            secrets: [
+                    secret('hmi-dtu-id', 'CLIENT_ID'),
+                    secret('hmi-dtu-pwd', 'CLIENT_SECRET'),
+                    secret('hmi-gateway-scope', 'SCOPE'),
+            ]) {
+        env.CLIENT_ID = "${CLIENT_ID}"
+        env.CLIENT_SECRET = "${CLIENT_SECRET}"
+        env.SCOPE = "${SCOPE}"
+    }
+}
+
+static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
+    [ $class: 'AzureKeyVaultSecret',
+      secretType: 'Secret',
+      name: secretName,
+      version: '',
+      envVariable: envVar
+    ]
+}
+
+withPipeline(type, product, component) {
+    setupTestSecrets()
+}
