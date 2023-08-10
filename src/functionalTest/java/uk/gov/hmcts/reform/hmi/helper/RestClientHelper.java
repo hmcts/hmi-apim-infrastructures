@@ -89,7 +89,7 @@ public final class RestClientHelper {
      */
     private String generateOAuthToken() {
         String fullTokenApiUrl = String.format(tokenUrl, tokenTenantId);
-        final String bodyForToken = String.format("grant_type=%s&client_id=%s&client_secret=%s&scope=%s",
+        final String bodyForToken = String.format("grant_type=%s&client_id=%s&client_secret=%s&scope=%s/.default",
                 grantType, clientId, clientSecret, scope);
 
         return given()
