@@ -34,9 +34,6 @@ public final class RestClientHelper {
     @Value("${scope}")
     private String scope;
 
-
-
-
     /**
      * Perform a post request with an OAuth token and validate the response.
      *
