@@ -2,7 +2,7 @@
 
 properties([
   // H allow predefined but random minute see https://en.wikipedia.org/wiki/Cron#Non-standard_characters
-  pipelineTriggers([cron('H 08 * * 1-5')])
+  pipelineTriggers([cron('07 30 * 1-5')])
 ])
 
 @Library("Infrastructure")
@@ -11,4 +11,30 @@ def type = "java"
 def product = "hmi"
 def component = "apim"
 
-withNightlyPipeline(type, product, component) {}
+def setupTestSecrets() {
+    def kv_env = env.ENV == "prod" || env.ENV == "demo" || env.ENV == "sbox" ? env.ENV : "stg"
+    azureKeyVault(
+            keyVaultURL: "https://hmi-kv-${kv_env}.vault.azure.net/",
+            secrets: [
+                    secret('hmi-dtu-id', 'CLIENT_ID'),
+                    secret('hmi-dtu-pwd', 'CLIENT_SECRET'),
+                    secret('hmi-gateway-scope', 'SCOPE'),
+            ]) {
+        env.CLIENT_ID = "${CLIENT_ID}"
+        env.CLIENT_SECRET = "${CLIENT_SECRET}"
+        env.SCOPE = "${SCOPE}"
+    }
+}
+
+static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
+    [ $class: 'AzureKeyVaultSecret',
+      secretType: 'Secret',
+      name: secretName,
+      version: '',
+      envVariable: envVar
+    ]
+}
+
+withNightlyPipeline(type, product, component) {
+    setupTestSecrets()
+}
