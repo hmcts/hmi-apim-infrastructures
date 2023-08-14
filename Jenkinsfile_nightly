@@ -37,4 +37,5 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 
 withNightlyPipeline(type, product, component) {
     setupTestSecrets()
+    enableFullFunctionalTest()
 }
