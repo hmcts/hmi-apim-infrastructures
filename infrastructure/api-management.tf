@@ -10,10 +10,7 @@ module "apim_apis" {
   department  = var.department
 
   api_name                  = var.product_name
-  api_revision              = "1"
   api_protocols             = ["http", "https"]
-  api_service_url           = "https://${local.base_url}"
-  api_subscription_required = false
   api_content_format        = "openapi+json"
   api_content_value         = file("${path.module}/resources/api-spec/hmi-api-health.json")
 
