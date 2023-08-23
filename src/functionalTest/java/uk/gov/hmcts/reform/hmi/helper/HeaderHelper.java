@@ -3,8 +3,6 @@ package uk.gov.hmcts.reform.hmi.helper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -22,7 +20,7 @@ public final class HeaderHelper {
      * @param destinationSystem The system that the data will be sent to e.g. PIH.
      * @return a map containing the headers.
      */
-    public static Map<String, String> createHeaders(String destinationSystem) throws UnknownHostException {
+    public static Map<String, String> createHeaders(String destinationSystem) {
 
         final LocalDateTime now = LocalDateTime.now();
         final String requestCreatedAt = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm:ss'Z'"));
@@ -33,7 +31,7 @@ public final class HeaderHelper {
         headersAsMap.put("Source-System", "EMULATOR");
         headersAsMap.put("Destination-System", destinationSystem);
         headersAsMap.put("Request-Created-At", requestCreatedAt);
-        headersAsMap.put("X-Forwarded-For", String.valueOf(InetAddress.getLocalHost()));
+        //headersAsMap.put("X-Forwarded-For", String.valueOf(InetAddress.getLocalHost()));
         return headersAsMap;
     }
 
