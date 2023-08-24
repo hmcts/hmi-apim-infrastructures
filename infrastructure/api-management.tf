@@ -14,7 +14,8 @@ module "apim_apis" {
   api_content_format        = "openapi+json"
   api_content_value         = file("${path.module}/resources/api-spec/hmi-api-health.json")
 
-  policy_xml_content = file("${path.module}/resources/policy-files/api-policy.xml")
+  policy_xml_content = replace(file("${path.module}/resources/policy-files/api-policy.xml"),
+    "#oAuthRole#", var.oauth_role)
   api_operations = local.policy_file_template
 
   depends_on = [
