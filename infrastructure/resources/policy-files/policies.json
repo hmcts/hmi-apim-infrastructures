@@ -225,7 +225,7 @@
       }
     },
     {
-      "operationId": "retrieve-video-hearings",
+      "operationId": "retrieve-video-hearing-by-user",
       "templateFile": "Video-Hearing/api-op-retrieve-vh-by-user-policy.xml",
       "display_name": "Retrieve Video Hearing By User",
       "method": "GET",
