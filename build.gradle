@@ -29,15 +29,6 @@ sourceSets {
     resources.srcDir file('src/functionalTest/resources')
   }
 
-  integrationTest {
-    java {
-      compileClasspath += main.output
-      runtimeClasspath += main.output
-      srcDir file('src/integrationTest/java')
-    }
-    resources.srcDir file('src/integrationTest/resources')
-  }
-
   smokeTest {
     java {
       compileClasspath += main.output
@@ -51,9 +42,6 @@ sourceSets {
 configurations {
   functionalTestImplementation.extendsFrom testImplementation
   functionalTestRuntimeOnly.extendsFrom runtimeOnly
-
-  integrationTestImplementation.extendsFrom testImplementation
-  integrationTestRuntimeOnly.extendsFrom runtimeOnly
 
   smokeTestImplementation.extendsFrom testImplementation
   smokeTestRuntimeOnly.extendsFrom runtimeOnly
@@ -87,14 +75,6 @@ task functional(type: Test) {
   classpath = sourceSets.functionalTest.runtimeClasspath
 }
 
-task integration(type: Test) {
-  description = "Runs integration tests"
-  group = "Verification"
-  testClassesDirs = sourceSets.integrationTest.output.classesDirs
-  classpath = sourceSets.integrationTest.runtimeClasspath
-  failFast = true
-}
-
 task smoke(type: Test) {
   description = "Runs Smoke Tests"
   testClassesDirs = sourceSets.smokeTest.output.classesDirs
@@ -109,7 +89,7 @@ checkstyle {
 
 pmd {
   toolVersion = "6.55.0"
-  sourceSets = [sourceSets.main, sourceSets.test, sourceSets.functionalTest, sourceSets.integrationTest, sourceSets.smokeTest]
+  sourceSets = [sourceSets.main, sourceSets.test, sourceSets.functionalTest, sourceSets.smokeTest]
   reportsDir = file("$project.buildDir/reports/pmd")
   // https://github.com/pmd/pmd/issues/876
   ruleSets = []
@@ -117,7 +97,7 @@ pmd {
 }
 
 jacocoTestReport {
-  executionData(test, integration)
+  executionData(test)
   reports {
     xml.required = true
     csv.required = false
@@ -126,7 +106,6 @@ jacocoTestReport {
 }
 
 project.tasks['sonarqube'].dependsOn jacocoTestReport
-project.tasks['check'].dependsOn integration
 
 sonarqube {
   properties {
@@ -162,7 +141,6 @@ dependencyCheck {
     "checkstyle",
     "compileOnly",
     "pmd",
-    "integrationTest",
     "functionalTest",
     "smokeTest",
     "contractTestRuntimeClasspath",
@@ -216,6 +194,11 @@ bootJar {
 
 // Gradle 7.x issue, workaround from: https://github.com/gradle/gradle/issues/17236#issuecomment-894768083
 rootProject.tasks.named("processSmokeTestResources") {
+  duplicatesStrategy = 'include'
+}
+
+// Gradle 7.x issue, workaround from: https://github.com/gradle/gradle/issues/17236#issuecomment-894768083
+rootProject.tasks.named("processFunctionalTestResources") {
   duplicatesStrategy = 'include'
 }
 
