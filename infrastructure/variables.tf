@@ -34,6 +34,6 @@ variable "rate-call-limit" {
 }
 variable "oauth_role" {
   type        = string
-  default = "hmiGatewayNonProd"
+  default     = "hmiGatewayNonProd"
   description = "The oAuth role to use within the policy files"
 }
