@@ -82,6 +82,247 @@
         "name": "health-check",
         "display_name": "health-check"
       }
+    },
+    {
+      "operationId": "request-video-hearing",
+      "templateFile": "Video-Hearing/api-op-create-vh-policy.xml",
+      "display_name": "Request Video Hearing",
+      "method": "POST",
+      "url_template": "/resources/video-hearing",
+      "description": "Request Video Hearing",
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "201",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "update-video-hearing",
+      "templateFile": "Video-Hearing/api-op-update-vh-by-id-policy.xml",
+      "display_name": "Update Video Hearing",
+      "method": "PUT",
+      "url_template": "/resources/video-hearing/{hearingId}",
+      "description": "Update Video Hearing",
+      "template_parameter": {
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": "VH1234"
+      },
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "retrieve-video-hearings",
+      "templateFile": "Video-Hearing/api-op-retrieve-vh-by-id-policy.xml",
+      "display_name": "Retrieve Video Hearings",
+      "method": "GET",
+      "url_template": "/resources/video-hearing/{hearingId}",
+      "description": "Retrieve Video Hearings",
+      "template_parameter": {
+        "name": "hearingId",
+        "required": "true",
+        "type": "string",
+        "default_value": "VH012"
+      },
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "retrieve-video-hearing-by-user",
+      "templateFile": "Video-Hearing/api-op-retrieve-vh-by-user-policy.xml",
+      "display_name": "Retrieve Video Hearing By User",
+      "method": "GET",
+      "url_template": "/resources/video-hearing",
+      "description": "Retrieve Video Hearing By User",
+      "query_parameters": [
+        {
+          "name": "username",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "groupid-hearing",
+      "templateFile": "Video-Hearing/api-op-vh-groupid-hearing-policy.xml",
+      "display_name": "Groupid Hearing",
+      "method": "GET",
+      "url_template": "/hearings/{groupId}/hearings",
+      "description": "Groupid Hearing",
+      "template_parameter": {
+        "name": "groupId",
+        "required": "true",
+        "type": "string",
+        "default_value": ""
+      },
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
     }
   ]
 }
