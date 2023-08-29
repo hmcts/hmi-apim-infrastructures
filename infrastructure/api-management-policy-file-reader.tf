@@ -34,12 +34,14 @@ locals {
         default_value = query_parameter.default_value
       }
       ] : null
-      template_parameter =  can(policy.template_parameter) ? {
+      template_parameter =  can(policy.template_parameters) ? [for template_parameter in policy.template_parameters :
+      {
         name = policy.template_parameter.name
         required = policy.template_parameter.required
         type = policy.template_parameter.type
         default_value = policy.template_parameter.default_value
-      } : null
+      }
+      ] : null
       tag = can(policy.tag) ? {
         name = policy.tag.name
         display_name = policy.tag.display_name
