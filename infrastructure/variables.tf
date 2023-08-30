@@ -34,6 +34,11 @@ variable "rate-call-limit" {
 }
 variable "oauth_role" {
   type        = string
-  default = "hmiGatewayNonProd"
+  default     = "hmiGatewayNonProd"
   description = "The oAuth role to use within the policy files"
+}
+
+variable "apim_url" {
+  type        = string
+  description = "The url of the apim"
 }
