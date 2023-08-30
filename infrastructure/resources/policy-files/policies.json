@@ -494,6 +494,176 @@
         "name": "video-hearings",
         "display_name": "video-hearings"
       }
+    },
+    {
+      "operationId": "cancel-hearing",
+      "templateFile": "Video-Hearing/api-op-vh-cancel-hearing-policy.xml",
+      "display_name": "Cancel Hearing",
+      "method": "PATCH",
+      "url_template": "/hearings/{hearingId}/cancel",
+      "description": "Cancel Hearing",
+      "template_parameters": [
+        {
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "clone-hearing",
+      "templateFile": "Video-Hearing/api-op-vh-clone-hearing-policy.xml",
+      "display_name": "Clone Hearing",
+      "method": "POST",
+      "url_template": "/hearings/{hearingId}/clone",
+      "description": "Clone Hearing",
+      "template_parameters": [
+        {
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "delete-video-hearing",
+      "templateFile": "Video-Hearing/api-op-delete-vh-by-id-policy.xml",
+      "display_name": "Delete Video Hearing",
+      "method": "DELETE",
+      "url_template": "/resources/video-hearing/{hearingId}",
+      "description": "Delete Video Hearing",
+      "template_parameters": [
+        {
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "204",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "vh-health",
+      "templateFile": "Video-Hearing/api-op-vh-health-policy.xml",
+      "display_name": "Video Hearing Health",
+      "method": "GET",
+      "url_template": "/vh-health",
+      "description": "Health check for Video Hearing",
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
     }
   ]
 }
