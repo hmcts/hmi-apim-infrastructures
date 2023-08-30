@@ -37,3 +37,8 @@ variable "oauth_role" {
   default     = "hmiGatewayNonProd"
   description = "The oAuth role to use within the policy files"
 }
+
+variable "apim_url" {
+  type        = string
+  description = "The url of the apim"
+}
