@@ -8,8 +8,8 @@ locals {
   env_long_name = var.env == "sbox" ? "sandbox" : var.env == "stg" ? "staging" : var.env
   env_subdomain = local.env_long_name == "prod" ? "" : "${local.env_long_name}."
 
-  apim_name     = "sds-api-mgmt-${local.env}"
-  apim_rg       = "ss-${local.env}-network-rg"
+  apim_name = "sds-api-mgmt-${local.env}"
+  apim_rg   = "ss-${local.env}-network-rg"
 
 
   deploy_apim = local.env == "test" || local.env == "stg" || local.env == "sbox" || local.env == "prod" ? 1 : 0
