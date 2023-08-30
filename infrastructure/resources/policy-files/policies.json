@@ -133,12 +133,14 @@
       "method": "PUT",
       "url_template": "/resources/video-hearing/{hearingId}",
       "description": "Update Video Hearing",
-      "template_parameter": {
+      "template_parameters": [
+        {
           "name": "hearingId",
           "required": "true",
           "type": "string",
           "default_value": "VH1234"
-      },
+        }
+      ],
       "headers": [
         {
           "name": "Source-System",
@@ -182,12 +184,14 @@
       "method": "GET",
       "url_template": "/resources/video-hearing/{hearingId}",
       "description": "Retrieve Video Hearings",
-      "template_parameter": {
-        "name": "hearingId",
-        "required": "true",
-        "type": "string",
-        "default_value": "VH012"
-      },
+      "template_parameters": [
+        {
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": "VH012"
+        }
+      ],
       "headers": [
         {
           "name": "Source-System",
@@ -282,12 +286,179 @@
       "method": "GET",
       "url_template": "/hearings/{groupId}/hearings",
       "description": "Groupid Hearing",
-      "template_parameter": {
-        "name": "groupId",
+      "template_parameters": [
+        {
+          "name": "groupId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "add-participant",
+      "templateFile": "Video-Hearing/api-op-add-participant-policy.xml",
+      "display_name": "Add Participant",
+      "method": "POST",
+      "url_template": "/{hearingId}/participants",
+      "description": "Add Participant",
+      "template_parameters": [
+        {
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "delete-participant",
+      "templateFile": "Video-Hearing/api-op-delete-participant-policy.xml",
+      "display_name": "Delete Participant",
+      "method": "DELETE",
+      "url_template": "/{hearingId}/participants/{participantId}",
+      "description": "Delete Participant",
+      "template_parameters": [
+        {
+        "name": "hearingId",
         "required": "true",
         "type": "string",
         "default_value": ""
+        },
+        {
+          "name": "participantId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
       },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "edit-participant",
+      "templateFile": "Video-Hearing/api-op-edit-participant-policy.xml",
+      "display_name": "Edit Participant",
+      "method": "PUT",
+      "url_template": "/{hearingId}/participants/{participantId}",
+      "description": "Edit Participant",
+      "template_parameters": [
+        {
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "participantId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
       "headers": [
         {
           "name": "Source-System",
