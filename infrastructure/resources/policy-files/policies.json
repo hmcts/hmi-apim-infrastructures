@@ -538,7 +538,7 @@
       ],
       "response":
       {
-        "status_code": "200",
+        "status_code": "204",
         "description": ""
       },
       "tag": {
@@ -589,7 +589,7 @@
       ],
       "response":
       {
-        "status_code": "200",
+        "status_code": "204",
         "description": ""
       },
       "tag": {
