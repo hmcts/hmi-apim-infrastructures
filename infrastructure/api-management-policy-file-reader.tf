@@ -4,12 +4,13 @@ locals {
   policy_file_template = [for policy in local.policies_data.policies :
     {
       operation_id = policy.operationId
-      xml_content = replace(replace(replace(replace(replace(file("${path.module}/resources/policy-files/${policy.templateFile}"),
+      xml_content = replace(replace(replace(replace(replace(replace(file("${path.module}/resources/policy-files/${policy.templateFile}"),
         "#keyVaultHost#", var.key_vault_host),
         "#pihHost#", length(data.azurerm_key_vault_secret.pip_client_host) > 0 ? data.azurerm_key_vault_secret.pip_client_host[0].value : ""),
         "#snowHost#", length(data.azurerm_key_vault_secret.servicenow_host) > 0 ? data.azurerm_key_vault_secret.servicenow_host[0].value : ""),
         "#vhHost#", length(data.azurerm_key_vault_secret.vh_client_host) > 0 ? data.azurerm_key_vault_secret.vh_client_host[0].value : ""),
-      "#vhOauthUrl#", length(data.azurerm_key_vault_secret.vh_OAuth_url) > 0 ? data.azurerm_key_vault_secret.vh_OAuth_url[0].value : "")
+        "#vhOauthUrl#", length(data.azurerm_key_vault_secret.vh_OAuth_url) > 0 ? data.azurerm_key_vault_secret.vh_OAuth_url[0].value : ""),
+        "#elinksHost#", length(data.azurerm_key_vault_secret.elinks_client_host) > 0 ? data.azurerm_key_vault_secret.elinks_client_host[0].value : "")
       display_name = policy.display_name
       method       = policy.method
       url_template = policy.url_template
