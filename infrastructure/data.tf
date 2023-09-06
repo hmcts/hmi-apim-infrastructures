@@ -6,6 +6,7 @@ locals {
   servicenow_host     = "hmi-servicenow-host"
   vh_client_host      = "vh-client-host"
   vh_OAuth_url        = "vh-OAuth-url"
+  elinks_client_host  = "elinks-client-host"
 }
 
 data "azurerm_client_config" "current" {}
@@ -36,5 +37,11 @@ data "azurerm_key_vault_secret" "vh_client_host" {
 data "azurerm_key_vault_secret" "vh_OAuth_url" {
   count        = local.deploy_apim
   name         = local.vh_OAuth_url
+  key_vault_id = data.azurerm_key_vault.kv.id
+}
+
+data "azurerm_key_vault_secret" "elinks_client_host" {
+  count        = local.deploy_apim
+  name         = local.elinks_client_host
   key_vault_id = data.azurerm_key_vault.kv.id
 }

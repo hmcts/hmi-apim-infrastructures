@@ -664,6 +664,171 @@
         "name": "video-hearings",
         "display_name": "video-hearings"
       }
+    },
+    {
+      "operationId": "get-people",
+      "templateFile": "eLinks/api-op-get-people-by-id-elinks-policy.xml",
+      "display_name": "Get People By ID",
+      "method": "GET",
+      "url_template": "/people/{id}",
+      "description": "Get People By ID",
+      "template_parameters": [
+        {
+          "name": "id",
+          "required": "true",
+          "type": "string",
+          "default_value": "PID012"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "eLinks",
+        "display_name": "eLinks"
+      }
+    },
+    {
+      "operationId": "get-people-by-params",
+      "templateFile": "eLinks/api-op-get-people-by-params-elinks-policy.xml",
+      "display_name": "Get People By Params",
+      "method": "GET",
+      "url_template": "/people",
+      "description": "Get People By Params",
+      "query_parameters": [
+        {
+          "name": "updated_since",
+          "required": "false",
+          "type": "string",
+          "default_value": "2018-04-10"
+        },
+        {
+          "name": "per_page",
+          "required": "false",
+          "type": "string",
+          "default_value": "2"
+        },
+        {
+          "name": "page",
+          "required": "false",
+          "type": "string",
+          "default_value": "100"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "eLinks",
+        "display_name": "eLinks"
+      }
+    },
+    {
+      "operationId": "update-people",
+      "templateFile": "eLinks/api-op-update-people-elinks-policy.xml",
+      "display_name": "Update People",
+      "method": "PUT",
+      "url_template": "/people/{id}",
+      "description": "Update People",
+      "template_parameters": [
+        {
+          "name": "id",
+          "required": "true",
+          "type": "string",
+          "default_value": "PID012"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "204",
+        "description": ""
+      },
+      "tag": {
+        "name": "eLinks",
+        "display_name": "eLinks"
+      }
     }
   ]
 }
