@@ -83,6 +83,74 @@ public final class RestClientHelper {
     }
 
     /**
+     * Perform a post request without an OAuth token and validate the response.
+     *
+     * @param queryParams The query parameters to send in the request.
+     * @param headers The headers to send in the request.
+     * @param path The path to send the request on.
+     * @param expectedResponse The expected response body.
+     * @param expectedStatusCode The expected response code.
+     */
+    public void performSecureGetRequestAndValidateWithQueryParams(Map<String, String> headers,
+                                                            String path,
+                                                            final Map<String, String> queryParams,
+                                                            String expectedResponse,
+                                                            int expectedStatusCode) {
+
+        given().queryParams(queryParams)
+                .headers(headers)
+                .auth().oauth2(generateOAuthToken())
+                .when().request("GET", path).then()
+                .log().ifValidationFails()
+                .assertThat()
+                .body(containsString(expectedResponse))
+                .statusCode(expectedStatusCode);
+    }
+
+    /**
+     * Perform a post request with an OAuth token and validate the response.
+     *
+     * @param headers The headers to send in the request.
+     * @param path The path to send the request on.
+     * @param expectedStatusCode The expected response code.
+     */
+    public void performSecureGetRequestAndValidate(Map<String, String> headers,
+                                                    String path,
+                                                    String expectedResponse,
+                                                    int expectedStatusCode) {
+        given()
+                .headers(headers)
+                .auth().oauth2(generateOAuthToken())
+                .when().request("GET", path).then()
+                .log().ifValidationFails()
+                .assertThat()
+                .body(containsString(expectedResponse))
+                .statusCode(expectedStatusCode);
+    }
+
+    /**
+     * Perform a get request without an OAuth token and validate the response.
+     *
+     * @param headers The headers to send in the request.
+     * @param path The path to send the request on.
+     * @param expectedResponse The expected response body.
+     * @param expectedStatusCode The expected response code.
+     */
+    public void performGetRequestAndValidate(Map<String, String> headers,
+                                              String path,
+                                              String expectedResponse,
+                                              int expectedStatusCode) {
+
+        given()
+                .headers(headers)
+                .when().request("GET", path).then()
+                .log().ifValidationFails()
+                .assertThat()
+                .body(containsString(expectedResponse))
+                .statusCode(expectedStatusCode);
+    }
+
+    /**
      * Call to microsoft to get a bearer token.
      *
      * @return A bearer token that can be used in the requests to hmi.
