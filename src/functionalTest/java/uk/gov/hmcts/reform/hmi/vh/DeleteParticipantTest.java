@@ -12,8 +12,9 @@ import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
 import uk.gov.hmcts.reform.hmi.helper.RestClientHelper;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+
+import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getHearingId;
+import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
 
 /**
  * Functional tests for the VH endpoint (/{hearingId}/participants/{participantId}).
@@ -69,28 +70,5 @@ class DeleteParticipantTest {
                 "The value 'test' is not valid.",
                 400
         );
-    }
-
-    /**
-     * Takes in a file name and returns it as a string, used to extract json from payload.
-     *
-     * @param fileName The name of the file.
-     * @return A string of the json content within the file.
-     */
-    private String getJsonPayloadFileAsString(String fileName) throws IOException {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-
-        return Files.readString(Path.of(classLoader.getResource(fileName).getPath()));
-    }
-
-    /**
-     * Get the hearing id from the response.
-     *
-     * @param response The response from creating a hearing.
-     * @return A string of the hearing id.
-     */
-    private String getHearingId(Response response) {
-        String newlyCreatedHearing = response.getHeader("Location");
-        return newlyCreatedHearing.substring(newlyCreatedHearing.lastIndexOf('/') + 1);
     }
 }
