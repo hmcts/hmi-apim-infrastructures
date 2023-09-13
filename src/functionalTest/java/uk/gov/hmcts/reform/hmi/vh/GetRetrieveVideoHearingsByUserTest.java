@@ -35,12 +35,12 @@ class GetRetrieveVideoHearingsByUserTest {
     void vhGetRetrieveVideoHearingsByUserSuccessful() throws UnknownHostException {
         Map<String, String> params = new ConcurrentHashMap<>();
         params.put("username", "Manual01Clerk01@hearings.reform.hmcts.net");
-        restClientHelper.performSecureGetRequestWithParamsAndValidate(
-                "/resources/video-hearing",
-                "2022-10-19T19:15:00Z",
-                200,
+        restClientHelper.performSecureGetRequestAndValidateWithQueryParams(
                 HeaderHelper.createHeaders("VH"),
-                params
+                "/resources/video-hearing",
+                params,
+                "2022-10-19T19:15:00Z",
+                200
         );
     }
 
@@ -51,12 +51,12 @@ class GetRetrieveVideoHearingsByUserTest {
     void vhGetRetrieveVideoHearingsByUserSuccessfulBlankResponse() throws UnknownHostException {
         Map<String, String> params = new ConcurrentHashMap<>();
         params.put("username", "test.hmi.vh@justice.gov.uk");
-        restClientHelper.performSecureGetRequestWithParamsAndValidate(
-                "/resources/video-hearing",
-                "[]",
-                200,
+        restClientHelper.performSecureGetRequestAndValidateWithQueryParams(
                 HeaderHelper.createHeaders("VH"),
-                params
+                "/resources/video-hearing",
+                params,
+                "[]",
+                200
         );
     }
 
@@ -66,10 +66,10 @@ class GetRetrieveVideoHearingsByUserTest {
     @Test
     void vhGetRetrieveVideoHearingsByUserNoUser() throws UnknownHostException {
         restClientHelper.performSecureGetRequestAndValidate(
+                HeaderHelper.createHeaders("VH"),
                 "/resources/video-hearing",
                 "Object reference not set to an instance of an object.",
-                500,
-                HeaderHelper.createHeaders("VH")
+                500
         );
     }
 }

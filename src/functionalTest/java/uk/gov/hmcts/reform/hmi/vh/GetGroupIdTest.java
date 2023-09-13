@@ -32,10 +32,10 @@ class GetGroupIdTest {
     @Test
     void vhGetRetrieveVideoHearingsSuccessful() throws UnknownHostException {
         restClientHelper.performSecureGetRequestAndValidate(
+                HeaderHelper.createHeaders("VH"),
                 "/hearings/f138520a-2a20-4b08-9777-a53fbb651e33/hearings",
                 "[]",
-                200,
-                HeaderHelper.createHeaders("VH")
+                200
         );
     }
 
@@ -45,10 +45,10 @@ class GetGroupIdTest {
     @Test
     void vhGetRetrieveVideoHearingsInvalidId() throws UnknownHostException {
         restClientHelper.performSecureGetRequestAndValidate(
+                HeaderHelper.createHeaders("VH"),
                 "/hearings/test/hearings",
                 "The value 'test' is not valid.",
-                400,
-                HeaderHelper.createHeaders("VH")
+                400
         );
     }
 }
