@@ -62,8 +62,8 @@
         "description": ""
       },
       "tag": {
-        "name": "CaTH",
-        "display_name": "CaTH"
+        "name": "health-check",
+        "display_name": "health-check"
       }
     },
     {
@@ -661,8 +661,76 @@
         "description": ""
       },
       "tag": {
-        "name": "video-hearings",
-        "display_name": "video-hearings"
+        "name": "health-check",
+        "display_name": "health-check"
+      }
+    },
+    {
+      "operationId": "crime-health",
+      "templateFile": "Crime/api-op-crime-health-policy.xml",
+      "display_name": "Crime Health Check",
+      "method": "GET",
+      "url_template": "/crime-health",
+      "description": "Health check for Crime",
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "health-check",
+        "display_name": "health-check"
+      }
+    },
+    {
+      "operationId": "elinks-health",
+      "templateFile": "eLinks/api-op-elinks-health-policy.xml",
+      "display_name": "eLinks API Health Check",
+      "method": "GET",
+      "url_template": "/elinks-health",
+      "description": "Health check for eLinks API",
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "health-check",
+        "display_name": "health-check"
+      }
+    },
+    {
+      "operationId": "hmc-health",
+      "templateFile": "CFT/api-op-hmc-health-policy.xml",
+      "display_name": "HMC Health Check",
+      "method": "GET",
+      "url_template": "/hmc-health",
+      "description": "Health check for HMC",
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "health-check",
+        "display_name": "health-check"
+      }
+    },
+    {
+      "operationId": "snl-health",
+      "templateFile": "SNL/api-op-snl-health-policy.xml",
+      "display_name": "SNL Health Check",
+      "method": "GET",
+      "url_template": "/snl-health",
+      "description": "Health check for SNL",
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "health-check",
+        "display_name": "health-check"
       }
     },
     {
@@ -823,23 +891,6 @@
       "response":
       {
         "status_code": "204",
-        "description": ""
-      },
-      "tag": {
-        "name": "eLinks",
-        "display_name": "eLinks"
-      }
-    },
-    {
-      "operationId": "elinks-health",
-      "templateFile": "eLinks/api-op-elinks-health-policy.xml",
-      "display_name": "Einks Health",
-      "method": "GET",
-      "url_template": "/elinks-health",
-      "description": "Health check for Einks",
-      "response":
-      {
-        "status_code": "200",
         "description": ""
       },
       "tag": {
