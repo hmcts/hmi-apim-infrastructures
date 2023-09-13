@@ -897,23 +897,6 @@
         "name": "eLinks",
         "display_name": "eLinks"
       }
-    },
-    {
-      "operationId": "elinks-health",
-      "templateFile": "eLinks/api-op-elinks-health-policy.xml",
-      "display_name": "Einks Health",
-      "method": "GET",
-      "url_template": "/elinks-health",
-      "description": "Health check for Einks",
-      "response":
-      {
-        "status_code": "200",
-        "description": ""
-      },
-      "tag": {
-        "name": "eLinks",
-        "display_name": "eLinks"
-      }
     }
   ]
 }
