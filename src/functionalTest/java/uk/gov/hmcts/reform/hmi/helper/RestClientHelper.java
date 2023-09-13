@@ -83,7 +83,7 @@ public final class RestClientHelper {
     }
 
     /**
-     * Perform a post request without an OAuth token and validate the response.
+     * Perform a get request with an OAuth token, query parameters and validate the response.
      *
      * @param queryParams The query parameters to send in the request.
      * @param headers The headers to send in the request.
