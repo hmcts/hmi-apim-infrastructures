@@ -159,37 +159,69 @@ public final class RestClientHelper {
     }
 
     /**
-     * Perform a get request with an OAuth token and validate the response.
+     * Perform a get request with an OAuth token, query parameters and validate the response.
      *
+     * @param queryParams The query parameters to send in the request.
+     * @param headers The headers to send in the request.
      * @param path The path to send the request on.
      * @param expectedResponse The expected response body.
      * @param expectedStatusCode The expected response code.
-     * @param headers The headers to send in the request.
      */
-    public void performSecureGetRequestAndValidate(String path, String expectedResponse,
-                                                   int expectedStatusCode, Map<String, String> headers) {
-        given().headers(headers).auth().oauth2(generateOAuthToken())
+    public void performSecureGetRequestAndValidateWithQueryParams(Map<String, String> headers,
+                                                            String path,
+                                                            final Map<String, String> queryParams,
+                                                            String expectedResponse,
+                                                            int expectedStatusCode) {
+
+        given().queryParams(queryParams)
+                .headers(headers)
+                .auth().oauth2(generateOAuthToken())
                 .when().request("GET", path).then()
-                .log().ifValidationFails().assertThat()
+                .log().ifValidationFails()
+                .assertThat()
                 .body(containsString(expectedResponse))
                 .statusCode(expectedStatusCode);
     }
 
     /**
-     * Perform a get request with an OAuth token, param and validate the response.
+     * Perform a post request with an OAuth token and validate the response.
      *
+     * @param headers The headers to send in the request.
+     * @param path The path to send the request on.
+     * @param expectedStatusCode The expected response code.
+     */
+    public void performSecureGetRequestAndValidate(Map<String, String> headers,
+                                                    String path,
+                                                    String expectedResponse,
+                                                    int expectedStatusCode) {
+        given()
+                .headers(headers)
+                .auth().oauth2(generateOAuthToken())
+                .when().request("GET", path).then()
+                .log().ifValidationFails()
+                .assertThat()
+                .body(containsString(expectedResponse))
+                .statusCode(expectedStatusCode);
+    }
+
+    /**
+     * Perform a get request without an OAuth token and validate the response.
+     *
+     * @param headers The headers to send in the request.
      * @param path The path to send the request on.
      * @param expectedResponse The expected response body.
      * @param expectedStatusCode The expected response code.
-     * @param headers The headers to send in the request.
-     * @param params The params to send in the request.
      */
-    public void performSecureGetRequestWithParamsAndValidate(String path, String expectedResponse,
-                                                   int expectedStatusCode, Map<String, String> headers,
-                                                             Map<String, String> params) {
-        given().headers(headers).params(params).auth().oauth2(generateOAuthToken())
+    public void performGetRequestAndValidate(Map<String, String> headers,
+                                              String path,
+                                              String expectedResponse,
+                                              int expectedStatusCode) {
+
+        given()
+                .headers(headers)
                 .when().request("GET", path).then()
-                .log().ifValidationFails().assertThat()
+                .log().ifValidationFails()
+                .assertThat()
                 .body(containsString(expectedResponse))
                 .statusCode(expectedStatusCode);
     }
