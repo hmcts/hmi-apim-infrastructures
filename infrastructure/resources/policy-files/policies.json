@@ -897,6 +897,214 @@
         "name": "eLinks",
         "display_name": "eLinks"
       }
+    },
+    {
+      "operationId": "create-linked-hearing-group",
+      "templateFile": "CFT/api-op-create-linked-hearing-group-policy.xml",
+      "display_name": "Create Linked Hearing Group",
+      "method": "POST",
+      "url_template": "/resources/linked-hearing-group",
+      "description": "Create Linked Hearing Group",
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "false",
+          "type": "string",
+          "default_value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "resources",
+        "display_name": "resources"
+      }
+    },
+    {
+      "operationId": "delete-hearing",
+      "templateFile": "CFT/api-op-delete-hearing-policy.xml",
+      "display_name": "Delete Hearing",
+      "method": "DELETE",
+      "url_template": "/hearings/{hearing-id}",
+      "description": "Delete Hearing",
+      "template_parameters": [
+        {
+          "name": "hearing-id",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "hearings",
+        "display_name": "hearings"
+      }
+    },
+    {
+      "operationId": "delete-linked-hearing-group",
+      "templateFile": "CFT/api-op-delete-linked-hearing-group-policy.xml",
+      "display_name": "Delete Linked Hearing Group",
+      "method": "DELETE",
+      "url_template": "/resources/linked-hearing-group/{groupClientReference}",
+      "description": "Delete Linked Hearing Group",
+      "template_parameters": [
+        {
+          "name": "groupClientReference",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "false",
+          "type": "string",
+          "default_value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "202",
+        "description": ""
+      },
+      "tag": {
+        "name": "resources",
+        "display_name": "resources"
+      }
+    },
+    {
+      "operationId": "direct-hearing",
+      "templateFile": "CFT/api-op-request-direct-hearing-policy.xml",
+      "display_name": "Direct Hearings",
+      "method": "PUT",
+      "url_template": "/hearings/sessions/{sessionId}",
+      "description": "Direct Hearings",
+      "template_parameters": [
+        {
+          "name": "sessionId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "202",
+        "description": ""
+      },
+      "tag": {
+        "name": "hearings",
+        "display_name": "hearings"
+      }
     }
   ]
 }
