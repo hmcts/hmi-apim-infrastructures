@@ -1105,6 +1105,205 @@
         "name": "hearings",
         "display_name": "hearings"
       }
+    },
+    {
+      "operationId": "request-hearing",
+      "templateFile": "CFT/api-op-request-hearing-policy.xml",
+      "display_name": "Request Hearing",
+      "method": "POST",
+      "url_template": "/hearings",
+      "description": "Request Hearing",
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "202",
+        "description": ""
+      },
+      "tag": {
+        "name": "hearings",
+        "display_name": "hearings"
+      }
+    },
+    {
+      "operationId": "reservations",
+      "templateFile": "CFT/api-op-get-reservations-policy.xml",
+      "display_name": "Reservations",
+      "method": "GET",
+      "url_template": "/reservations",
+      "description": "Reservations",
+      "query_parameters": [
+        {
+          "name": "requestStartDate",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "requestEndDate",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "requestDuration",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "requestLocationType",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "requestLocationReferenceType",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "requestLocationId",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "requestComments",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "requestExternalId",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "hearings",
+        "display_name": "hearings"
+      }
+    },
+    {
+      "operationId": "update-linked-hearing-group",
+      "templateFile": "CFT/api-op-update-linked-hearing-group-policy.xml",
+      "display_name": "Update Linked Hearing Group",
+      "method": "PUT",
+      "url_template": "/resources/linked-hearing-group/{groupClientReference}",
+      "description": "Update Linked Hearing Group",
+      "template_parameters": [
+        {
+          "name": "groupClientReference",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "202",
+        "description": ""
+      },
+      "tag": {
+        "name": "resources",
+        "display_name": "resources"
+      }
     }
   ]
 }
