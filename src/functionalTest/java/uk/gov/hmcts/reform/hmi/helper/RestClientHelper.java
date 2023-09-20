@@ -227,6 +227,30 @@ public final class RestClientHelper {
     }
 
     /**
+     * Perform a put request with an OAuth token and validate the response.
+     *
+     * @param payload The payload to send in the request.
+     * @param headers The headers to send in the request.
+     * @param path The path to send the request on.
+     * @param expectedResponse The expected response body.
+     * @param expectedStatusCode The expected response code.
+     */
+    public void performSecurePutRequestAndValidate(String payload,
+                                                     Map<String, String> headers,
+                                                     String path,
+                                                     String expectedResponse,
+                                                     int expectedStatusCode) {
+        given().body(payload)
+                .headers(headers)
+                .auth().oauth2(generateOAuthToken())
+                .when().request("PUT", path).then()
+                .log().ifValidationFails()
+                .assertThat()
+                .body(containsString(expectedResponse))
+                .statusCode(expectedStatusCode);
+    }
+
+    /**
      * Call to microsoft to get a bearer token.
      *
      * @return A bearer token that can be used in the requests to hmi.
