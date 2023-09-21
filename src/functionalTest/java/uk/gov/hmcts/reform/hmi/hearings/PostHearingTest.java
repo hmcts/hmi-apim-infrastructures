@@ -9,27 +9,20 @@ import org.springframework.test.context.ActiveProfiles;
 import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
 import uk.gov.hmcts.reform.hmi.helper.RestClientHelper;
 
-import java.net.UnknownHostException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.io.IOException;
 import java.util.Map;
-import java.util.Random;
+
+import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
 
 /**
- * Functional tests for the endpoint used by different consumers (/hearings/{hearing-id}).
+ * Functional tests for the endpoint used by different consumers (/hearings).
  */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
-class DeleteHearingTest {
+class PostHearingTest {
 
     @Autowired
     RestClientHelper restClientHelper;
-
-    private final Random rand;
-
-    public DeleteHearingTest()  throws NoSuchAlgorithmException {
-        rand = SecureRandom.getInstanceStrong();
-    }
 
     @BeforeEach
     void setup() {
@@ -37,17 +30,14 @@ class DeleteHearingTest {
     }
 
     /**
-     * Test with a valid set of headers, but empty body, response should return 400.
+     * Test with a valid payload and a valid set of headers and valid payload, expect 400.
      */
     @Test
-    void deleteHearingFail() throws UnknownHostException {
-        int randomId = rand.nextInt(99_999_999);
-        String hearingsIdRootContext = String.format("/hearings/%s", randomId);
-
-        restClientHelper.performSecureDeleteRequestAndValidate(
-                "{}",
+    void postHearingCreateFail() throws IOException {
+        restClientHelper.performSecurePostRequestAndValidateWithResponse(
+                getJsonPayloadFileAsString("hearings/create-hearing-request-payload.json"),
                 HeaderHelper.createHeaders("SNL"),
-                hearingsIdRootContext,
+                "/hearings",
                 "",
                 400
         );
@@ -57,17 +47,14 @@ class DeleteHearingTest {
      * Test with a Invalid header, response should return 400.
      */
     @Test
-    void deleteHearingInvalidHeaderFail() throws UnknownHostException {
-        int randomId = rand.nextInt(99_999_999);
-        String hearingsIdRootContext = String.format("/hearings/%s", randomId);
-
+    void postHearingCreateInvalidHeaderFail() throws IOException {
         Map<String, String> requestHeader =  HeaderHelper.createHeaders("SNL");
         requestHeader.remove("Destination-System");
 
-        restClientHelper.performSecureDeleteRequestAndValidate(
-                "{}",
+        restClientHelper.performSecurePostRequestAndValidateWithResponse(
+                getJsonPayloadFileAsString("hearings/create-hearing-request-payload.json"),
                 requestHeader,
-                hearingsIdRootContext,
+                "/hearings",
                 "Missing/Invalid Header Destination-System",
                 400
         );
