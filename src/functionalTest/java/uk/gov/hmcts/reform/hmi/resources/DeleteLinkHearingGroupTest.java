@@ -46,7 +46,7 @@ class DeleteLinkHearingGroupTest {
 
         restClientHelper.performSecureDeleteRequestAndValidate(
                 "{}",
-                HeaderHelper.createHeaders("CFT"),
+                HeaderHelper.createHeaders("SNL"),
                 resourcesLinkedHearingGroupIdRootContext,
                 "",
                 400
@@ -61,7 +61,7 @@ class DeleteLinkHearingGroupTest {
         int randomId = rand.nextInt(99_999_999);
         String resourcesLinkedHearingGroupIdRootContext = String.format("/resources/linked-hearing-group/%s", randomId);
 
-        Map<String, String> requestHeader =  HeaderHelper.createHeaders("CFT");
+        Map<String, String> requestHeader =  HeaderHelper.createHeaders("SNL");
         requestHeader.remove("Destination-System");
 
         restClientHelper.performSecureDeleteRequestAndValidate(

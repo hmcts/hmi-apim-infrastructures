@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.hmi.direct;
+package uk.gov.hmcts.reform.hmi.resources;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,26 +10,17 @@ import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
 import uk.gov.hmcts.reform.hmi.helper.RestClientHelper;
 
 import java.net.UnknownHostException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.Map;
-import java.util.Random;
 
 /**
- * Functional tests for the endpoint used by different consumers (/hearings/sessions/{sessionId}).
+ * Functional tests for the endpoint used by different consumers (/resources/linked-hearing-group).
  */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
-class DirectHearingTest {
+class PostLinkHearingGroupTest {
 
     @Autowired
     RestClientHelper restClientHelper;
-
-    private final Random rand;
-
-    public DirectHearingTest()  throws NoSuchAlgorithmException {
-        rand = SecureRandom.getInstanceStrong();
-    }
 
     @BeforeEach
     void setup() {
@@ -40,14 +31,11 @@ class DirectHearingTest {
      * Test with a valid set of headers, but empty body, response should return 400.
      */
     @Test
-    void putDirectHearingFail() throws UnknownHostException {
-        int randomId = rand.nextInt(99_999_999);
-        String hearingsIdRootContext = String.format("/hearings/sessions/%s", randomId);
-
-        restClientHelper.performSecurePutRequestAndValidate(
+    void postCreateLinkHearingGroupFail() throws UnknownHostException {
+        restClientHelper.performSecurePostRequestAndValidate(
                 "{}",
-                HeaderHelper.createHeaders("CFT"),
-                hearingsIdRootContext,
+                HeaderHelper.createHeaders("SNL"),
+                "/resources/linked-hearing-group",
                 "",
                 400
         );
@@ -57,17 +45,14 @@ class DirectHearingTest {
      * Test with a Invalid header, response should return 400.
      */
     @Test
-    void putDirectHearingInvalidHeaderFail() throws UnknownHostException {
-        int randomId = rand.nextInt(99_999_999);
-        String hearingsIdRootContext = String.format("/hearings/sessions/%s", randomId);
-
-        Map<String, String> requestHeader =  HeaderHelper.createHeaders("CFT");
+    void postCreateLinkHearingGroupInvalidHeaderFail() throws UnknownHostException {
+        Map<String, String> requestHeader =  HeaderHelper.createHeaders("SNL");
         requestHeader.remove("Destination-System");
 
-        restClientHelper.performSecurePutRequestAndValidate(
+        restClientHelper.performSecurePostRequestAndValidate(
                 "{}",
                 requestHeader,
-                hearingsIdRootContext,
+                "/resources/linked-hearing-group",
                 "Missing/Invalid Header Destination-System",
                 400
         );

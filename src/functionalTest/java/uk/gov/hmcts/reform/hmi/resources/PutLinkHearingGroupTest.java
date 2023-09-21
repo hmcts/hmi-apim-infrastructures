@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.hmi.hearings;
+package uk.gov.hmcts.reform.hmi.resources;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,18 +16,19 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Functional tests for the endpoint used by different consumers (/hearings/{hearing-id}).
+ * Functional tests for the endpoint used by different
+ * consumers (/resources/linked-hearing-group/{groupClientReference}).
  */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
-class DeleteHearingTest {
+class PutLinkHearingGroupTest {
 
     @Autowired
     RestClientHelper restClientHelper;
 
     private final Random rand;
 
-    public DeleteHearingTest()  throws NoSuchAlgorithmException {
+    public PutLinkHearingGroupTest()  throws NoSuchAlgorithmException {
         rand = SecureRandom.getInstanceStrong();
     }
 
@@ -40,14 +41,14 @@ class DeleteHearingTest {
      * Test with a valid set of headers, but empty body, response should return 400.
      */
     @Test
-    void deleteHearingFail() throws UnknownHostException {
+    void putLinkHearingGroupFail() throws UnknownHostException {
         int randomId = rand.nextInt(99_999_999);
-        String hearingsIdRootContext = String.format("/hearings/%s", randomId);
+        String resourcesLinkedHearingGroupIdRootContext = String.format("/resources/linked-hearing-group/%s", randomId);
 
-        restClientHelper.performSecureDeleteRequestAndValidate(
+        restClientHelper.performSecurePutRequestAndValidate(
                 "{}",
                 HeaderHelper.createHeaders("SNL"),
-                hearingsIdRootContext,
+                resourcesLinkedHearingGroupIdRootContext,
                 "",
                 400
         );
@@ -57,17 +58,17 @@ class DeleteHearingTest {
      * Test with a Invalid header, response should return 400.
      */
     @Test
-    void deleteHearingInvalidHeaderFail() throws UnknownHostException {
+    void putLinkHearingGroupInvalidHeaderFail() throws UnknownHostException {
         int randomId = rand.nextInt(99_999_999);
-        String hearingsIdRootContext = String.format("/hearings/%s", randomId);
+        String resourcesLinkedHearingGroupIdRootContext = String.format("/resources/linked-hearing-group/%s", randomId);
 
         Map<String, String> requestHeader =  HeaderHelper.createHeaders("SNL");
         requestHeader.remove("Destination-System");
 
-        restClientHelper.performSecureDeleteRequestAndValidate(
+        restClientHelper.performSecurePutRequestAndValidate(
                 "{}",
                 requestHeader,
-                hearingsIdRootContext,
+                resourcesLinkedHearingGroupIdRootContext,
                 "Missing/Invalid Header Destination-System",
                 400
         );
