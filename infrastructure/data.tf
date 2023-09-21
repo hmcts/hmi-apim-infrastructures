@@ -1,19 +1,19 @@
 locals {
 
-  resource_group_name = "${local.prefix}-sharedinfra-${var.env}-rg"
-  key_vault_name      = "${local.prefix}-kv-${var.env}"
-  bootstrap_key_vault_name     = "${local.prefix}-boostrap-kv-${var.env}"
-  pip_client_host     = "pip-client-host"
-  servicenow_host     = "hmi-servicenow-host"
-  vh_client_host      = "vh-client-host"
-  vh_OAuth_url        = "vh-OAuth-url"
-  cft_client_host     = "cft-client-host"
-  cft_OAuth_url       = "cft-OAuth-url"
-  crime_client_host   = "crime-client-host"
-  elinks_client_host  = "elinks-client-host"
-  snl_client_host     = "snl-client-host"
-  snl_OAuth_url       = "snl-OAuth-url"
-  crime_cert          = "hmi-crime-cert-${var.env}"
+  resource_group_name      = "${local.prefix}-sharedinfra-${var.env}-rg"
+  key_vault_name           = "${local.prefix}-kv-${var.env}"
+  bootstrap_key_vault_name = "${local.prefix}-boostrap-kv-${var.env}"
+  pip_client_host          = "pip-client-host"
+  servicenow_host          = "hmi-servicenow-host"
+  vh_client_host           = "vh-client-host"
+  vh_OAuth_url             = "vh-OAuth-url"
+  cft_client_host          = "cft-client-host"
+  cft_OAuth_url            = "cft-OAuth-url"
+  crime_client_host        = "crime-client-host"
+  elinks_client_host       = "elinks-client-host"
+  snl_client_host          = "snl-client-host"
+  snl_OAuth_url            = "snl-OAuth-url"
+  crime_cert               = "hmi-crime-cert-${var.env}"
 }
 
 data "azurerm_client_config" "current" {}
