@@ -12,6 +12,7 @@ locals {
   elinks_client_host  = "elinks-client-host"
   snl_client_host     = "snl-client-host"
   snl_OAuth_url       = "snl-OAuth-url"
+  crime_cert = "hmi-crime-cert-${var.env}"
 }
 
 data "azurerm_client_config" "current" {}
@@ -78,5 +79,10 @@ data "azurerm_key_vault_secret" "snl_client_host" {
 data "azurerm_key_vault_secret" "snl_OAuth_url" {
   count        = local.deploy_apim
   name         = local.snl_OAuth_url
+  key_vault_id = data.azurerm_key_vault.kv.id
+}
+
+data "azurerm_key_vault_certificate" "crime_cert" {
+  name         = local.crime_cert
   key_vault_id = data.azurerm_key_vault.kv.id
 }
