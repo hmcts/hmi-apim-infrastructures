@@ -2,6 +2,7 @@ locals {
 
   resource_group_name = "${local.prefix}-sharedinfra-${var.env}-rg"
   key_vault_name      = "${local.prefix}-kv-${var.env}"
+  bootstrap_key_vault_name     = "${local.prefix}-boostrap-kv-${var.env}"
   pip_client_host     = "pip-client-host"
   servicenow_host     = "hmi-servicenow-host"
   vh_client_host      = "vh-client-host"
@@ -18,6 +19,11 @@ locals {
 data "azurerm_client_config" "current" {}
 
 data "azurerm_key_vault" "kv" {
+  name                = local.key_vault_name
+  resource_group_name = local.resource_group_name
+}
+
+data "azurerm_key_vault" "bootstrap_kv" {
   name                = local.key_vault_name
   resource_group_name = local.resource_group_name
 }
@@ -84,5 +90,5 @@ data "azurerm_key_vault_secret" "snl_OAuth_url" {
 
 data "azurerm_key_vault_certificate" "crime_cert" {
   name         = local.crime_cert
-  key_vault_id = data.azurerm_key_vault.kv.id
+  key_vault_id = data.azurerm_key_vault.bootstrap_kv.id
 }
