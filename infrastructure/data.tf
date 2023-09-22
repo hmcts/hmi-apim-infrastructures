@@ -96,6 +96,5 @@ data "azurerm_key_vault_secret" "crime_cert_base" {
 
 data "azurerm_key_vault_secret" "crime_cert_password" {
   name         = local.crime_cert_password
-  key_vault_id = data.azurerm_key_vault.
-  .id
+  key_vault_id = data.azurerm_key_vault.bootstrap_kv.id
 }
