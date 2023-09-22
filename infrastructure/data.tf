@@ -13,8 +13,8 @@ locals {
   elinks_client_host       = "elinks-client-host"
   snl_client_host          = "snl-client-host"
   snl_OAuth_url            = "snl-OAuth-url"
-  crime_cert_base = "hmi-crime-cert-base-64"
-  crime_cert_password = "hmi-crime-cert-password"
+  crime_cert_base          = "hmi-crime-cert-base-64"
+  crime_cert_password      = "hmi-crime-cert-password"
 }
 
 data "azurerm_client_config" "current" {}
