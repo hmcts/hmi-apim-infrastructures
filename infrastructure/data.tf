@@ -2,8 +2,6 @@ locals {
 
   resource_group_name           = "${local.prefix}-sharedinfra-${var.env}-rg"
   key_vault_name                = "${local.prefix}-kv-${var.env}"
-  bootstrap_key_vault_name      = "${local.prefix}-bootstrap-kv-${var.env}"
-  bootstrap_resource_group_name = "${local.prefix}-bootstrap-${var.env}-rg"
   pip_client_host               = "pip-client-host"
   servicenow_host               = "hmi-servicenow-host"
   vh_client_host                = "vh-client-host"
@@ -23,12 +21,6 @@ data "azurerm_client_config" "current" {}
 data "azurerm_key_vault" "kv" {
   name                = local.key_vault_name
   resource_group_name = local.resource_group_name
-}
-
-# REMOVE ME AFTER TESTING
-data "azurerm_key_vault" "bootstrap_kv" {
-  name                = local.bootstrap_key_vault_name
-  resource_group_name = local.bootstrap_resource_group_name
 }
 
 data "azurerm_key_vault_secret" "pip_client_host" {
@@ -93,10 +85,10 @@ data "azurerm_key_vault_secret" "snl_OAuth_url" {
 
 data "azurerm_key_vault_secret" "crime_cert_base" {
   name         = local.crime_cert_base
-  key_vault_id = data.azurerm_key_vault.bootstrap_kv.id
+  key_vault_id = data.azurerm_key_vault.kv.id
 }
 
 data "azurerm_key_vault_secret" "crime_cert_password" {
   name         = local.crime_cert_password
-  key_vault_id = data.azurerm_key_vault.bootstrap_kv.id
+  key_vault_id = data.azurerm_key_vault.kv.id
 }
