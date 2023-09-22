@@ -25,7 +25,7 @@ data "azurerm_key_vault" "kv" {
 }
 
 data "azurerm_key_vault" "bootstrap_kv" {
-  name                = local.key_vault_name
+  name                = local.bootstrap_key_vault_name
   resource_group_name = local.resource_group_name
 }
 
@@ -96,5 +96,6 @@ data "azurerm_key_vault_secret" "crime_cert_base" {
 
 data "azurerm_key_vault_secret" "crime_cert_password" {
   name         = local.crime_cert_password
-  key_vault_id = data.azurerm_key_vault.bootstrap_kv.id
+  key_vault_id = data.azurerm_key_vault.
+  .id
 }
