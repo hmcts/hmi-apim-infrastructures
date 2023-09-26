@@ -949,7 +949,7 @@
     },
     {
       "operationId": "delete-hearing",
-      "templateFile": "CFT/api-op-delete-hearing-policy.xml",
+      "templateFile": "Hearings/api-op-delete-hearing-policy.xml",
       "display_name": "Delete Hearing",
       "method": "DELETE",
       "url_template": "/hearings/{hearing-id}",
@@ -1108,7 +1108,7 @@
     },
     {
       "operationId": "request-hearing",
-      "templateFile": "CFT/api-op-request-hearing-policy.xml",
+      "templateFile": "Hearings/api-op-request-hearing-policy.xml",
       "display_name": "Request Hearing",
       "method": "POST",
       "url_template": "/hearings",
@@ -1303,6 +1303,198 @@
       "tag": {
         "name": "resources",
         "display_name": "resources"
+      }
+    },
+    {
+      "operationId": "create-schedule",
+      "templateFile": "Schedule/api-op-create-hearing-sched-policy.xml",
+      "display_name": "Create Schedule",
+      "method": "POST",
+      "url_template": "/schedules",
+      "description": "Create Schedule",
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "201",
+        "description": ""
+      },
+      "tag": {
+        "name": "schedules",
+        "display_name": "schedules"
+      }
+    },
+    {
+      "operationId": "direct-listing",
+      "templateFile": "DirectListing/api-op-request-direct-listing-policy.xml",
+      "display_name": "Direct Listing",
+      "method": "POST",
+      "url_template": "/",
+      "description": "Direct Listing",
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "direct-listing",
+        "display_name": "direct-listing"
+      }
+    },
+    {
+      "operationId": "get-sessions",
+      "templateFile": "Sessions/api-op-get-sessions-policy.xml",
+      "display_name": "Get Sessions",
+      "method": "GET",
+      "url_template": "/sessions",
+      "description": "Get Sessions",
+      "query_parameters": [
+        {
+          "name": "requestStartDate",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "requestEndDate",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "requestJudgeType",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "requestLocationId",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "requestDuration",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "requestSessionType",
+          "required": "false",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "sessions",
+        "display_name": "sessions"
+      }
+    },
+    {
+      "operationId": "update-hearing",
+      "templateFile": "Hearings/api-op-update-hearing-policy.xml",
+      "display_name": "Update Hearing",
+      "method": "PUT",
+      "url_template": "/hearings/{hearing-id}",
+      "description": "Update Hearing",
+      "template_parameters": [
+        {
+          "name": "hearing-id",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Content-Type",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "202",
+        "description": ""
+      },
+      "tag": {
+        "name": "hearings",
+        "display_name": "hearings"
       }
     }
   ]
