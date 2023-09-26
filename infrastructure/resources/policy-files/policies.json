@@ -1353,7 +1353,7 @@
       "templateFile": "DirectListing/api-op-request-direct-listing-policy.xml",
       "display_name": "Direct Listing",
       "method": "POST",
-      "url_template": "/",
+      "url_template": "/listings",
       "description": "Direct Listing",
       "response":
       {
