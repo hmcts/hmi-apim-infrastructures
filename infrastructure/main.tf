@@ -16,3 +16,13 @@ locals {
 
   prefix = var.product
 }
+
+data "azurerm_api_management" "sds_apim" {
+  name                = local.apim_name
+  resource_group_name = local.apim_rg
+}
+
+data "azurerm_user_assigned_identity" "hmi" {
+  name                = "hmi-${var.env}-mi"
+  resource_group_name = "managed-identities-${var.env}-rg"
+}

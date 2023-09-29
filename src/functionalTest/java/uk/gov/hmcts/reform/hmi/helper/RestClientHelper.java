@@ -1,6 +1,7 @@
 package uk.gov.hmcts.reform.hmi.helper;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +60,81 @@ public final class RestClientHelper {
     }
 
     /**
+     * Perform a post request with an OAuth token and validate the response and return the response.
+     *
+     * @param payload The payload to send in the request.
+     * @param headers The headers to send in the request.
+     * @param path The path to send the request on.
+     * @param expectedResponse The expected response body.
+     * @param expectedStatusCode The expected response code.
+     */
+    public Response performSecurePostRequestAndValidateWithResponse(String payload,
+                                                                    Map<String, String> headers,
+                                                                    String path,
+                                                                    String expectedResponse,
+                                                                    int expectedStatusCode) {
+        return given().body(payload)
+                .headers(headers)
+                .auth().oauth2(generateOAuthToken())
+                .when().request("POST", path).then()
+                .log().ifValidationFails()
+                .assertThat()
+                .body(containsString(expectedResponse))
+                .statusCode(expectedStatusCode)
+                .and()
+                .extract()
+                .response();
+    }
+
+    /**
+     * Perform a delete request with an OAuth token and validate the response.
+     *
+     * @param payload The payload to send in the request.
+     * @param headers The headers to send in the request.
+     * @param path The path to send the request on.
+     * @param expectedResponse The expected response body.
+     * @param expectedStatusCode The expected response code.
+     */
+    public void performSecureDeleteRequestAndValidate(String payload,
+                                                    Map<String, String> headers,
+                                                    String path,
+                                                    String expectedResponse,
+                                                    int expectedStatusCode) {
+        given().body(payload)
+                .headers(headers)
+                .auth().oauth2(generateOAuthToken())
+                .when().request("DELETE", path).then()
+                .log().ifValidationFails()
+                .assertThat()
+                .body(containsString(expectedResponse))
+                .statusCode(expectedStatusCode);
+    }
+
+    /**
+     * Perform a patch request with an OAuth token and validate the response.
+     *
+     * @param payload The payload to send in the request.
+     * @param headers The headers to send in the request.
+     * @param path The path to send the request on.
+     * @param expectedResponse The expected response body.
+     * @param expectedStatusCode The expected response code.
+     */
+    public void performSecurePatchRequestAndValidate(String payload,
+                                                    Map<String, String> headers,
+                                                    String path,
+                                                    String expectedResponse,
+                                                    int expectedStatusCode) {
+        given().body(payload)
+                .headers(headers)
+                .auth().oauth2(generateOAuthToken())
+                .when().request("PATCH", path).then()
+                .log().ifValidationFails()
+                .assertThat()
+                .body(containsString(expectedResponse))
+                .statusCode(expectedStatusCode);
+    }
+
+    /**
      * Perform a post request without an OAuth token and validate the response.
      *
      * @param payload The payload to send in the request.
@@ -76,6 +152,98 @@ public final class RestClientHelper {
         given().body(payload)
                 .headers(headers)
                 .when().request("POST", path).then()
+                .log().ifValidationFails()
+                .assertThat()
+                .body(containsString(expectedResponse))
+                .statusCode(expectedStatusCode);
+    }
+
+    /**
+     * Perform a get request with an OAuth token, query parameters and validate the response.
+     *
+     * @param queryParams The query parameters to send in the request.
+     * @param headers The headers to send in the request.
+     * @param path The path to send the request on.
+     * @param expectedResponse The expected response body.
+     * @param expectedStatusCode The expected response code.
+     */
+    public void performSecureGetRequestAndValidateWithQueryParams(Map<String, String> headers,
+                                                            String path,
+                                                            final Map<String, String> queryParams,
+                                                            String expectedResponse,
+                                                            int expectedStatusCode) {
+
+        given().queryParams(queryParams)
+                .headers(headers)
+                .auth().oauth2(generateOAuthToken())
+                .when().request("GET", path).then()
+                .log().ifValidationFails()
+                .assertThat()
+                .body(containsString(expectedResponse))
+                .statusCode(expectedStatusCode);
+    }
+
+    /**
+     * Perform a post request with an OAuth token and validate the response.
+     *
+     * @param headers The headers to send in the request.
+     * @param path The path to send the request on.
+     * @param expectedStatusCode The expected response code.
+     */
+    public void performSecureGetRequestAndValidate(Map<String, String> headers,
+                                                    String path,
+                                                    String expectedResponse,
+                                                    int expectedStatusCode) {
+        given()
+                .headers(headers)
+                .auth().oauth2(generateOAuthToken())
+                .when().request("GET", path).then()
+                .log().ifValidationFails()
+                .assertThat()
+                .body(containsString(expectedResponse))
+                .statusCode(expectedStatusCode);
+    }
+
+    /**
+     * Perform a get request without an OAuth token and validate the response.
+     *
+     * @param headers The headers to send in the request.
+     * @param path The path to send the request on.
+     * @param expectedResponse The expected response body.
+     * @param expectedStatusCode The expected response code.
+     */
+    public void performGetRequestAndValidate(Map<String, String> headers,
+                                              String path,
+                                              String expectedResponse,
+                                              int expectedStatusCode) {
+
+        given()
+                .headers(headers)
+                .when().request("GET", path).then()
+                .log().ifValidationFails()
+                .assertThat()
+                .body(containsString(expectedResponse))
+                .statusCode(expectedStatusCode);
+    }
+
+    /**
+     * Perform a put request with an OAuth token and validate the response.
+     *
+     * @param payload The payload to send in the request.
+     * @param headers The headers to send in the request.
+     * @param path The path to send the request on.
+     * @param expectedResponse The expected response body.
+     * @param expectedStatusCode The expected response code.
+     */
+    public void performSecurePutRequestAndValidate(String payload,
+                                                     Map<String, String> headers,
+                                                     String path,
+                                                     String expectedResponse,
+                                                     int expectedStatusCode) {
+        given().body(payload)
+                .headers(headers)
+                .auth().oauth2(generateOAuthToken())
+                .when().request("PUT", path).then()
                 .log().ifValidationFails()
                 .assertThat()
                 .body(containsString(expectedResponse))
