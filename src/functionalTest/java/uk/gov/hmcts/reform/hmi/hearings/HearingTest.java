@@ -2,6 +2,7 @@ package uk.gov.hmcts.reform.hmi.hearings;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,7 +11,10 @@ import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
 import uk.gov.hmcts.reform.hmi.helper.RestClientHelper;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Map;
+import java.util.Random;
 
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
 
@@ -19,10 +23,20 @@ import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsStri
  */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
-class PostHearingTest {
+class HearingTest {
 
     @Autowired
     RestClientHelper restClientHelper;
+
+    private final Random rand;
+
+    private static String randomHearingId;
+
+    private static final String DESTINATION = "SNL";
+
+    public HearingTest()  throws NoSuchAlgorithmException {
+        rand = SecureRandom.getInstanceStrong();
+    }
 
     @BeforeEach
     void setup() {
@@ -33,22 +47,42 @@ class PostHearingTest {
      * Test with a valid payload and a valid set of headers and valid payload, expect 400.
      */
     @Test
-    void postHearingCreateFail() throws IOException {
+    @Order(1)
+    void postHearingCreateSuccess() throws IOException {
+        randomHearingId = String.format("HMI_%s", rand.nextInt(999_999_999));
         restClientHelper.performSecurePostRequestAndValidateWithResponse(
-                getJsonPayloadFileAsString("hearings/create-hearing-request-payload.json"),
-                HeaderHelper.createHeaders("SNL"),
+                getJsonPayloadFileAsString("hearings/create-hearing-request-payload.json")
+                        .replace("HMI_CASE_LISTING_ID", randomHearingId),
+                HeaderHelper.createHeaders(DESTINATION),
                 "/hearings",
                 "",
-                400
+                202
         );
     }
 
     /**
-     * Test with a Invalid header, response should return 400.
+     * Test Update Hearing with a payload for SNL, a valid set of headers and valid payload, expect 202.
      */
     @Test
+    @Order(2)
+    void putHearingSuccess() throws IOException {
+        restClientHelper.performSecurePutRequestAndValidate(
+                getJsonPayloadFileAsString("hearings/update-hearing-request-payload.json")
+                        .replace("HMI_CASE_LISTING_ID", randomHearingId),
+                HeaderHelper.createHeaders(DESTINATION),
+                "/hearings/" + randomHearingId,
+                "",
+                202
+        );
+    }
+
+    /**
+     * Test with an Invalid header, response should return 400.
+     */
+    @Test
+    @Order(3)
     void postHearingCreateInvalidHeaderFail() throws IOException {
-        Map<String, String> requestHeader =  HeaderHelper.createHeaders("SNL");
+        Map<String, String> requestHeader =  HeaderHelper.createHeaders(DESTINATION);
         requestHeader.remove("Destination-System");
 
         restClientHelper.performSecurePostRequestAndValidateWithResponse(

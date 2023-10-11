@@ -1,6 +1,7 @@
 {
   "hearingRequest":{
     "listing":{
+      "amendReasonCode": "CNCL",
       "listingAutoCreateFlag":false,
       "listingPriority":"Standard",
       "listingType":"ABA5-FOF",

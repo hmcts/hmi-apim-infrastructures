@@ -1,0 +1,64 @@
+{
+  "listingRequest": {
+    "meta": {},
+    "_case": {
+      "caseIdHMCTS": "160001303611",
+      "caseListingRequestId": "HMI_CASE_LISTING_ID",
+      "caseVersionID": "",
+      "caseTitle": "1600013036",
+      "caseJurisdiction": "B",
+      "caseCourt": {
+        "locationType": "Court",
+        "locationReferenceType": "EXTERNAL",
+        "locationId": ""
+      },
+      "caseRegistered": "2016-06-15T00:00:00+00:00",
+      "caseReportingRestrictions": "",
+      "caseClassifications": [
+        {
+          "caseClassificationService": "B001",
+          "caseClassificationType": "CASE",
+          "caseClassificationSubType": "S"
+        }
+      ]
+    },
+    "entities": [
+      {
+        "entityId": "765855",
+        "entityTypeCode": "IND",
+        "entityRoleCode": "DEFE",
+        "entitySubType": {
+          "entityClassCode": "PERSON",
+          "entityFirstName": "JCone",
+          "entityLastName": "JCone",
+          "entityDateOfBirth": "1998-01-01"
+        },
+        "entityOffences": [
+          {
+            "offenceId": "1",
+            "offenceClass": "3",
+            "offenceTitle": "Theft from a shop",
+            "offenceWording": "On 01/01/2015 at town, stole article, to the value of \u00A32464.00, belonging to person.",
+            "offenceLegislation": "Contrary to section 1(1) and 7 of the Theft Act 1968.",
+            "offenceDate": "2015-01-01"
+          }
+        ]
+      }
+    ],
+    "listing": {
+      "listingType": "G",
+      "listingSessions": [
+        {
+          "listingRoom": {
+            "locationType": "Room",
+            "locationReferenceType": "EXTERNAL",
+            "locationId": "1083"
+          },
+          "listingStartDate": "2016-06-15T15:39:29+00:00",
+          "listingDuration": 5,
+          "listingStatus": "FIXED"
+        }
+      ]
+    }
+  }
+}
