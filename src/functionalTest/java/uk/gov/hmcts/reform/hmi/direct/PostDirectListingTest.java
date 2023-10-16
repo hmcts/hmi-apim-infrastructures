@@ -10,8 +10,12 @@ import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
 import uk.gov.hmcts.reform.hmi.helper.RestClientHelper;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Map;
+import java.util.Random;
+
+import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
 
 /**
  * Functional tests for the endpoint used by different consumers (/listings).
@@ -23,6 +27,14 @@ class PostDirectListingTest {
     @Autowired
     RestClientHelper restClientHelper;
 
+    private final Random rand;
+
+    private static String randomHearingId;
+
+    public PostDirectListingTest()  throws NoSuchAlgorithmException {
+        rand = SecureRandom.getInstanceStrong();
+    }
+
     @BeforeEach
     void setup() {
         RestAssured.baseURI = "https://sds-api-mgmt.staging.platform.hmcts.net/hmi";
@@ -30,11 +42,14 @@ class PostDirectListingTest {
 
     /**
      * Test with a valid set of headers, but empty body, response should return 400.
+     * Need to fix the payload once LA deploy DirectListing config on their SIT environment.
      */
     @Test
-    void postDirectListingFail() throws UnknownHostException {
+    void postDirectListingFail() throws IOException {
+        randomHearingId = String.format("HMI_%s", rand.nextInt(999_999_999));
         restClientHelper.performSecurePostRequestAndValidate(
-                "{}",
+                getJsonPayloadFileAsString("directlistings/create-direct-listings-request-payload.json")
+                        .replace("HMI_CASE_LISTING_ID", randomHearingId),
                 HeaderHelper.createHeaders("SNL"),
                 "/listings",
                 "",
