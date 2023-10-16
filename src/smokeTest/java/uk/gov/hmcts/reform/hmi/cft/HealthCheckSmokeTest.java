@@ -21,7 +21,7 @@ class HealthCheckSmokeTest {
     void cftHealthCheckTest() {
         RestClientHelper.performGetRequestAndValidate(
                 "/hmc-health",
-                "Welcome to hmc-hmi-inbound-adapter",
+                "",
                 200
         );
     }

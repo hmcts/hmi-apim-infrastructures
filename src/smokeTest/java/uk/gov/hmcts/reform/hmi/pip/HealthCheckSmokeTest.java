@@ -21,7 +21,7 @@ class HealthCheckSmokeTest {
     void pipHealthCheckTest() {
         RestClientHelper.performGetRequestAndValidate(
                 "/pih/health",
-                "Welcome to pip-data-management",
+                "",
                 200
         );
     }

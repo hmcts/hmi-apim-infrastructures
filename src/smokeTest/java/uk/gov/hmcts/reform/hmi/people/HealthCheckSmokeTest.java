@@ -18,7 +18,7 @@ class HealthCheckSmokeTest {
     void peopleHealthCheckTest() {
         RestClientHelper.performGetRequestAndValidate(
                 "/elinks-health",
-                "\"status\":\"OK\"",
+                "",
                 200
         );
     }

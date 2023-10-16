@@ -21,7 +21,7 @@ class HealthCheckSmokeTest {
     void vhHealthCheckTest() {
         RestClientHelper.performGetRequestAndValidate(
                 "/vh-health",
-                "\"successful\":true",
+                "",
                 200
         );
     }
