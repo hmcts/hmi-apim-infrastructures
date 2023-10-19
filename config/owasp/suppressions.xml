@@ -20,6 +20,7 @@
     <notes>Tomcat vuln, exists on latest version of spring 3.0.x</notes>
     <cve>CVE-2023-44487</cve>
     <cve>CVE-2023-45648</cve>
+    <cve>CVE-2023-42795</cve>
   </suppress>
   <!--End of temporary suppression section -->
 </suppressions>
