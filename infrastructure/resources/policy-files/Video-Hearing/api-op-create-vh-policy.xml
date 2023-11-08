@@ -1,6 +1,6 @@
 <policies>
     <inbound>
-        <base />
+        <base /> 
         <choose>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "VH")">
                 <cache-lookup-value key="vhAuth" variable-name="vhAuthToken" default-value="" />
