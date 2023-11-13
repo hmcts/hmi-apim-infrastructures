@@ -1661,6 +1661,63 @@
         "name": "video-hearings",
         "display_name": "video-hearings"
       }
+    },
+    {
+      "operationId": "edit-participant-v2",
+      "templateFile": "Video-Hearing/api-op-edit-participant-policy.xml",
+      "display_name": "Edit Participant V2",
+      "method": "PATCH",
+      "url_template": "/{hearingId}/participants/{participantId}",
+      "description": "Edit Participant",
+      "template_parameters": [
+        {
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "participantId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
     }
   ]
 }
