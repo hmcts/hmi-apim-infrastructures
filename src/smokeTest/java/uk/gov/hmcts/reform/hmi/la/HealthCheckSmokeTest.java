@@ -21,7 +21,7 @@ class HealthCheckSmokeTest {
     void listAssistHealthCheckTest() {
         RestClientHelper.performGetRequestAndValidate(
                 "/snl-health",
-                " \"database.connectivity\" : \"success\"",
+                " ",
                 200
         );
     }

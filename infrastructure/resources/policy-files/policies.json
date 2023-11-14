@@ -1496,6 +1496,228 @@
         "name": "hearings",
         "display_name": "hearings"
       }
+    },
+    {
+      "operationId": "add-judicial-officer",
+      "templateFile": "Video-Hearing/api-op-vh-add-joh-policy.xml",
+      "display_name": "Add Judicial Office Holders",
+      "method": "POST",
+      "url_template": "/hearings/{hearingId}/joh",
+      "description": "Add Judicial Office Holders",
+      "template_parameters": [
+        {
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "delete-judicial-officer",
+      "templateFile": "Video-Hearing/api-op-vh-delete-joh-policy.xml",
+      "display_name": "Delete Judicial Office Holder details",
+      "method": "DELETE",
+      "url_template": "/hearings/{hearingId}/joh/{personalCode}",
+      "description": "Delete Judicial Office Holder details",
+      "template_parameters": [
+        {
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "personalCode",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "204",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "update-judicial-officer",
+      "templateFile": "Video-Hearing/api-op-vh-edit-joh-policy.xml",
+      "display_name": "Update Judicial Office Holder details",
+      "method": "PATCH",
+      "url_template": "/hearings/{hearingId}/joh/{personalCode}",
+      "description": "Update Judicial Office Holder details",
+      "template_parameters": [
+        {
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "personalCode",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
+    },
+    {
+      "operationId": "edit-participant-v2",
+      "templateFile": "Video-Hearing/api-op-edit-participant-policy.xml",
+      "display_name": "Edit Participant V2",
+      "method": "PATCH",
+      "url_template": "/{hearingId}/participants/{participantId}",
+      "description": "Edit Participant",
+      "template_parameters": [
+        {
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        },
+        {
+          "name": "participantId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "MOCK"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "video-hearings",
+        "display_name": "video-hearings"
+      }
     }
   ]
 }

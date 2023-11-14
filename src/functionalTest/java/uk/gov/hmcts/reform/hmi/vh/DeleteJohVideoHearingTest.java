@@ -1,6 +1,5 @@
 package uk.gov.hmcts.reform.hmi.vh;
 
-
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,14 +17,16 @@ import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getHearingId;
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
 
 /**
- * Functional tests for the VH endpoint (/hearings/{id}/clone).
+ * Functional tests for the VH endpoint (/hearings/{hearingId}/joh/{personalCode}).
  */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
-class PostCloneVideoHearingTest {
+class DeleteJohVideoHearingTest {
 
     @Autowired
     RestClientHelper restClientHelper;
+
+    private String validHearingId = "";
 
     @BeforeEach
     void setup() {
@@ -33,10 +34,11 @@ class PostCloneVideoHearingTest {
     }
 
     /**
-     * Test with a valid hearing id and a valid set of headers, response should return 204.
+     * Test with a valid hearing id and a valid set of headers, response will be 404
+     * because we do not have judge id assigned on VH side.
      */
     @Test
-    void vhPostCloneVideoHearingSuccessful() throws IOException {
+    void vhDeleteJohVideoHearingFailed() throws IOException {
         Response response = restClientHelper.performSecurePostRequestAndValidateWithResponse(
                 getJsonPayloadFileAsString("vh/create-vh-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
@@ -45,26 +47,28 @@ class PostCloneVideoHearingTest {
                 201
         );
 
-        restClientHelper.performSecurePostRequestAndValidate(
-                "{}",
-                HeaderHelper.createHeaders("VH"),
-                String.format("/hearings/%s/clone", getHearingId(response)),
+        validHearingId = getHearingId(response);
+
+        restClientHelper.performSecureDeleteRequestAndValidate(
                 "",
-                204
+                HeaderHelper.createHeaders("VH"),
+                String.format("/hearings/%s/joh/%s", validHearingId, "123"),
+                "",
+                404
         );
     }
 
     /**
-     * Test with an invalid hearing id and a valid set of headers, response should return 400.
+     * Test with an invalid hearing id and a valid set of headers, response should return 404.
      */
     @Test
-    void vhPostCloneVideoHearingInvalidId() throws UnknownHostException {
-        restClientHelper.performSecurePostRequestAndValidate(
+    void vhDeleteJohVideoHearingInvalidId() throws UnknownHostException {
+        restClientHelper.performSecureDeleteRequestAndValidate(
                 "{}",
                 HeaderHelper.createHeaders("VH"),
-                "/hearings/invalid/clone",
+                String.format("/hearings/%s/joh/invalid", validHearingId),
                 "",
-                400
+                404
         );
     }
 }

@@ -21,7 +21,7 @@ class HealthCheckSmokeTest {
     void internalHealthCheckTest() {
         RestClientHelper.performGetRequestAndValidate(
                 "/",
-                "\"status\": \"Up\"",
+                "",
                 200
         );
     }

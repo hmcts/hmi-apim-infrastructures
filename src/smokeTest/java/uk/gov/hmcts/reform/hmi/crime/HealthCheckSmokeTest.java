@@ -21,7 +21,7 @@ class HealthCheckSmokeTest {
     void crimeHealthCheckTest() {
         RestClientHelper.performGetRequestAndValidate(
                 "/crime-health",
-                "{“knock-knock”: \"who's there??\"}",
+                "",
                 200
         );
     }

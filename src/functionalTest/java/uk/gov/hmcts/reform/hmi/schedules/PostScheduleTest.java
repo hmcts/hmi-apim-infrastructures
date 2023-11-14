@@ -1,4 +1,4 @@
-package uk.gov.hmcts.reform.hmi.hearings;
+package uk.gov.hmcts.reform.hmi.schedules;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,16 +10,15 @@ import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
 import uk.gov.hmcts.reform.hmi.helper.RestClientHelper;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Map;
 
-import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
-
 /**
- * Functional tests for the endpoint used by different consumers (/hearings).
+ * Functional tests for the endpoint used by different consumers (/schedules).
  */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
-class PostHearingTest {
+class PostScheduleTest {
 
     @Autowired
     RestClientHelper restClientHelper;
@@ -30,14 +29,14 @@ class PostHearingTest {
     }
 
     /**
-     * Test with a valid payload and a valid set of headers and valid payload, expect 400.
+     * Test with a valid set of headers, but empty body, response should return 400.
      */
     @Test
-    void postHearingCreateFail() throws IOException {
-        restClientHelper.performSecurePostRequestAndValidateWithResponse(
-                getJsonPayloadFileAsString("hearings/create-hearing-request-payload.json"),
+    void postCreateScheduleFail() throws UnknownHostException {
+        restClientHelper.performSecurePostRequestAndValidate(
+                "{}",
                 HeaderHelper.createHeaders("SNL"),
-                "/hearings",
+                "/schedules",
                 "",
                 400
         );
@@ -47,14 +46,14 @@ class PostHearingTest {
      * Test with a Invalid header, response should return 400.
      */
     @Test
-    void postHearingCreateInvalidHeaderFail() throws IOException {
+    void postCreateScheduleHeaderFail() throws IOException {
         Map<String, String> requestHeader =  HeaderHelper.createHeaders("SNL");
         requestHeader.remove("Destination-System");
 
         restClientHelper.performSecurePostRequestAndValidateWithResponse(
-                getJsonPayloadFileAsString("hearings/create-hearing-request-payload.json"),
+                "{}",
                 requestHeader,
-                "/hearings",
+                "/schedules",
                 "Missing/Invalid Header Destination-System",
                 400
         );

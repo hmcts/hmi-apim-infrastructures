@@ -1,32 +1,6 @@
 <policies>
     <inbound>
         <base />
-        <set-variable name="versionRequest" value="@{
-            string[] qryPrmKeys = context.Request.Url.Query.Keys.ToArray();
-            string[] allowedKeys = {"version"};
-            bool v2Request = false;
-            if(context.Request.Url.Query.Count &gt; 0){
-                for (int i = 0; i &lt; qryPrmKeys.Count(); i++)
-                {
-                    bool keyFound = false;
-                    for (int j = 0; j &lt; allowedKeys.Count(); j++)
-                    {
-                        if (qryPrmKeys[i] == allowedKeys[j]){
-                            keyFound = true;
-                            break;
-                        }
-                    }
-                    if(keyFound){
-                        if(context.Request.Url.Query["version"][0] == "v2") {
-                            v2Request = true;
-                        }
-                        break;
-                    }
-                }
-            }
-
-            return v2Request;
-        }" />
         <choose>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "VH")">
                 <cache-lookup-value key="vhAuth" variable-name="vhAuthToken" default-value="" />
@@ -57,8 +31,7 @@
                                 <value>application/x-www-form-urlencoded</value>
                             </set-header>
                             <set-body>@{
-                            return "client_id=" + (string)context.Variables["vhClient"] + "&client_secret=" + (string)context.Variables["vhSecret"] + "&grant_type=client_credentials&resource=#vhHost#";
-                            }</set-body>
+                            return "client_id=" + (string)context.Variables["vhClient"] + "&client_secret=" + (string)context.Variables["vhSecret"] + "&grant_type=client_credentials&resource=#vhHost#";}</set-body>
                         </send-request>
                         <set-header name="Authorization" exists-action="override">
                             <value>@("Bearer " + (String)((IResponse)context.Variables["vhBearerToken"]).Body.As<JObject>()["access_token"])</value>
@@ -71,15 +44,8 @@
                         </set-header>
                     </otherwise>
                 </choose>
-                <rewrite-uri template="/{hearingId}/participants/{participantId}" copy-unmatched-params="true" />
-                <choose>
-                    <when condition="@((bool)context.Variables["versionRequest"])">
-                        <set-backend-service base-url="#vhHost#/v2/hearings" />
-                    </when>
-                    <otherwise>
-                        <set-backend-service base-url="#vhHost#/hearings" />
-                    </otherwise>
-                </choose>
+                <rewrite-uri template="/{hearingId}/joh/{personalCode}" copy-unmatched-params="true" />
+                <set-backend-service base-url="#vhHost#/hearings" />
             </when>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
                 <mock-response status-code="204" content-type="application/json" />
@@ -127,10 +93,10 @@
                         new JProperty("caller_id", "1475a0491b743414f0dc85e4464bcb7a"),
                         new JProperty("category", "Data Issue"),
                         new JProperty("contact_type", "Alert"),
-                        new JProperty("description", "HMI - Update Participant: " + context.Request.Headers.GetValueOrDefault("transactionIdHMCTS","")),
+                        new JProperty("description", "HMI - Delete Participant: " + context.Request.Headers.GetValueOrDefault("transactionIdHMCTS","")),
                         new JProperty("impact", "2"),
                         new JProperty("service_offering", "138e0c541bc5bc507bdaddf0b24bcb2a"),
-                        new JProperty("short_description", "HMI - API Gateway Error - Authentication Issue"),
+                        new JProperty("short_description", "HMI - API Gateway Error -  Authentication Issue"),
                         new JProperty("subcategory", "HMI - Backend Service Failure"),
                         new JProperty("u_role_type", "c319bc4bdb41834074abffa9bf96199c"),
                         new JProperty("urgency", "3")
@@ -144,8 +110,8 @@
                     </set-header>
                     <set-body>@{
                         return new JObject(
-                            new JProperty("message", "Successfully authenticated by HMI, however target system failed to authenticate. Please try again.")
-                            ).ToString();
+                        new JProperty("message", "Successfully authenticated by HMI, however target system failed to authenticate. Please try again.")
+                        ).ToString();
                         }
                     </set-body>
                 </return-response>
@@ -172,7 +138,7 @@
                         new JProperty("caller_id", "1475a0491b743414f0dc85e4464bcb7a"),
                         new JProperty("category", "Data Issue"),
                         new JProperty("contact_type", "Alert"),
-                        new JProperty("description", "HMI - Update Participant: " + context.Request.Headers.GetValueOrDefault("transactionIdHMCTS","")),
+                        new JProperty("description", "HMI - Delete Participant: " + context.Request.Headers.GetValueOrDefault("transactionIdHMCTS","")),
                         new JProperty("impact", "2"),
                         new JProperty("service_offering", "138e0c541bc5bc507bdaddf0b24bcb2a"),
                         new JProperty("short_description", "HMI - API Gateway Error - Authorization Issue"),
@@ -189,8 +155,8 @@
                     </set-header>
                     <set-body>@{
                         return new JObject(
-                            new JProperty("message", "Successfully authorized by HMI, however target system failed to authorize. Please try again.")
-                            ).ToString();
+                        new JProperty("message", "Successfully authorized by HMI, however target system failed to authorize. Please try again.")
+                        ).ToString();
                         }
                     </set-body>
                 </return-response>
@@ -216,7 +182,7 @@
 							new JProperty("caller_id", "1475a0491b743414f0dc85e4464bcb7a"),
 							new JProperty("category", "Data Issue"),
 							new JProperty("contact_type", "Alert"),
-							new JProperty("description", "HMI - Update Participant: " + context.Request.Headers.GetValueOrDefault("transactionIdHMCTS","")),
+							new JProperty("description", "HMI - Delete Participant: " + context.Request.Headers.GetValueOrDefault("transactionIdHMCTS","")),
 							new JProperty("impact", "2"),
 							new JProperty("service_offering", "138e0c541bc5bc507bdaddf0b24bcb2a"),
 							new JProperty("short_description", "HMI - API Gateway Error"),
