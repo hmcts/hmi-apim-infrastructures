@@ -50,7 +50,7 @@ class PostCloneVideoHearingTest {
                 HeaderHelper.createHeaders("VH"),
                 String.format("/hearings/%s/clone", getHearingId(response)),
                 "",
-                204
+                200
         );
     }
 
