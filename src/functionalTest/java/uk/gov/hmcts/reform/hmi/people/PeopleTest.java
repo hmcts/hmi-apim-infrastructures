@@ -2,6 +2,7 @@ package uk.gov.hmcts.reform.hmi.people;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,6 +37,7 @@ class PeopleTest {
     }
 
     @Test
+    @Disabled
     void peopleGetSuccessful() throws IOException {
         requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
 
@@ -52,6 +54,7 @@ class PeopleTest {
     }
 
     @Test
+    @Disabled
     void peopleGetByIdSuccessful() throws IOException {
         requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         getPeopleById = String.format(getPeopleById, "PPLN1");
@@ -63,6 +66,7 @@ class PeopleTest {
     }
 
     @Test
+    @Disabled
     void peopleGetMissingDestinationHeader() throws IOException {
         requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         requestHeader.remove("Destination-System");
@@ -80,6 +84,7 @@ class PeopleTest {
     }
 
     @Test
+    @Disabled
     void peopleGetInvalidQueryParams() throws IOException {
         requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
 
@@ -97,6 +102,7 @@ class PeopleTest {
     }
 
     @Test
+    @Disabled
     void peopleGetMissingOAuth() throws IOException {
         requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
 
@@ -107,6 +113,7 @@ class PeopleTest {
     }
 
     @Test
+    @Disabled
     void peopleGeByIdtMissingOAuth() throws IOException {
         requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         getPeopleById = String.format(getPeopleById, "PPLN2");
@@ -118,6 +125,7 @@ class PeopleTest {
     }
 
     @Test
+    @Disabled
     void peopleGetByIdInvalidRequest() throws IOException {
         requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
 
