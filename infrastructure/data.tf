@@ -1,7 +1,7 @@
 locals {
 
-  resource_group_name = "${local.prefix}-sharedinfra-${var.env}-rg"
-  key_vault_name      = "${local.prefix}-kv-${var.env}"
+  resource_group_name = "${local.prefix}-sharedinfra-sds-${var.env}-rg"
+  key_vault_name      = "${local.prefix}-sds-kv-${var.env}"
   pip_client_host     = "pip-client-host"
   servicenow_host     = "hmi-servicenow-host"
   vh_client_host      = "vh-client-host"
