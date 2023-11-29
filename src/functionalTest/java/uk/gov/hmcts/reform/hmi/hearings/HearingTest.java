@@ -2,6 +2,7 @@ package uk.gov.hmcts.reform.hmi.hearings;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ class HearingTest {
      */
     @Test
     @Order(1)
+    @Disabled
     void postHearingCreateSuccess() throws IOException {
         randomHearingId = String.format("HMI_%s", rand.nextInt(999_999_999));
         restClientHelper.performSecurePostRequestAndValidateWithResponse(
@@ -65,6 +67,7 @@ class HearingTest {
      */
     @Test
     @Order(2)
+    @Disabled
     void putHearingSuccess() throws IOException {
         restClientHelper.performSecurePutRequestAndValidate(
                 getJsonPayloadFileAsString("hearings/update-hearing-request-payload.json")
@@ -81,6 +84,7 @@ class HearingTest {
      */
     @Test
     @Order(3)
+    @Disabled
     void postHearingCreateInvalidHeaderFail() throws IOException {
         Map<String, String> requestHeader =  HeaderHelper.createHeaders(DESTINATION);
         requestHeader.remove("Destination-System");

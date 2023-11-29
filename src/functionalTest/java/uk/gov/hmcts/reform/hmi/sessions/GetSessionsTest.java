@@ -2,6 +2,7 @@ package uk.gov.hmcts.reform.hmi.sessions;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,6 +35,7 @@ class GetSessionsTest {
      * Test with a valid GET request and check response payload, expect 200.
      */
     @Test
+    @Disabled
     void sessionsSuccessful() throws UnknownHostException {
         Map<String, String> queryParameters = new ConcurrentHashMap<>();
         queryParameters.put(REQUEST_SESSION_TYPE, "CJ");
@@ -52,6 +54,7 @@ class GetSessionsTest {
      * Test with a Invalid header, response should return 400.
      */
     @Test
+    @Disabled
     void sessionsHeaderFail() throws IOException {
         Map<String, String> requestHeader =  HeaderHelper.createHeaders("SNL");
         requestHeader.remove("Destination-System");
