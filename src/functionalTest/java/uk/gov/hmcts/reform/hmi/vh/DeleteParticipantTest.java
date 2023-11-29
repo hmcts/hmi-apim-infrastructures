@@ -4,7 +4,6 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,7 +35,6 @@ class DeleteParticipantTest {
      * Test with a valid hearing id and a valid set of headers and valid payload, expect 204.
      */
     @Test
-    @Disabled
     void vhDeleteParticipantTestSuccessful() throws IOException {
         Response response = restClientHelper.performSecurePostRequestAndValidateWithResponse(
                 getJsonPayloadFileAsString("vh/create-vh-hearing.json"),
@@ -63,7 +61,6 @@ class DeleteParticipantTest {
      * Test with an invalid hearing id and a valid set of headers and valid payload, expect 400.
      */
     @Test
-    @Disabled
     void vhDeleteParticipantTestInvalidId() throws IOException {
 
         restClientHelper.performSecureDeleteRequestAndValidate(

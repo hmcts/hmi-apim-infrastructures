@@ -2,7 +2,6 @@ package uk.gov.hmcts.reform.hmi.vh;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,7 +32,6 @@ class GetRetrieveVideoHearingsByUserTest {
      * Test with a valid user and valid headers, response should return the hearing.
      */
     @Test
-    @Disabled
     void vhGetRetrieveVideoHearingsByUserSuccessful() throws UnknownHostException {
         Map<String, String> params = new ConcurrentHashMap<>();
         params.put("username", "Manual01Clerk01@hearings.reform.hmcts.net");
@@ -50,7 +48,6 @@ class GetRetrieveVideoHearingsByUserTest {
      * Test with a user and valid headers, response should return blank response as no hearings.
      */
     @Test
-    @Disabled
     void vhGetRetrieveVideoHearingsByUserSuccessfulBlankResponse() throws UnknownHostException {
         Map<String, String> params = new ConcurrentHashMap<>();
         params.put("username", "test.hmi.vh@justice.gov.uk");
@@ -67,7 +64,6 @@ class GetRetrieveVideoHearingsByUserTest {
      * Test with no user and valid headers, response should return 500.
      */
     @Test
-    @Disabled
     void vhGetRetrieveVideoHearingsByUserNoUser() throws UnknownHostException {
         restClientHelper.performSecureGetRequestAndValidate(
                 HeaderHelper.createHeaders("VH"),

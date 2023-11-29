@@ -2,7 +2,6 @@ package uk.gov.hmcts.reform.hmi.direct;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -46,7 +45,6 @@ class PostDirectListingTest {
      * Need to fix the payload once LA deploy DirectListing config on their SIT environment.
      */
     @Test
-    @Disabled
     void postDirectListingFail() throws IOException {
         randomHearingId = String.format("HMI_%s", rand.nextInt(999_999_999));
         restClientHelper.performSecurePostRequestAndValidate(
@@ -63,7 +61,6 @@ class PostDirectListingTest {
      * Test with a Invalid header, response should return 400.
      */
     @Test
-    @Disabled
     void postDirectListingHeaderFail() throws IOException {
         Map<String, String> requestHeader =  HeaderHelper.createHeaders("SNL");
         requestHeader.remove("Destination-System");

@@ -2,7 +2,6 @@ package uk.gov.hmcts.reform.hmi.direct;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,7 +40,6 @@ class PutDirectHearingTest {
      * Test with a valid set of headers, but empty body, response should return 400.
      */
     @Test
-    @Disabled
     void putDirectHearingFail() throws UnknownHostException {
         int randomId = rand.nextInt(99_999_999);
         String hearingsIdRootContext = String.format("/hearings/sessions/%s", randomId);
@@ -59,7 +57,6 @@ class PutDirectHearingTest {
      * Test with a Invalid header, response should return 400.
      */
     @Test
-    @Disabled
     void putDirectHearingInvalidHeaderFail() throws UnknownHostException {
         int randomId = rand.nextInt(99_999_999);
         String hearingsIdRootContext = String.format("/hearings/sessions/%s", randomId);

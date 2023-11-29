@@ -2,7 +2,6 @@ package uk.gov.hmcts.reform.hmi.vh;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -31,7 +30,6 @@ class GetGroupIdTest {
      * Test with a valid hearing id and a valid set of headers.
      */
     @Test
-    @Disabled
     void vhGetRetrieveVideoHearingsSuccessful() throws UnknownHostException {
         restClientHelper.performSecureGetRequestAndValidate(
                 HeaderHelper.createHeaders("VH"),
@@ -45,7 +43,6 @@ class GetGroupIdTest {
      * Test with an invalid hearing id and a valid set of headers.
      */
     @Test
-    @Disabled
     void vhGetRetrieveVideoHearingsInvalidId() throws UnknownHostException {
         restClientHelper.performSecureGetRequestAndValidate(
                 HeaderHelper.createHeaders("VH"),

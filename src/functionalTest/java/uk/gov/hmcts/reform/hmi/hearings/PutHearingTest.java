@@ -2,7 +2,6 @@ package uk.gov.hmcts.reform.hmi.hearings;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,7 +31,6 @@ class PutHearingTest {
      * Test with a empty payload for CRIME, a valid set of headers and valid payload, expect 404.
      */
     @Test
-    @Disabled
     void putHearingCrimeFail() throws IOException {
         restClientHelper.performSecurePutRequestAndValidate(
                 "{}",
@@ -47,7 +45,6 @@ class PutHearingTest {
      * Test with a empty payload for CFT, a valid set of headers and valid payload, expect 404.
      */
     @Test
-    @Disabled
     void putHearingCftFail() throws IOException {
         restClientHelper.performSecurePutRequestAndValidate(
                 "{}",
@@ -62,7 +59,7 @@ class PutHearingTest {
      * Test with a Invalid header, response should return 400.
      */
     @Test
-    @Disabled
+    
     void putHearingInvalidHeaderFail() throws IOException {
         Map<String, String> requestHeader =  HeaderHelper.createHeaders("CRIME");
         requestHeader.remove("Destination-System");

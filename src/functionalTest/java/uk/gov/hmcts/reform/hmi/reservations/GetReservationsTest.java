@@ -2,7 +2,6 @@ package uk.gov.hmcts.reform.hmi.reservations;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -33,7 +32,6 @@ class GetReservationsTest {
      * Test with a valid GET request and check response payload, expect 200.
      */
     @Test
-    @Disabled
     void reservationsSuccessful() throws UnknownHostException {
         restClientHelper.performSecureGetRequestAndValidate(HeaderHelper.createHeaders("SNL"),
                 "/reservations",
@@ -46,7 +44,6 @@ class GetReservationsTest {
      * Test with a Invalid header, response should return 400.
      */
     @Test
-    @Disabled
     void reservationsInvalidHeaderFail() throws IOException {
         Map<String, String> requestHeader =  HeaderHelper.createHeaders("SNL");
         requestHeader.remove("Destination-System");

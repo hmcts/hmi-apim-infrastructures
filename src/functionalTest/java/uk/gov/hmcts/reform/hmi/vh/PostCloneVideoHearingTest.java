@@ -4,7 +4,6 @@ package uk.gov.hmcts.reform.hmi.vh;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,7 +36,6 @@ class PostCloneVideoHearingTest {
      * Test with a valid hearing id and a valid set of headers, response should return 204.
      */
     @Test
-    @Disabled
     void vhPostCloneVideoHearingSuccessful() throws IOException {
         Response response = restClientHelper.performSecurePostRequestAndValidateWithResponse(
                 getJsonPayloadFileAsString("vh/create-vh-hearing.json"),
@@ -60,7 +58,6 @@ class PostCloneVideoHearingTest {
      * Test with an invalid hearing id and a valid set of headers, response should return 400.
      */
     @Test
-    @Disabled
     void vhPostCloneVideoHearingInvalidId() throws UnknownHostException {
         restClientHelper.performSecurePostRequestAndValidate(
                 "{}",

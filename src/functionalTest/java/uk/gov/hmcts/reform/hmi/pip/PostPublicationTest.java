@@ -2,7 +2,6 @@ package uk.gov.hmcts.reform.hmi.pip;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -52,7 +51,6 @@ class PostPublicationTest {
      * Tests with a valid payload and a set of valid headers, response should return an artefactId.
      */
     @Test
-    @Disabled
     void pipPostPublicationSuccessful() throws IOException {
         Map<String, String> requestHeaders = updateHeadersWithPipSpecific(
                 HeaderHelper.createHeaders(DESTINATION_SYSTEM),
@@ -80,7 +78,6 @@ class PostPublicationTest {
      * Test with an invalid json payload, this should be rejected and a reason returned.
      */
     @Test
-    @Disabled
     void pipPostPublicationInvalidJson() throws IOException {
         Map<String, String> requestHeaders = updateHeadersWithPipSpecific(
                 HeaderHelper.createHeaders(DESTINATION_SYSTEM),
@@ -109,7 +106,6 @@ class PostPublicationTest {
      * policy file.
      */
     @Test
-    @Disabled
     void pipPostPublicationMissingProvenance() throws IOException {
         Map<String, String> requestHeaders = updateHeadersWithPipSpecific(
                 HeaderHelper.createHeaders(DESTINATION_SYSTEM),
@@ -137,7 +133,6 @@ class PostPublicationTest {
      * Test with a missing type, this is a required header within pip.
      */
     @Test
-    @Disabled
     void pipPostPublicationMissingType() throws IOException {
         Map<String, String> requestHeaders = updateHeadersWithPipSpecific(
                 HeaderHelper.createHeaders(DESTINATION_SYSTEM),
@@ -165,7 +160,6 @@ class PostPublicationTest {
      * Test with a missing sensitivity, this should be allowed through as pip defaults the value.
      */
     @Test
-    @Disabled
     void pipPostPublicationMissingSensitivity() throws IOException {
         Map<String, String> requestHeaders = updateHeadersWithPipSpecific(
                 HeaderHelper.createHeaders(DESTINATION_SYSTEM),
@@ -193,7 +187,6 @@ class PostPublicationTest {
      * Test with a missing language, this is a required header within pip.
      */
     @Test
-    @Disabled
     void pipPostPublicationMissingLanguage() throws IOException {
         Map<String, String> requestHeaders = updateHeadersWithPipSpecific(
                 HeaderHelper.createHeaders(DESTINATION_SYSTEM),
@@ -221,7 +214,6 @@ class PostPublicationTest {
      * Test with a missing display from, this is a required header within pip when type is LIST.
      */
     @Test
-    @Disabled
     void pipPostPublicationMissingDisplayFrom() throws IOException {
         Map<String, String> requestHeaders = updateHeadersWithPipSpecific(
                 HeaderHelper.createHeaders(DESTINATION_SYSTEM),
@@ -249,7 +241,6 @@ class PostPublicationTest {
      * Test with a missing display to, this is a required header within pip when type is LIST.
      */
     @Test
-    @Disabled
     void pipPostPublicationMissingDisplayTo() throws IOException {
         Map<String, String> requestHeaders = updateHeadersWithPipSpecific(
                 HeaderHelper.createHeaders(DESTINATION_SYSTEM),
@@ -277,7 +268,6 @@ class PostPublicationTest {
      * Test with a missing list type, this is a required header within pip.
      */
     @Test
-    @Disabled
     void pipPostPublicationMissingListType() throws IOException {
         Map<String, String> requestHeaders = updateHeadersWithPipSpecific(
                 HeaderHelper.createHeaders(DESTINATION_SYSTEM),
@@ -305,7 +295,6 @@ class PostPublicationTest {
      * Test with a missing court id, this is a required header within pip.
      */
     @Test
-    @Disabled
     void pipPostPublicationMissingCourtId() throws IOException {
         Map<String, String> requestHeaders = updateHeadersWithPipSpecific(
                 HeaderHelper.createHeaders(DESTINATION_SYSTEM),
@@ -333,7 +322,6 @@ class PostPublicationTest {
      * Test with a missing content date, this is a required header within pip.
      */
     @Test
-    @Disabled
     void pipPostPublicationMissingContentDate() throws IOException {
         Map<String, String> requestHeaders = updateHeadersWithPipSpecific(
                 HeaderHelper.createHeaders(DESTINATION_SYSTEM),
@@ -358,7 +346,6 @@ class PostPublicationTest {
     }
 
     @Test
-    @Disabled
     void pipPostPublicationMissingOAuth() throws IOException {
         Map<String, String> requestHeaders = updateHeadersWithPipSpecific(
                 HeaderHelper.createHeaders(DESTINATION_SYSTEM),

@@ -2,7 +2,6 @@ package uk.gov.hmcts.reform.hmi.resources;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,7 +31,6 @@ class PostLinkHearingGroupTest {
      * Test with a valid set of headers, but empty body, response should return 400.
      */
     @Test
-    @Disabled
     void postCreateLinkHearingGroupFail() throws UnknownHostException {
         restClientHelper.performSecurePostRequestAndValidate(
                 "{}",
@@ -47,7 +45,6 @@ class PostLinkHearingGroupTest {
      * Test with a Invalid header, response should return 400.
      */
     @Test
-    @Disabled
     void postCreateLinkHearingGroupInvalidHeaderFail() throws UnknownHostException {
         Map<String, String> requestHeader =  HeaderHelper.createHeaders("SNL");
         requestHeader.remove("Destination-System");

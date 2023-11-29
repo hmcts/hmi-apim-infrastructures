@@ -2,7 +2,6 @@ package uk.gov.hmcts.reform.hmi.resources;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -42,7 +41,6 @@ class PutLinkHearingGroupTest {
      * Test with a valid set of headers, but empty body, response should return 400.
      */
     @Test
-    @Disabled
     void putLinkHearingGroupFail() throws UnknownHostException {
         int randomId = rand.nextInt(99_999_999);
         String resourcesLinkedHearingGroupIdRootContext = String.format("/resources/linked-hearing-group/%s", randomId);
@@ -60,7 +58,6 @@ class PutLinkHearingGroupTest {
      * Test with a Invalid header, response should return 400.
      */
     @Test
-    @Disabled
     void putLinkHearingGroupInvalidHeaderFail() throws UnknownHostException {
         int randomId = rand.nextInt(99_999_999);
         String resourcesLinkedHearingGroupIdRootContext = String.format("/resources/linked-hearing-group/%s", randomId);
