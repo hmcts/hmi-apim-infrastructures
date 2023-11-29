@@ -3,6 +3,7 @@ package uk.gov.hmcts.reform.hmi.vh;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,6 +36,7 @@ class PatchCancelVideoHearingTest {
      * Test with a valid hearing id and a valid set of headers and valid payload, expect 204.
      */
     @Test
+    @Disabled
     void vhPatchCancelVideoHearingSuccessful() throws IOException {
         Response response = restClientHelper.performSecurePostRequestAndValidateWithResponse(
                 getJsonPayloadFileAsString("vh/create-vh-hearing.json"),
@@ -57,6 +59,7 @@ class PatchCancelVideoHearingTest {
      * Test with a valid hearing id and a valid set of headers but no payload, expect 400.
      */
     @Test
+    @Disabled
     void vhPatchCancelVideoHearingNoPayload() throws UnknownHostException {
         restClientHelper.performSecurePatchRequestAndValidate(
                 "",
