@@ -16,7 +16,7 @@ locals {
         "#elinksHost#", length(data.azurerm_key_vault_secret.elinks_client_host) > 0 ? data.azurerm_key_vault_secret.elinks_client_host[0].value : ""),
         "#sAndLHost#", length(data.azurerm_key_vault_secret.snl_client_host) > 0 ? data.azurerm_key_vault_secret.snl_client_host[0].value : ""),
         "#sAndLOauthUrl#", length(data.azurerm_key_vault_secret.snl_OAuth_url) > 0 ? data.azurerm_key_vault_secret.snl_OAuth_url[0].value : ""),
-        "#enableCrimeNewHealthCheck#", var.enable-crime-new-health-check)
+      "#enableCrimeNewHealthCheck#", var.enable-crime-new-health-check)
       display_name = policy.display_name
       method       = policy.method
       url_template = policy.url_template
