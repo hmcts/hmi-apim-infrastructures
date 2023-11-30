@@ -59,6 +59,7 @@ class PutHearingTest {
      * Test with a Invalid header, response should return 400.
      */
     @Test
+    
     void putHearingInvalidHeaderFail() throws IOException {
         Map<String, String> requestHeader =  HeaderHelper.createHeaders("CRIME");
         requestHeader.remove("Destination-System");

@@ -42,3 +42,7 @@ variable "apim_url" {
   type        = string
   description = "The url of the apim"
 }
+variable "enable-crime-new-health-check" {
+  type        = bool
+  description = "enable Crime new health check endpoint"
+}

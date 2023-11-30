@@ -1,9 +1,18 @@
 <policies>
     <inbound>
-        <rewrite-uri template="/" copy-unmatched-params="true" />
+        <set-variable name="enableCrimeNewHealthCheckEndpoint" value="#enableCrimeNewHealthCheck#" />
         <authentication-certificate certificate-id="hmi-crime-cert" />
         <set-header name="Authorization" exists-action="delete" />
-        <set-backend-service base-url="https://#crimeHost#/snltestin/healthcheck" />
+        <choose>
+            <when condition="@((bool)context.Variables["enableCrimeNewHealthCheckEndpoint"])">
+                <rewrite-uri template="/" copy-unmatched-params="true" />
+                <set-backend-service base-url="https://#crimeHost#/snltestin/healthcheck" />
+            </when>
+            <otherwise>
+                <rewrite-uri template="/knock-knock" copy-unmatched-params="true" />
+                <set-backend-service base-url="https://#crimeHost#/cppi/v3/" />
+            </otherwise>
+        </choose>
     </inbound>
     <backend>
         <base />
