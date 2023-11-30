@@ -3,7 +3,6 @@ package uk.gov.hmcts.reform.hmi.vh;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,7 +38,6 @@ class DeleteJohVideoHearingTest {
      * because we do not have judge id assigned on VH side.
      */
     @Test
-    @Disabled
     void vhDeleteJohVideoHearingFailed() throws IOException {
         Response response = restClientHelper.performSecurePostRequestAndValidateWithResponse(
                 getJsonPayloadFileAsString("vh/create-vh-hearing.json"),
@@ -64,7 +62,6 @@ class DeleteJohVideoHearingTest {
      * Test with an invalid hearing id and a valid set of headers, response should return 404.
      */
     @Test
-    @Disabled
     void vhDeleteJohVideoHearingInvalidId() throws UnknownHostException {
         restClientHelper.performSecureDeleteRequestAndValidate(
                 "{}",
