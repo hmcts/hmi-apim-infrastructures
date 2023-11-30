@@ -4,7 +4,7 @@
         <authentication-certificate certificate-id="hmi-crime-cert" />
         <set-header name="Authorization" exists-action="delete" />
         <choose>
-            <when condition="@((bool)context.Variables["enableCrimeNewHealthCheckEndpoint"])">
+            <when condition="@((string)context.Variables["enableCrimeNewHealthCheckEndpoint"] == "true")">
                 <rewrite-uri template="/" copy-unmatched-params="true" />
                 <set-backend-service base-url="https://#crimeHost#/snltestin/healthcheck" />
             </when>
