@@ -50,7 +50,7 @@ class PostCloneVideoHearingTest {
                 HeaderHelper.createHeaders("VH"),
                 String.format("/hearings/%s/clone", getHearingId(response)),
                 "",
-                204 //THIS NEED TO BE CHANGED TO 200 ONCE VH MERGED CHANGES TO THEIR STG ENV.
+                200
         );
     }
 
