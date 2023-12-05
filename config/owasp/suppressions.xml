@@ -25,6 +25,7 @@
   <suppress>
     <notes>Affecting lots of spring boot libs.</notes>
     <cve>CVE-2023-34053</cve>
+    <cve>CVE-2023-34055</cve>
   </suppress>
   <suppress>
     <notes><![CDATA[
