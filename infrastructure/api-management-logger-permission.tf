@@ -5,5 +5,5 @@ resource "azurerm_role_assignment" "app_insight_viewers" {
 }
 
 data "azuread_group" "hmi-group" {
-  display_name     = "DTS HMI App Insights"
+  display_name = "DTS HMI App Insights"
 }
