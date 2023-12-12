@@ -34,5 +34,9 @@
    ]]></notes>
     <cve>CVE-2023-46589</cve>
   </suppress>
+  <suppress>
+    <notes>file name: cpe:2.3:a:qos:logback:*:*:*:*:*:*:*:*</notes>
+    <cve>CVE-2023-6378</cve>
+  </suppress>
   <!--End of temporary suppression section -->
 </suppressions>
