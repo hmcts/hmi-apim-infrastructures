@@ -1,5 +1,5 @@
 locals {
-  policies_data = jsondecode(file("${path.module}/resources/policy-files/policies.json"))
+  policies_data = jsondecode(file("${path.module}/resources/policy-files/environments/${local.env}.json"))
 
   policy_file_template = [for policy in local.policies_data.policies :
     {

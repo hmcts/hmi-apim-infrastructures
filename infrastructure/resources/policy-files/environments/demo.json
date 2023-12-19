@@ -390,10 +390,10 @@
       "description": "Delete Participant",
       "template_parameters": [
         {
-        "name": "hearingId",
-        "required": "true",
-        "type": "string",
-        "default_value": ""
+          "name": "hearingId",
+          "required": "true",
+          "type": "string",
+          "default_value": ""
         },
         {
           "name": "participantId",
