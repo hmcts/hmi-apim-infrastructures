@@ -4,7 +4,7 @@ locals {
 
 resource "azurerm_app_configuration" "app_conf" {
   name                = local.app_config_name
-  resource_group_name = local.api_resource_group
+  resource_group_name = "managed-identities-${var.env}-rg"
   location            = var.location
 }
 
