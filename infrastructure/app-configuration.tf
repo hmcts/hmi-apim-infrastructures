@@ -6,16 +6,12 @@ resource "azurerm_app_configuration" "app_conf" {
   name                = local.app_config_name
   resource_group_name = local.api_resource_group
   location            = var.location
-
-  identity {
-    type = "SystemAssigned"
-  }
 }
 
 resource "azurerm_role_assignment" "app_conf_data_owner" {
   scope                = azurerm_app_configuration.app_conf.id
   role_definition_name = "App Configuration Data Owner"
-  principal_id         = data.azurerm_client_config.current.client_id
+  principal_id         = "ded9b69f-b5b0-420e-8a02-fd97e6d04d8d"
 }
 
 resource "azurerm_app_configuration_feature" "test" {
