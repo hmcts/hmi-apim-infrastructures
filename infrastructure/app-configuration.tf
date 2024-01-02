@@ -8,12 +8,10 @@ resource "azurerm_app_configuration" "app_conf" {
   location            = var.location
 }
 
-data "azurerm_client_config" "current_app_config" {}
-
 resource "azurerm_role_assignment" "app_conf_data_owner" {
   scope                = azurerm_app_configuration.app_conf.id
   role_definition_name = "App Configuration Data Owner"
-  principal_id         = data.azurerm_client_config.current_app_config.client_id
+  principal_id         = data.azurerm_client_config.current.client_id
 }
 
 resource "azurerm_app_configuration_feature" "test" {
