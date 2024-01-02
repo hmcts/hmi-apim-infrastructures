@@ -6,6 +6,10 @@ resource "azurerm_app_configuration" "app_conf" {
   name                = local.app_config_name
   resource_group_name = local.api_resource_group
   location            = var.location
+
+  identity {
+    type = "SystemAssigned"
+  }
 }
 
 resource "azurerm_role_assignment" "app_conf_data_owner" {
