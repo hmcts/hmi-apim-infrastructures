@@ -1,5 +1,4 @@
 locals {
-  api_resource_group = "ss-${var.env}-network-rg"
   app_config_name = "app-config-${var.product}-${var.env}"
 }
 
