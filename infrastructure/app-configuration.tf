@@ -2,7 +2,7 @@ locals {
   app_config_name = "${var.product}-app-config-${var.env}"
 }
 
-resource "azurerm_resource_group" "rg" {
+data "azurerm_resource_group" "rg" {
   name     = local.api_resource_group
   location = var.location
 }
@@ -11,7 +11,7 @@ data "azurerm_client_config" "test" {
 }
 
 resource "azurerm_role_assignment" "app_conf_data_owner" {
-  scope                = azurerm_resource_group.rg.id
+  scope                = data.azurerm_resource_group.rg.id
   role_definition_name = "App Configuration Data Owner"
   principal_id         = data.azurerm_client_config.test.object_id
 }
