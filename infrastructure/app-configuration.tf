@@ -6,15 +6,15 @@ data "azurerm_client_config" "test" {
 }
 
 resource "azurerm_role_assignment" "app_conf_data_owner" {
-  scope                = data.azurerm_resource_group.rg.id
+  scope                = "/subscriptions/a8140a9e-f1b0-481f-a4de-09e2ee23f7ab/resourceGroups/ss-sbox-network-rg"
   role_definition_name = "App Configuration Data Owner"
   principal_id         = data.azurerm_client_config.test.object_id
 }
 
 resource "azurerm_app_configuration" "app_conf" {
   name                = local.app_config_name
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
+  resource_group_name = local.resource_group_name
+  location            = var.location
   sku                 = "standard"
 
   depends_on = [

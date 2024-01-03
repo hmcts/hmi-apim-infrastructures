@@ -92,7 +92,3 @@ data "azurerm_key_vault_secret" "crime_cert_password" {
   name         = local.crime_cert_password
   key_vault_id = data.azurerm_key_vault.kv.id
 }
-
-data "azurerm_resource_group" "rg" {
-  name     = local.api_resource_group
-}
