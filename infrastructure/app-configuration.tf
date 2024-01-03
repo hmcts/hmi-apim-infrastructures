@@ -4,7 +4,6 @@ locals {
 
 data "azurerm_resource_group" "rg" {
   name     = local.api_resource_group
-  location = var.location
 }
 
 data "azurerm_client_config" "test" {
