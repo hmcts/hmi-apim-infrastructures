@@ -2,10 +2,6 @@ locals {
   app_config_name = "${var.product}-app-config-${var.env}"
 }
 
-data "azurerm_resource_group" "rg" {
-  name     = local.api_resource_group
-}
-
 data "azurerm_client_config" "test" {
 }
 
