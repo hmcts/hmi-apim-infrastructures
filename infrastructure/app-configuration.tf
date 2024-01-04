@@ -19,6 +19,7 @@ resource "time_sleep" "role_assignment_sleep" {
     role_assignment = azurerm_role_assignment.app_conf_data_owner.id
   }
 }
+
 resource "azurerm_app_configuration" "app_conf" {
   name                = local.app_config_name
   resource_group_name = local.api_resource_group
