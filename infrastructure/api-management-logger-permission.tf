@@ -5,7 +5,7 @@ resource "azurerm_role_assignment" "app_insight_viewers" {
   count                = local.env == "prod" ? 0 : 1
 }
 
-resource "azurerm_role_assignment" "app_insight_viewers-monitoring" {
+resource "azurerm_role_assignment" "app_insight_viewers_monitoring" {
   scope                = data.azurerm_application_insights.sds-app-insights.id
   role_definition_name = "Monitoring Reader"
   principal_id         = data.azuread_group.hmi-group.id
