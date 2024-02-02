@@ -97,3 +97,8 @@ data "azurerm_application_insights" "sds_app_insights" {
   name                = "sds-api-mgmt-${var.env}"
   resource_group_name = "ss-${var.env}-network-rg"
 }
+
+data "azurerm_application_insights" "sds_app_insights_test" {
+  name                = "pip-app-insights-alerts"
+  resource_group_name = "pip-app-insights-alerts"
+}

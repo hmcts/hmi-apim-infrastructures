@@ -12,6 +12,13 @@ resource "azurerm_role_assignment" "app_insight_viewers_monitoring" {
   count                = local.env == "prod" ? 0 : 1
 }
 
+resource "azurerm_role_assignment" "app_insight_viewers_monitoring_test" {
+  scope                = data.azurerm_application_insights.sds_app_insights_test.id
+  role_definition_name = "Monitoring Reader"
+  principal_id         = data.azuread_group.hmi-group.id
+  count                = local.env == "prod" ? 0 : 1
+}
+
 data "azuread_group" "hmi-group" {
   display_name = "DTS HMI App Insights"
 }
