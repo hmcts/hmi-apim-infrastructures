@@ -92,3 +92,8 @@ data "azurerm_key_vault_secret" "crime_cert_password" {
   name         = local.crime_cert_password
   key_vault_id = data.azurerm_key_vault.kv.id
 }
+
+data "azurerm_application_insights" "sds_app_insights" {
+  name                = "sds-api-mgmt-${var.env}"
+  resource_group_name = "ss-${var.env}-network-rg"
+}
