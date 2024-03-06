@@ -32,6 +32,8 @@ class HearingTest {
 
     private static String randomHearingId;
 
+    private static Integer randomNumber;
+
     private static final String DESTINATION = "SNL";
 
     public HearingTest()  throws NoSuchAlgorithmException {
@@ -49,7 +51,8 @@ class HearingTest {
     @Test
     @Order(1)
     void postHearingCreateSuccess() throws IOException {
-        randomHearingId = String.format("HMI_%s", rand.nextInt(999_999_999));
+        randomNumber = rand.nextInt(999_999_999);
+        randomHearingId = String.format("HMI_%s", randomNumber);
         restClientHelper.performSecurePostRequestAndValidateWithResponse(
                 getJsonPayloadFileAsString("hearings/create-hearing-request-payload.json")
                         .replace("HMI_CASE_LISTING_ID", randomHearingId),
@@ -68,7 +71,8 @@ class HearingTest {
     void putHearingSuccess() throws IOException {
         restClientHelper.performSecurePutRequestAndValidate(
                 getJsonPayloadFileAsString("hearings/update-hearing-request-payload.json")
-                        .replace("HMI_CASE_LISTING_ID", randomHearingId),
+                        .replace("HMI_CASE_LISTING_ID", randomHearingId)
+                        .replace("\"CASE_VERSION_ID\"", randomNumber.toString()),
                 HeaderHelper.createHeaders(DESTINATION),
                 "/hearings/" + randomHearingId,
                 "",

@@ -96,7 +96,7 @@ class PostPublicationTest {
                 getJsonPayloadFileAsString("pip/invalid-care-standards-list.json"),
                 requestHeaders,
                 ENDPOINT,
-                "$.document.publicationDate: is missing but it is required",
+                "$.document: required property 'publicationDate' not found",
                 400
         );
     }
