@@ -49,6 +49,24 @@ class GetSessionsTest {
     }
 
     /**
+     * Test with a valid GET request as source DLRM and check response payload, expect 200.
+     */
+    @Test
+    void sessionsSuccessfulForDlrm() throws UnknownHostException {
+        Map<String, String> queryParameters = new ConcurrentHashMap<>();
+        queryParameters.put(REQUEST_SESSION_TYPE, "CJ");
+        queryParameters.put("requestStartDate", "2022-02-25T09:00:00Z");
+        queryParameters.put("requestEndDate", "2022-03-01T09:00:00Z");
+
+        restClientHelper.performSecureGetRequestAndValidateWithQueryParams(HeaderHelper.createHeaders("SNL", "DLRM"),
+                "/sessions",
+                queryParameters,
+                "",
+                200
+        );
+    }
+
+    /**
      * Test with a Invalid header, response should return 400.
      */
     @Test
