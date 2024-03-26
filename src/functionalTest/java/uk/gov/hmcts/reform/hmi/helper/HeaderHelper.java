@@ -20,9 +20,11 @@ public final class HeaderHelper {
      * Create the standard set of headers required to send data into HMI APIM.
      *
      * @param destinationSystem The system that the data will be sent to e.g. PIH.
+     * @param sourceSystem The system that the data will be sent from e.g. CFT.
      * @return a map containing the headers.
      */
-    public static Map<String, String> createHeaders(String destinationSystem) throws UnknownHostException {
+    public static Map<String, String> createHeaders(String destinationSystem, String sourceSystem)
+            throws UnknownHostException {
 
         final LocalDateTime now = LocalDateTime.now();
         final String requestCreatedAt = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm:ss'Z'"));
@@ -30,11 +32,21 @@ public final class HeaderHelper {
         Map<String,String> headersAsMap = new ConcurrentHashMap<>();
         headersAsMap.put("Content-Type", MediaType.APPLICATION_JSON_VALUE);
         headersAsMap.put("Accept", MediaType.APPLICATION_JSON_VALUE);
-        headersAsMap.put("Source-System", "EMULATOR");
+        headersAsMap.put("Source-System", sourceSystem);
         headersAsMap.put("Destination-System", destinationSystem);
         headersAsMap.put("Request-Created-At", requestCreatedAt);
         headersAsMap.put("X-Forwarded-For", String.valueOf(InetAddress.getLocalHost()));
         return headersAsMap;
+    }
+
+    /**
+     * Create the standard set of headers required to send data into HMI APIM.
+     *
+     * @param destinationSystem The system that the data will be sent to e.g. PIH.
+     * @return a map containing the headers.
+     */
+    public static Map<String, String> createHeaders(String destinationSystem) throws UnknownHostException {
+        return createHeaders(destinationSystem, "EMULATOR");
     }
 
     /**
