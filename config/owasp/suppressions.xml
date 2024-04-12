@@ -13,13 +13,6 @@
     <cve>CVE-2023-35116</cve>
   </suppress>
   <suppress>
-    <notes><![CDATA[
-   pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@10.1.15
-   pkg:maven/org.apache.tomcat.embed/tomcat-embed-websocket@10.1.15
-   ]]></notes>
-    <cve>CVE-2023-46589</cve>
-  </suppress>
-  <suppress>
     <notes>file name: cpe:2.3:a:qos:logback:*:*:*:*:*:*:*:*</notes>
     <cve>CVE-2023-6378</cve>
   </suppress>
