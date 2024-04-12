@@ -13,11 +13,6 @@
     <cve>CVE-2023-35116</cve>
   </suppress>
   <suppress>
-    <notes>Affecting lots of spring boot libs.</notes>
-    <cve>CVE-2023-34053</cve>
-    <cve>CVE-2023-34055</cve>
-  </suppress>
-  <suppress>
     <notes><![CDATA[
    pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@10.1.15
    pkg:maven/org.apache.tomcat.embed/tomcat-embed-websocket@10.1.15
