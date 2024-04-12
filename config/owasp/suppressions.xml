@@ -9,10 +9,6 @@
   </suppress>
   <!--End of false positives section -->
   <suppress>
-    <notes>Jackson databind used in spring</notes>
-    <cve>CVE-2023-35116</cve>
-  </suppress>
-  <suppress>
     <notes>Tomcat vuln, exists on latest version of spring 3.0.x</notes>
     <cve>CVE-2023-44487</cve>
     <cve>CVE-2023-45648</cve>
