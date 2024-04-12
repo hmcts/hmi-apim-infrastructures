@@ -17,7 +17,7 @@ To build the project execute the following command:
 
 Create the image of the application by executing the following command:
 
-```bash
+```bash 
   ./gradlew assemble
 ```
 
