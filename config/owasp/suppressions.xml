@@ -9,8 +9,7 @@
   </suppress>
   <!--End of false positives section -->
   <suppress>
-    <notes>The vulnerability exists in the latest version of lib too. Need to wait for new version with the fix</notes>
-    <packageUrl regex="true">^pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.14.3</packageUrl>
+    <notes>Jackson databind used in spring</notes>
     <cve>CVE-2023-35116</cve>
   </suppress>
   <suppress>
