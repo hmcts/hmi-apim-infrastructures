@@ -3,7 +3,6 @@ package uk.gov.hmcts.reform.hmi.helper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.MediaType;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,8 +22,7 @@ public final class HeaderHelper {
      * @param sourceSystem The system that the data will be sent from e.g. CFT.
      * @return a map containing the headers.
      */
-    public static Map<String, String> createHeaders(String destinationSystem, String sourceSystem)
-            throws UnknownHostException {
+    public static Map<String, String> createHeaders(String destinationSystem, String sourceSystem) {
 
         final LocalDateTime now = LocalDateTime.now();
         final String requestCreatedAt = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm:ss'Z'"));
@@ -35,7 +33,6 @@ public final class HeaderHelper {
         headersAsMap.put("Source-System", sourceSystem);
         headersAsMap.put("Destination-System", destinationSystem);
         headersAsMap.put("Request-Created-At", requestCreatedAt);
-        headersAsMap.put("X-Forwarded-For", String.valueOf(InetAddress.getLocalHost()));
         return headersAsMap;
     }
 
