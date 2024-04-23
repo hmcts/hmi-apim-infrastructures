@@ -35,7 +35,6 @@ public final class HeaderHelper {
         headersAsMap.put("Source-System", sourceSystem);
         headersAsMap.put("Destination-System", destinationSystem);
         headersAsMap.put("Request-Created-At", requestCreatedAt);
-        headersAsMap.put("X-Forwarded-For", String.valueOf(InetAddress.getLocalHost()));
         return headersAsMap;
     }
 
