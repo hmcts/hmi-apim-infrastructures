@@ -3,7 +3,7 @@
         <base />
         <choose>
             <when condition="@(context.Request.Headers.GetValueOrDefault("X-Forwarded-For","") == "")">
-                <rate-limit-by-key calls="#rateCallLimit#" renewal-period="60" counter-key="@(context.Request.Headers.GetValueOrDefault("X-Forwarded-For",""))" />
+                <rate-limit-by-key calls="#rateCallLimit#" renewal-period="60" counter-key="@(context.Request.IpAddress)" />
             </when>
             <otherwise>
                 <rate-limit-by-key calls="#rateCallLimit#" renewal-period="60" counter-key="@(context.Request.Headers.GetValueOrDefault("X-Forwarded-For",""))" />
