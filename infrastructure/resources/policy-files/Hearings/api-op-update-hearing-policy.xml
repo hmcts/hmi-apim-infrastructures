@@ -115,7 +115,7 @@
 				<set-header name="Authorization" exists-action="delete" />
 				<set-backend-service base-url="https://#crimeHost#/" />
 			</when>
-			<when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
+			<when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK" || context.Request.Headers.GetValueOrDefault("Destination-System","") == "EMULATOR")">
 				<return-response>
 					<set-status code="202" />
 					<set-header name="Content-Type">
