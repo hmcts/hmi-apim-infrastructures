@@ -15,13 +15,13 @@ This project contains two parts:
 - Automation tests
   You can run only the automation tests in this project. Terraform code can be tested by deploying the code to the lower environments like demo.
 
-Before running the automation tests, you need to setup some environment variables in your project. Those variables are:
+Before running the automation tests, you need to setup some environment variables in your project which can be retrieved from the key vault. Those variables are:
 
-|Variable|Description| Required? |
-|:----------|:-------------|-----------|
-|CLIENT_ID|This value can get from Azure keyvault for SNL| Yes       |
-|CLIENT_SECRET|This value can get from Azure keyvault for SNL| Yes       |
-|SCOPE|api://d49d7fa2-6904-4223-a907-3b8992af4190| Yes       |
+| Variable      | Description                                                          | Required? |
+|:--------------|:---------------------------------------------------------------------|-----------|
+| CLIENT_ID     | The client ID                                                        | Yes       |
+| CLIENT_SECRET | The client secret                                                    | Yes       |
+| SCOPE         | The scope to request                                                 | Yes       |
 
 To run the automation test, execute the following command:
 
