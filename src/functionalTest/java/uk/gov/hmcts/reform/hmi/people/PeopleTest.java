@@ -27,7 +27,6 @@ class PeopleTest {
     private static final String UPDATE_SINCE = "updated_since";
     private static final String PER_PAGE = "per_page";
     private static final String PAGE = "page";
-    private Map<String, String> requestHeader = new ConcurrentHashMap<>();
     private String getPeopleById = "/people/%s";
 
     @BeforeEach
@@ -37,13 +36,12 @@ class PeopleTest {
 
     @Test
     void peopleGetSuccessful() throws IOException {
-        requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
-
         Map<String, String> queryParameters = new ConcurrentHashMap<>();
         queryParameters.put(UPDATE_SINCE, "2019-01-29");
         queryParameters.put(PER_PAGE, "52");
         queryParameters.put(PAGE, "1");
 
+        Map<String, String> requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         restClientHelper.performSecureGetRequestAndValidateWithQueryParams(requestHeader,
                 GET_PEOPLE_ENDPOINT,
                 queryParameters,
@@ -53,7 +51,7 @@ class PeopleTest {
 
     @Test
     void peopleGetByIdSuccessful() throws IOException {
-        requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
+        Map<String, String> requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         getPeopleById = String.format(getPeopleById, "PPLN1");
 
         restClientHelper.performSecureGetRequestAndValidate(requestHeader,
@@ -64,7 +62,7 @@ class PeopleTest {
 
     @Test
     void peopleGetMissingDestinationHeader() throws IOException {
-        requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
+        Map<String, String> requestHeader = HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         requestHeader.remove("Destination-System");
 
         Map<String, String> queryParameters = new ConcurrentHashMap<>();
@@ -81,14 +79,13 @@ class PeopleTest {
 
     @Test
     void peopleGetInvalidQueryParams() throws IOException {
-        requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
-
         Map<String, String> queryParameters = new ConcurrentHashMap<>();
         queryParameters.put(UPDATE_SINCE, "2019-02-29");
         queryParameters.put(PER_PAGE, "50");
         queryParameters.put(PAGE, "2");
         queryParameters.put("OneMore", "OneMore");
 
+        Map<String, String> requestHeader = HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         restClientHelper.performSecureGetRequestAndValidateWithQueryParams(requestHeader,
                 GET_PEOPLE_ENDPOINT,
                 queryParameters,
@@ -98,7 +95,7 @@ class PeopleTest {
 
     @Test
     void peopleGetMissingOAuth() throws IOException {
-        requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
+        Map<String, String> requestHeader = HeaderHelper.createHeaders(DESTINATION_SYSTEM);
 
         restClientHelper.performGetRequestAndValidate(requestHeader,
                 GET_PEOPLE_ENDPOINT,
@@ -108,7 +105,7 @@ class PeopleTest {
 
     @Test
     void peopleGeByIdtMissingOAuth() throws IOException {
-        requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
+        Map<String, String> requestHeader = HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         getPeopleById = String.format(getPeopleById, "PPLN2");
 
         restClientHelper.performGetRequestAndValidate(requestHeader,
@@ -119,7 +116,7 @@ class PeopleTest {
 
     @Test
     void peopleGetByIdInvalidRequest() throws IOException {
-        requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
+        Map<String, String> requestHeader = HeaderHelper.createHeaders(DESTINATION_SYSTEM);
 
         getPeopleById = getPeopleById.substring(0, getPeopleById.lastIndexOf('/') + 1);
         restClientHelper.performSecureGetRequestAndValidate(requestHeader,

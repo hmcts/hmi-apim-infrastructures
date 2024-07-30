@@ -21,6 +21,7 @@ import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsStri
  */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
+@SuppressWarnings("PMD.LawOfDemeter")
 class DeleteParticipantTest {
 
     @Autowired

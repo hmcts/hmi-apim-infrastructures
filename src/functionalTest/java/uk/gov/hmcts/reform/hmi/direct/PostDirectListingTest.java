@@ -29,8 +29,6 @@ class PostDirectListingTest {
 
     private final Random rand;
 
-    private static String randomHearingId;
-
     public PostDirectListingTest()  throws NoSuchAlgorithmException {
         rand = SecureRandom.getInstanceStrong();
     }
@@ -46,7 +44,7 @@ class PostDirectListingTest {
      */
     @Test
     void postDirectListingFail() throws IOException {
-        randomHearingId = String.format("HMI_%s", rand.nextInt(999_999_999));
+        String randomHearingId = String.format("HMI_%s", rand.nextInt(999_999_999));
         restClientHelper.performSecurePostRequestAndValidate(
                 getJsonPayloadFileAsString("directlistings/create-direct-listings-request-payload.json")
                         .replace("HMI_CASE_LISTING_ID", randomHearingId),
