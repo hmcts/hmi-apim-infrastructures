@@ -1,34 +1,41 @@
 <policies>
     <inbound>
-        <send-request ignore-error="false" timeout="20" response-variable-name="hmcClientResponse" mode="new">
-            <set-url>https://#keyVaultHost#/secrets/cft-client-id/?api-version=7.0</set-url>
-            <set-method>GET</set-method>
-            <authentication-managed-identity resource="https://vault.azure.net" />
-        </send-request>
-        <set-variable name="hmcClient" value="@{
-                var secret = ((IResponse)context.Variables["hmcClientResponse"]).Body.As<JObject>();
-                return secret["value"].ToString();
-        }" />
-        <send-request ignore-error="false" timeout="20" response-variable-name="hmcSecretResponse" mode="new">
-            <set-url>https://#keyVaultHost#/secrets/cft-client-pwd/?api-version=7.0</set-url>
-            <set-method>GET</set-method>
-            <authentication-managed-identity resource="https://vault.azure.net" />
-        </send-request>
-        <set-variable name="hmcSecret" value="@{
-                var secret = ((IResponse)context.Variables["hmcSecretResponse"]).Body.As<JObject>();
-                return secret["value"].ToString();
-        }" />
-        <send-request ignore-error="true" timeout="20" response-variable-name="bearerToken" mode="new">
-            <set-url>#cftOauthUrl#</set-url>
-            <set-method>POST</set-method>
-            <set-header name="Content-Type" exists-action="override">
-                <value>application/x-www-form-urlencoded</value>
-            </set-header>
-            <set-body>@{
-                return "client_id=" + (string)context.Variables["hmcClient"] + "&client_secret=" + (string)context.Variables["hmcSecret"] + "&grant_type=client_credentials&scope=profile";}</set-body>
-        </send-request>
+        <cache-lookup-value key="hmcAuth" variable-name="hmcAuthToken" />
+        <choose>
+            <when condition="@(context.Variables.GetValueOrDefault("hmcAuthToken", "") == "")">
+                <send-request ignore-error="false" timeout="20" response-variable-name="hmcClientResponse" mode="new">
+                    <set-url>https://#keyVaultHost#/secrets/cft-client-id/?api-version=7.0</set-url>
+                    <set-method>GET</set-method>
+                    <authentication-managed-identity resource="https://vault.azure.net" />
+                </send-request>
+                <set-variable name="hmcClient" value="@{
+                        var secret = ((IResponse)context.Variables["hmcClientResponse"]).Body.As<JObject>();
+                        return secret["value"].ToString();
+                }" />
+                <send-request ignore-error="false" timeout="20" response-variable-name="hmcSecretResponse" mode="new">
+                    <set-url>https://#keyVaultHost#/secrets/cft-client-pwd/?api-version=7.0</set-url>
+                    <set-method>GET</set-method>
+                    <authentication-managed-identity resource="https://vault.azure.net" />
+                </send-request>
+                <set-variable name="hmcSecret" value="@{
+                        var secret = ((IResponse)context.Variables["hmcSecretResponse"]).Body.As<JObject>();
+                        return secret["value"].ToString();
+                }" />
+                <send-request ignore-error="true" timeout="20" response-variable-name="bearerToken" mode="new">
+                    <set-url>#cftOauthUrl#</set-url>
+                    <set-method>POST</set-method>
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/x-www-form-urlencoded</value>
+                    </set-header>
+                    <set-body>@{
+                        return "client_id=" + (string)context.Variables["hmcClient"] + "&client_secret=" + (string)context.Variables["hmcSecret"] + "&grant_type=client_credentials&scope=profile";}</set-body>
+                </send-request>
+                <set-variable name="hmcAuthToken" value="@("Bearer " + (String)((IResponse)context.Variables["bearerToken"]).Body.As<JObject>()["access_token"])" />
+                <cache-store-value key="hmcAuth" value="@((String)context.Variables["hmcAuthToken"])" duration="2700" />
+            </when>
+        </choose>
         <set-header name="Authorization" exists-action="override">
-            <value>@("Bearer " + (String)((IResponse)context.Variables["bearerToken"]).Body.As<JObject>()["access_token"])</value>
+            <value>@((String)context.Variables["hmcAuthToken"])</value>
         </set-header>
         <set-header name="Content-Type" exists-action="override">
             <value>application/json; charset=utf-8</value>
@@ -49,6 +56,11 @@
     </backend>
     <outbound>
         <base />
+        <choose>
+            <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
+                <cache-remove-value key="hmcAuth" />
+            </when>
+        </choose>
         <choose>
             <when condition="@(context.Response.StatusCode != 200)">
                 <send-request ignore-error="true" timeout="20" response-variable-name="snowAuth" mode="new">
