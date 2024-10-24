@@ -31,6 +31,8 @@ class GetRetrieveVideoHearingsByUserTest {
 
     /**
      * Test with a valid user and valid headers, response should return the hearing.
+     * We have asked VH about this test. Authentication is failing for this endpoint which is
+     * bit strange because it works for other endpoints.
      */
     @Test
     @Disabled

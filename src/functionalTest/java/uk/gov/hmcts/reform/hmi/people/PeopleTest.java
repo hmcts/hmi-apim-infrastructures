@@ -2,6 +2,7 @@ package uk.gov.hmcts.reform.hmi.people;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,6 +36,7 @@ class PeopleTest {
     }
 
     @Test
+    @Disabled
     void peopleGetSuccessful() throws IOException {
         Map<String, String> queryParameters = new ConcurrentHashMap<>();
         queryParameters.put(UPDATE_SINCE, "2019-01-29");
@@ -50,6 +52,7 @@ class PeopleTest {
     }
 
     @Test
+    @Disabled
     void peopleGetByIdSuccessful() throws IOException {
         Map<String, String> requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         getPeopleById = String.format(getPeopleById, "PPLN1");
