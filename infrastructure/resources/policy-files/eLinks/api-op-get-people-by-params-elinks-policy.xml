@@ -69,7 +69,7 @@
                     <value>@("Token " + (String)context.Variables["elinksToken"])</value>
                 </set-header>
                 <rewrite-uri template="/people" copy-unmatched-params="true" />
-                <set-backend-service base-url="https://#elinksHost#/api/v5" />
+                <set-backend-service base-url="https://#elinksHost#/elinks/api/v5" />
             </when>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
                 <return-response>
