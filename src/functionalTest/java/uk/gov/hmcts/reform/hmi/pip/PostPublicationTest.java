@@ -24,7 +24,8 @@ import static uk.gov.hmcts.reform.hmi.helper.HeaderHelper.putIfNotNullOrEmpty;
  */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
-@SuppressWarnings({"PMD.TooManyMethods", "PMD.ExcessiveParameterList", "PMD.AvoidReassigningParameters"})
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.ExcessiveParameterList",
+                   "PMD.AvoidReassigningParameters", "PMD.LawOfDemeter"})
 class PostPublicationTest {
 
     @Autowired
