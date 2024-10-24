@@ -684,7 +684,7 @@
     },
     {
       "operationId": "elinks-health",
-      "templateFile": "eLinks/api-op-elinks-health-policy.xml",
+      "templateFile": "eLinks/dev/api-op-elinks-health-policy.xml",
       "display_name": "eLinks API Health Check",
       "method": "GET",
       "url_template": "/elinks-health",
@@ -735,7 +735,7 @@
     },
     {
       "operationId": "get-people",
-      "templateFile": "eLinks/api-op-get-people-by-id-elinks-policy.xml",
+      "templateFile": "eLinks/dev/api-op-get-people-by-id-elinks-policy.xml",
       "display_name": "Get People By ID",
       "method": "GET",
       "url_template": "/people/{id}",
@@ -786,7 +786,7 @@
     },
     {
       "operationId": "get-people-by-params",
-      "templateFile": "eLinks/api-op-get-people-by-params-elinks-policy.xml",
+      "templateFile": "eLinks/dev/api-op-get-people-by-params-elinks-policy.xml",
       "display_name": "Get People By Params",
       "method": "GET",
       "url_template": "/people",
@@ -849,7 +849,7 @@
     },
     {
       "operationId": "update-people",
-      "templateFile": "eLinks/api-op-update-people-elinks-policy.xml",
+      "templateFile": "eLinks/dev/api-op-update-people-elinks-policy.xml",
       "display_name": "Update People",
       "method": "PUT",
       "url_template": "/people/{id}",
