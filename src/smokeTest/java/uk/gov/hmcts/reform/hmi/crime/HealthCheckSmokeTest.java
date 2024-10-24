@@ -18,7 +18,9 @@ class HealthCheckSmokeTest {
         RestAssured.baseURI = "https://sds-api-mgmt.staging.platform.hmcts.net/hmi";
     }
 
-    //THIS TEST IS DISABLE BECAUSE CRIME DID NOT MAKE CHANGES IN THEIR STG ENV YET.
+    /**
+     * This test needs to enable once we implement ticket PUB-2629
+     */
     @Test
     @Disabled
     void crimeHealthCheckTest() {

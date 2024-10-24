@@ -1,5 +1,5 @@
 {
-  "scheduled_date_time":"2025-08-17T10:00:00+01:00",
+  "scheduled_date_time":"2030-08-17T10:00:00+01:00",
   "scheduled_duration":60,
   "hearing_venue_name":"Blackpool Magistrates and Civil Court",
   "hearing_room_name":"Blackpool Magistrates Courtroom 03",
@@ -50,7 +50,6 @@
   ],
   "created_date":null,
   "created_by":"ListAssist",
-  "is_multi_day_hearing":"true",
   "updated_by":null,
   "updated_date":null,
   "confirmed_by":null,
