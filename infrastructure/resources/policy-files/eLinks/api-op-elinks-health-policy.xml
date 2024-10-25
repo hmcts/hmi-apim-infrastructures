@@ -1,7 +1,7 @@
 <policies>
     <inbound>
         <rewrite-uri template="/healthcheck" copy-unmatched-params="true" />
-        <set-backend-service base-url="https://#elinksHost#/api/" />
+        <set-backend-service base-url="https://#elinksHost#/api/v5" />
     </inbound>
     <backend>
         <base />

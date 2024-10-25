@@ -36,7 +36,6 @@ class PeopleTest {
     }
 
     @Test
-    @Disabled
     void peopleGetSuccessful() throws IOException {
         Map<String, String> queryParameters = new ConcurrentHashMap<>();
         queryParameters.put(UPDATE_SINCE, "2019-01-29");
@@ -55,7 +54,6 @@ class PeopleTest {
      * Ticket cannot be moved to done column until this test will be enabled.
      */
     @Test
-    @Disabled
     void peopleGetByIdSuccessful() throws IOException {
         Map<String, String> requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         getPeopleById = String.format(getPeopleById, "PPLN1");
