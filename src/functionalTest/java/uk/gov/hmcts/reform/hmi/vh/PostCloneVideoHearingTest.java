@@ -35,8 +35,9 @@ class PostCloneVideoHearingTest {
 
     /**
      * Test with a valid hearing id and a valid set of headers, response should return 204.
-     * This test is failing. We have asked VH the reason for it. This needs to be enable once
-     * we get response from VH.
+     * This test is failing. We have asked VH the reason for it. To deploy PUB-2640,
+     * we need to disable this test temporarily. Once PUB-2640 is deployed, We will enable this test.
+     * Ticket cannot be moved to done column until this test will be enabled.
      */
     @Test
     @Disabled

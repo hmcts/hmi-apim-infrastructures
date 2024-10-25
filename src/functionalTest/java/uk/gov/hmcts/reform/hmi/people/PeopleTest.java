@@ -51,6 +51,9 @@ class PeopleTest {
                 200);
     }
 
+    /** This test will be enabled once we deploy the changes for PUB-2640.
+     * Ticket cannot be moved to done column until this test will be enabled.
+     */
     @Test
     @Disabled
     void peopleGetByIdSuccessful() throws IOException {
