@@ -28,7 +28,7 @@ class PutHearingTest {
     }
 
     /**
-     * Test with a empty payload for CRIME, a valid set of headers and valid payload, expect 404.
+     * Test with an empty payload for CRIME, a valid set of headers and valid payload, expect 404.
      */
     @Test
     void putHearingCrimeFail() throws IOException {
