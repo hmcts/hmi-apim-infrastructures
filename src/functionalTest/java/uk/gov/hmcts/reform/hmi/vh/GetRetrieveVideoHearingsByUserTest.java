@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
@@ -21,12 +22,14 @@ import java.util.concurrent.ConcurrentHashMap;
 @ActiveProfiles(profiles = "functional")
 class GetRetrieveVideoHearingsByUserTest {
 
+    @Value("${apim_url}")
+    private String apimUrl;
     @Autowired
     RestClientHelper restClientHelper;
 
     @BeforeEach
     void setup() {
-        RestAssured.baseURI = "https://sds-api-mgmt.staging.platform.hmcts.net/hmi";
+        RestAssured.baseURI = apimUrl;
     }
 
     /**
