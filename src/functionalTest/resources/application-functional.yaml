@@ -4,3 +4,4 @@ grant_type: client_credentials
 client_id: ${CLIENT_ID}
 client_secret: ${CLIENT_SECRET}
 scope: ${SCOPE}
+apim_url: ${APIM_URL:https://sds-api-mgmt.staging.platform.hmcts.net/hmi}
