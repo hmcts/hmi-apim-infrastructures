@@ -94,7 +94,7 @@
 	<outbound>
         <base />
          <choose>
-			 <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
+            <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
                 <cache-remove-value key="snlAuth" />
                 <return-response>
 						<set-status code="502" />
