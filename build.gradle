@@ -90,7 +90,7 @@ checkstyle {
 pmd {
   toolVersion = "7.7.0"
   sourceSets = [sourceSets.main, sourceSets.test, sourceSets.functionalTest, sourceSets.smokeTest]
-  reportsDir = file("$project.buildDir/reports/pmd")
+  reportsDir = file("${layout.buildDirectory.get()}/reports/pmd")
   // https://github.com/pmd/pmd/issues/876
   ruleSets = []
   ruleSetFiles = files("config/pmd/ruleset.xml")
