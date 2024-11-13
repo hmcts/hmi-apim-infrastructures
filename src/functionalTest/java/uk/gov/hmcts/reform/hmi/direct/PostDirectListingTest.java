@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
@@ -24,12 +25,12 @@ import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsStri
 @ActiveProfiles(profiles = "functional")
 class PostDirectListingTest {
 
+    @Value("${apim_url}")
+    private String apimUrl;
     @Autowired
     RestClientHelper restClientHelper;
 
     private final Random rand;
-
-    private static String randomHearingId;
 
     public PostDirectListingTest()  throws NoSuchAlgorithmException {
         rand = SecureRandom.getInstanceStrong();
@@ -37,7 +38,7 @@ class PostDirectListingTest {
 
     @BeforeEach
     void setup() {
-        RestAssured.baseURI = "https://sds-api-mgmt.staging.platform.hmcts.net/hmi";
+        RestAssured.baseURI = apimUrl;
     }
 
     /**
@@ -46,7 +47,7 @@ class PostDirectListingTest {
      */
     @Test
     void postDirectListingFail() throws IOException {
-        randomHearingId = String.format("HMI_%s", rand.nextInt(999_999_999));
+        String randomHearingId = String.format("HMI_%s", rand.nextInt(999_999_999));
         restClientHelper.performSecurePostRequestAndValidate(
                 getJsonPayloadFileAsString("directlistings/create-direct-listings-request-payload.json")
                         .replace("HMI_CASE_LISTING_ID", randomHearingId),

@@ -6,46 +6,52 @@
                 <set-header name="Host" exists-action="override">
                     <value>#pihHost#</value>
                 </set-header>
-                <send-request ignore-error="false" timeout="20" response-variable-name="pipClientResponse" mode="new">
-                    <set-url>https://#keyVaultHost#/secrets/pip-client-id/?api-version=7.0</set-url>
-                    <set-method>GET</set-method>
-                    <authentication-managed-identity resource="https://vault.azure.net" />
-                </send-request>
-                <set-variable name="pipClient" value="@{
-                    var secret = ((IResponse)context.Variables["pipClientResponse"]).Body.As<JObject>();
-                    return secret["value"].ToString();
-                }" />
-                <send-request ignore-error="false" timeout="20" response-variable-name="pipSecretResponse" mode="new">
-                    <set-url>https://#keyVaultHost#/secrets/pip-client-pwd/?api-version=7.0</set-url>
-                    <set-method>GET</set-method>
-                    <authentication-managed-identity resource="https://vault.azure.net" />
-                </send-request>
-                <set-variable name="pipSecret" value="@{
-                    var secret = ((IResponse)context.Variables["pipSecretResponse"]).Body.As<JObject>();
-                    return secret["value"].ToString();
-                }" />
-                <send-request ignore-error="false" timeout="20" response-variable-name="pipScopeResponse" mode="new">
-                    <set-url>https://#keyVaultHost#/secrets/pip-client-scope/?api-version=7.0</set-url>
-                    <set-method>GET</set-method>
-                    <authentication-managed-identity resource="https://vault.azure.net" />
-                </send-request>
-                <set-variable name="pipScope" value="@{
-                    var secret = ((IResponse)context.Variables["pipScopeResponse"]).Body.As<JObject>();
-                    return secret["value"].ToString();
-                }" />
-                <send-request ignore-error="true" timeout="20" response-variable-name="pipBearerToken" mode="new">
-                    <set-url>https://login.microsoftonline.com/531ff96d-0ae9-462a-8d2d-bec7c0b42082/oauth2/v2.0/token</set-url>
-                    <set-method>POST</set-method>
-                    <set-header name="Content-Type" exists-action="override">
-                        <value>application/x-www-form-urlencoded</value>
-                    </set-header>
-                    <set-body>@{
-                    return "client_id=" + (string)context.Variables["pipClient"] + "&scope=" + (string)context.Variables["pipScope"] + "/.default&client_secret=" + (string)context.Variables["pipSecret"] + "&grant_type=client_credentials";
-                    }</set-body>
-                </send-request>
-                <set-variable name="pipAuthToken" value="@("Bearer " + (String)((IResponse)context.Variables["pipBearerToken"]).Body.As<JObject>()["access_token"])" />
+                <cache-lookup-value key="pihAuth" variable-name="pihAuthToken" />
+                <choose>
+                    <when condition="@(context.Variables.GetValueOrDefault("pihAuthToken", "") == "")">
+                        <send-request ignore-error="false" timeout="20" response-variable-name="pipClientResponse" mode="new">
+                            <set-url>https://#keyVaultHost#/secrets/pip-client-id/?api-version=7.0</set-url>
+                            <set-method>GET</set-method>
+                            <authentication-managed-identity resource="https://vault.azure.net" />
+                        </send-request>
+                        <set-variable name="pipClient" value="@{
+                            var secret = ((IResponse)context.Variables["pipClientResponse"]).Body.As<JObject>();
+                            return secret["value"].ToString();
+                        }" />
+                        <send-request ignore-error="false" timeout="20" response-variable-name="pipSecretResponse" mode="new">
+                            <set-url>https://#keyVaultHost#/secrets/pip-client-pwd/?api-version=7.0</set-url>
+                            <set-method>GET</set-method>
+                            <authentication-managed-identity resource="https://vault.azure.net" />
+                        </send-request>
+                        <set-variable name="pipSecret" value="@{
+                            var secret = ((IResponse)context.Variables["pipSecretResponse"]).Body.As<JObject>();
+                            return secret["value"].ToString();
+                        }" />
+                        <send-request ignore-error="false" timeout="20" response-variable-name="pipScopeResponse" mode="new">
+                            <set-url>https://#keyVaultHost#/secrets/pip-client-scope/?api-version=7.0</set-url>
+                            <set-method>GET</set-method>
+                            <authentication-managed-identity resource="https://vault.azure.net" />
+                        </send-request>
+                        <set-variable name="pipScope" value="@{
+                            var secret = ((IResponse)context.Variables["pipScopeResponse"]).Body.As<JObject>();
+                            return secret["value"].ToString();
+                        }" />
+                        <send-request ignore-error="true" timeout="20" response-variable-name="pipBearerToken" mode="new">
+                            <set-url>https://login.microsoftonline.com/531ff96d-0ae9-462a-8d2d-bec7c0b42082/oauth2/v2.0/token</set-url>
+                            <set-method>POST</set-method>
+                            <set-header name="Content-Type" exists-action="override">
+                                <value>application/x-www-form-urlencoded</value>
+                            </set-header>
+                            <set-body>@{
+                            return "client_id=" + (string)context.Variables["pipClient"] + "&scope=" + (string)context.Variables["pipScope"] + "/.default&client_secret=" + (string)context.Variables["pipSecret"] + "&grant_type=client_credentials";
+                            }</set-body>
+                        </send-request>
+                        <set-variable name="pihAuthToken" value="@("Bearer " + (String)((IResponse)context.Variables["pipBearerToken"]).Body.As<JObject>()["access_token"])" />
+                        <cache-store-value key="pihAuth" value="@((String)context.Variables["pihAuthToken"])" duration="2700" />
+                    </when>
+                </choose>
                 <set-header name="Authorization" exists-action="override">
-                    <value>@((String)context.Variables["pipAuthToken"])</value>
+                    <value>@((String)context.Variables["pihAuthToken"])</value>
                 </set-header>
                 <set-header name="x-provenance" exists-action="override">
                     <value>@(context.Request.Headers.GetValueOrDefault("Source-System","unknown"))</value>
@@ -75,131 +81,24 @@
         <base />
     </backend>
     <outbound>
-    <base />
-    <choose>
-        <when condition="@(context.Response.StatusCode == 401)">
-
-            <send-request ignore-error="true" timeout="20" response-variable-name="snowAuth" mode="new">
-                <set-url>https://#keyVaultHost#/secrets/hmi-servicenow-auth?api-version=7.0</set-url>
-                <set-method>GET</set-method>
-                <authentication-managed-identity resource="https://vault.azure.net" />
-            </send-request>
-            <send-request ignore-error="false" timeout="20" response-variable-name="serviceNow" mode="new">
-                <set-url>https://#snowHost#/api/now/table/incident?sysparm_fields=number</set-url>
-                <set-method>POST</set-method>
-                <set-header name="Authorization" exists-action="override">
-                    <value>
-                        @("Basic " + ((IResponse)context.Variables["snowAuth"]).Body.As
-                        <JObject>()["value"].ToString())
-                    </value>
-                </set-header>
-                <set-body>@{
-                    return new JObject(
-                    new JProperty("assignment_group", "56b756774fbd368057db0b318110c7bd"),
-                    new JProperty("caller_id", "1475a0491b743414f0dc85e4464bcb7a"),
-                    new JProperty("category", "Data Issue"),
-                    new JProperty("contact_type", "Alert"),
-                    new JProperty("description", "HMI - Publication: " + context.Request.Headers.GetValueOrDefault("transactionIdHMCTS","")),
-                    new JProperty("impact", "2"),
-                    new JProperty("service_offering", "138e0c541bc5bc507bdaddf0b24bcb2a"),
-                    new JProperty("short_description", "HMI - API Gateway Error - Authentication Issue"),
-                    new JProperty("subcategory", "HMI - Backend Service Failure"),
-                    new JProperty("u_role_type", "c319bc4bdb41834074abffa9bf96199c"),
-                    new JProperty("urgency", "3")
-                    ).ToString();
-                    }</set-body>
-            </send-request>
-            <return-response>
-                <set-status code="502" />
-                <set-header name="Content-Type">
-                    <value>application/json</value>
-                </set-header>
-                <set-body>@{
-                    return new JObject(
-                    new JProperty("message", "Successfully authenticated by HMI, however target system failed to authenticate. Please try again.")
-                    ).ToString();
-                    }
-                </set-body>
-            </return-response>
-        </when>
-        <when condition="@(context.Response.StatusCode == 403)">
-            
-            <send-request ignore-error="true" timeout="20" response-variable-name="snowAuth" mode="new">
-                <set-url>https://#keyVaultHost#/secrets/hmi-servicenow-auth?api-version=7.0</set-url>
-                <set-method>GET</set-method>
-                <authentication-managed-identity resource="https://vault.azure.net" />
-            </send-request>
-            <send-request ignore-error="false" timeout="20" response-variable-name="serviceNow" mode="new">
-                <set-url>https://#snowHost#/api/now/table/incident?sysparm_fields=number</set-url>
-                <set-method>POST</set-method>
-                <set-header name="Authorization" exists-action="override">
-                    <value>
-                        @("Basic " + ((IResponse)context.Variables["snowAuth"]).Body.As
-                        <JObject>()["value"].ToString())
-                    </value>
-                </set-header>
-                <set-body>@{
-                    return new JObject(
-                    new JProperty("assignment_group", "56b756774fbd368057db0b318110c7bd"),
-                    new JProperty("caller_id", "1475a0491b743414f0dc85e4464bcb7a"),
-                    new JProperty("category", "Data Issue"),
-                    new JProperty("contact_type", "Alert"),
-                    new JProperty("description", "HMI - Publication: " + context.Request.Headers.GetValueOrDefault("transactionIdHMCTS","")),
-                    new JProperty("impact", "2"),
-                    new JProperty("service_offering", "138e0c541bc5bc507bdaddf0b24bcb2a"),
-                    new JProperty("short_description", "HMI - API Gateway Error - Authorization Issue"),
-                    new JProperty("subcategory", "HMI - Backend Service Failure"),
-                    new JProperty("u_role_type", "c319bc4bdb41834074abffa9bf96199c"),
-                    new JProperty("urgency", "3")
-                    ).ToString();
-                    }</set-body>
-            </send-request>
-            <return-response>
-                <set-status code="502" />
-                <set-header name="Content-Type">
-                    <value>application/json</value>
-                </set-header>
-                <set-body>@{
-                    return new JObject(
-                    new JProperty("message", "Successfully authorized by HMI, however target system failed to authorize. Please try again.")
-                    ).ToString();
-                    }
-                </set-body>
-            </return-response>
-        </when>
-        <when condition="@(context.Response.StatusCode == 500)">
-            <send-request ignore-error="true" timeout="20" response-variable-name="snowAuth" mode="new">
-                <set-url>https://#keyVaultHost#/secrets/hmi-servicenow-auth?api-version=7.0</set-url>
-                <set-method>GET</set-method>
-                <authentication-managed-identity resource="https://vault.azure.net" />
-            </send-request>
-            <send-request ignore-error="false" timeout="20" response-variable-name="serviceNow" mode="new">
-                <set-url>https://#snowHost#/api/now/table/incident?sysparm_fields=number</set-url>
-                <set-method>POST</set-method>
-                <set-header name="Authorization" exists-action="override">
-                    <value>
-                        @("Basic " + ((IResponse)context.Variables["snowAuth"]).Body.As
-                        <JObject>()["value"].ToString())
-                    </value>
-                </set-header>
-                <set-body>@{
-                    return new JObject(
-                    new JProperty("assignment_group", "56b756774fbd368057db0b318110c7bd"),
-                    new JProperty("caller_id", "1475a0491b743414f0dc85e4464bcb7a"),
-                    new JProperty("category", "Data Issue"),
-                    new JProperty("contact_type", "Alert"),
-                    new JProperty("description", "HMI - Publication: " + context.Request.Headers.GetValueOrDefault("transactionIdHMCTS","")),
-                    new JProperty("impact", "2"),
-                    new JProperty("service_offering", "138e0c541bc5bc507bdaddf0b24bcb2a"),
-                    new JProperty("short_description", "HMI - API Gateway Error"),
-                    new JProperty("subcategory", "HMI - Backend Service Failure"),
-                    new JProperty("u_role_type", "c319bc4bdb41834074abffa9bf96199c"),
-                    new JProperty("urgency", "3")
-                    ).ToString();
-                    }</set-body>
-            </send-request>
-        </when>
-    </choose>
+        <base />
+        <choose>
+            <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
+                <cache-remove-value key="pihAuth" />
+                <return-response>
+                    <set-status code="502" />
+                    <set-header name="Content-Type">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>@{
+                        return new JObject(
+                        new JProperty("message", "Successfully authenticated by HMI, however target system failed to authenticate. Please try again.")
+                        ).ToString();
+                        }
+                    </set-body>
+                </return-response>
+            </when>
+        </choose>
     </outbound>
     <on-error>
         <base />

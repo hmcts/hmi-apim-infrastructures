@@ -120,7 +120,7 @@
       ],
       "caseInterpreterRequiredFlag":false,
       "caseRestrictedFlag":false,
-      "caseVersionId":1,
+      "caseVersionId":"CASE_VERSION_ID",
       "caseLinks":[
         {
           "url":"https://example.com/#Case File View"

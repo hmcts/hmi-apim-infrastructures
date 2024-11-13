@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
@@ -25,12 +26,16 @@ import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsStri
 @ActiveProfiles(profiles = "functional")
 class HearingTest {
 
+    @Value("${apim_url}")
+    private String apimUrl;
     @Autowired
     RestClientHelper restClientHelper;
 
     private final Random rand;
 
     private static String randomHearingId;
+
+    private static Integer randomNumber;
 
     private static final String DESTINATION = "SNL";
 
@@ -40,7 +45,7 @@ class HearingTest {
 
     @BeforeEach
     void setup() {
-        RestAssured.baseURI = "https://sds-api-mgmt.staging.platform.hmcts.net/hmi";
+        RestAssured.baseURI = apimUrl;
     }
 
     /**
@@ -49,7 +54,8 @@ class HearingTest {
     @Test
     @Order(1)
     void postHearingCreateSuccess() throws IOException {
-        randomHearingId = String.format("HMI_%s", rand.nextInt(999_999_999));
+        randomNumber = rand.nextInt(999_999_999);
+        randomHearingId = String.format("HMI_%s", randomNumber);
         restClientHelper.performSecurePostRequestAndValidateWithResponse(
                 getJsonPayloadFileAsString("hearings/create-hearing-request-payload.json")
                         .replace("HMI_CASE_LISTING_ID", randomHearingId),
@@ -68,7 +74,8 @@ class HearingTest {
     void putHearingSuccess() throws IOException {
         restClientHelper.performSecurePutRequestAndValidate(
                 getJsonPayloadFileAsString("hearings/update-hearing-request-payload.json")
-                        .replace("HMI_CASE_LISTING_ID", randomHearingId),
+                        .replace("HMI_CASE_LISTING_ID", randomHearingId)
+                        .replace("\"CASE_VERSION_ID\"", randomNumber.toString()),
                 HeaderHelper.createHeaders(DESTINATION),
                 "/hearings/" + randomHearingId,
                 "",

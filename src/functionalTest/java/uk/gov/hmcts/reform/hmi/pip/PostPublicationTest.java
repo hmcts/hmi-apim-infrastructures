@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
@@ -24,9 +25,12 @@ import static uk.gov.hmcts.reform.hmi.helper.HeaderHelper.putIfNotNullOrEmpty;
  */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
-@SuppressWarnings({"PMD.TooManyMethods", "PMD.ExcessiveParameterList", "PMD.AvoidReassigningParameters"})
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.ExcessiveParameterList",
+                   "PMD.AvoidReassigningParameters", "PMD.LawOfDemeter"})
 class PostPublicationTest {
 
+    @Value("${apim_url}")
+    private String apimUrl;
     @Autowired
     RestClientHelper restClientHelper;
 
@@ -44,7 +48,7 @@ class PostPublicationTest {
 
     @BeforeEach
     void setup() {
-        RestAssured.baseURI = "https://sds-api-mgmt.staging.platform.hmcts.net/hmi";
+        RestAssured.baseURI = apimUrl;
     }
 
     /**
@@ -96,7 +100,7 @@ class PostPublicationTest {
                 getJsonPayloadFileAsString("pip/invalid-care-standards-list.json"),
                 requestHeaders,
                 ENDPOINT,
-                "$.document.publicationDate: is missing but it is required",
+                "$.document: required property 'publicationDate' not found",
                 400
         );
     }

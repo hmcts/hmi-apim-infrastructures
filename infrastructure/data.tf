@@ -3,7 +3,6 @@ locals {
   resource_group_name = "${local.prefix}-sharedinfra-sds-${var.env}-rg"
   key_vault_name      = "${local.prefix}-sds-kv-${var.env}"
   pip_client_host     = "pip-client-host"
-  servicenow_host     = "hmi-servicenow-host"
   vh_client_host      = "vh-client-host"
   vh_OAuth_url        = "vh-OAuth-url"
   cft_client_host     = "cft-client-host"
@@ -26,12 +25,6 @@ data "azurerm_key_vault" "kv" {
 data "azurerm_key_vault_secret" "pip_client_host" {
   count        = local.deploy_apim
   name         = local.pip_client_host
-  key_vault_id = data.azurerm_key_vault.kv.id
-}
-
-data "azurerm_key_vault_secret" "servicenow_host" {
-  count        = local.deploy_apim
-  name         = local.servicenow_host
   key_vault_id = data.azurerm_key_vault.kv.id
 }
 
@@ -91,4 +84,9 @@ data "azurerm_key_vault_secret" "crime_cert_base" {
 data "azurerm_key_vault_secret" "crime_cert_password" {
   name         = local.crime_cert_password
   key_vault_id = data.azurerm_key_vault.kv.id
+}
+
+data "azurerm_application_insights" "sds_app_insights" {
+  name                = "sds-api-mgmt-${var.env}"
+  resource_group_name = "ss-${var.env}-network-rg"
 }
