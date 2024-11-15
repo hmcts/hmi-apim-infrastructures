@@ -13,7 +13,7 @@ resource "azurerm_api_management_api_diagnostic" "api_logs" {
   http_correlation_protocol = "W3C"
 
   frontend_request {
-    body_bytes = 5000
+    body_bytes = local.env == "prod" ? 0 : 8192
     headers_to_log = [
       "content-type",
       "accept",
@@ -25,7 +25,7 @@ resource "azurerm_api_management_api_diagnostic" "api_logs" {
   }
 
   frontend_response {
-    body_bytes = 5000
+    body_bytes = local.env == "prod" ? 0 : 8192
     headers_to_log = [
       "content-type",
       "content-length",
@@ -37,7 +37,7 @@ resource "azurerm_api_management_api_diagnostic" "api_logs" {
   }
 
   backend_request {
-    body_bytes = 5000
+    body_bytes = local.env == "prod" ? 0 : 8192
     headers_to_log = [
       "content-type",
       "accept",
@@ -49,7 +49,7 @@ resource "azurerm_api_management_api_diagnostic" "api_logs" {
   }
 
   backend_response {
-    body_bytes = 5000
+    body_bytes = local.env == "prod" ? 0 : 8192
     headers_to_log = [
       "content-type",
       "content-length",
