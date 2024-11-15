@@ -1,12 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
-  <suppress>
-    <notes>Jackson databind used in spring</notes>
-    <cve>CVE-2023-35116</cve>
-  </suppress>
-  <suppress>
-    <notes>Suppression for logback. Pulled in by the latest spring boot v3.0.13</notes>
-    <packageUrl regex="true">^pkg:maven/ch\.qos\.logback/logback.*@1.4.11$</packageUrl>
-    <cve>CVE-2023-6378</cve>
-  </suppress>
 </suppressions>
