@@ -4,6 +4,7 @@
   "hearing_venue_name":"Blackpool Magistrates and Civil Court",
   "hearing_room_name":"Blackpool Magistrates Courtroom 03",
   "other_information":null,
+  "is_multi_day_hearing": true,
   "cases":[
     {
       "number":"VH_RETEST_CANCEL",
