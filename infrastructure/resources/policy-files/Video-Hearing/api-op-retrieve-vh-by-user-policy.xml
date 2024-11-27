@@ -66,7 +66,7 @@
                                 <value>application/x-www-form-urlencoded</value>
                             </set-header>
                             <set-body>@{
-                            return "client_id=" + (string)context.Variables["vhClient"] + "&client_secret=" + (string)context.Variables["vhSecret"] + "&grant_type=client_credentials&resource=#vhHost#t";}</set-body>
+                            return "client_id=" + (string)context.Variables["vhClient"] + "&client_secret=" + (string)context.Variables["vhSecret"] + "&grant_type=client_credentials&resource=#vhHost#";}</set-body>
                         </send-request>
                         <set-header name="Authorization" exists-action="override">
                             <value>@("Bearer " + (String)((IResponse)context.Variables["vhBearerToken"]).Body.As<JObject>()["access_token"])</value>
