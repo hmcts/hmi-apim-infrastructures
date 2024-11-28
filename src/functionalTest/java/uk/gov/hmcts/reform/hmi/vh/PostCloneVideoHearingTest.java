@@ -4,7 +4,6 @@ package uk.gov.hmcts.reform.hmi.vh;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,13 +36,9 @@ class PostCloneVideoHearingTest {
     }
 
     /**
-     * Test with a valid hearing id and a valid set of headers, response should return 204.
-     * This test is failing. We have asked VH the reason for it. To deploy PUB-2640,
-     * we need to disable this test temporarily. Once PUB-2640 is deployed, We will enable this test.
-     * Ticket cannot be moved to done column until this test will be enabled.
+     * Test with a valid hearing id and a valid set of headers, response should return 200.
      */
     @Test
-    @Disabled
     void vhPostCloneVideoHearingSuccessful() throws IOException {
         Response response = restClientHelper.performSecurePostRequestAndValidateWithResponse(
                 getJsonPayloadFileAsString("vh/create-vh-hearing.json"),
