@@ -30,4 +30,4 @@
         <value>@("Bearer " + (String)((IResponse)context.Variables["snlBearerToken"]).Body.As<JObject>()["idToken"])</value>
     </set-header>
     <cache-store-value key="snlAuth" value="@(context.Request.Headers.GetValueOrDefault("Authorization", ""))" duration="2700" />
-</fragment
+</fragment>
