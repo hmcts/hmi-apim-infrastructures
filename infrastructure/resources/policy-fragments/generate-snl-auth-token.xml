@@ -1,1 +1,4 @@
-<fragment><set-method>GET</set-method></fragment>
+<fragment>
+    <set-method>GET</set-method>
+    <authentication-managed-identity resource="https://vault.azure.net" />
+</fragment>
