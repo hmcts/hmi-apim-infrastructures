@@ -1,7 +1,7 @@
 <fragment>
     <return-response>
         <set-status code="400" />
-        <set-header name="Content-Type">
+        <set-header name="Content-Type" exists-action="override">
             <value>application/json</value>
         </set-header>
         <set-body>@{
