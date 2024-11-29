@@ -30,4 +30,7 @@
 
         </set-body>
     </send-request>
+    <set-header name="Authorization" exists-action="override">
+        <value>@("Bearer " + (String)((IResponse)context.Variables["snlBearerToken"]).Body.As<JObject>()["idToken"])</value>
+    </set-header>
 </fragment>
