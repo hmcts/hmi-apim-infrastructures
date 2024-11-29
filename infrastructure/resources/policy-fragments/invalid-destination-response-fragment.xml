@@ -1,13 +1,14 @@
 <fragment>
     <return-response>
         <set-status code="400" />
-        <set-header name="Content-Type" exists-action="override">
+        <set-header name="Content-Type">
             <value>application/json</value>
         </set-header>
         <set-body>@{
             return new JObject(
             new JProperty("message", context.Request.Headers.GetValueOrDefault("Destination-System","") + " destination doesn't support this functionality")
             ).ToString();
-            }</set-body>
+            }
+        </set-body>
     </return-response>
 </fragment>
