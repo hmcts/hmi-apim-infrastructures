@@ -15,3 +15,11 @@ resource "azurerm_api_management_policy_fragment" "mock_generic_response" {
   description       = "This fragment contains code which generate generic response for MOCK"
   value             = file("${path.module}/resources/policy-fragments/mock-generic-response-fragment.xml")
 }
+
+resource "azurerm_api_management_policy_fragment" "invalid_destination_response" {
+  api_management_id = data.azurerm_api_management.sds_apim.id
+  name              = "${var.product}-invalid-destination-response"
+  format            = "rawxml"
+  description       = "This fragment contains code which send error response if request has invalid destination in header"
+  value             = file("${path.module}/resources/policy-fragments/invalid-destination-response-fragment.xml")
+}
