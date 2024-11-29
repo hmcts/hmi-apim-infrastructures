@@ -32,7 +32,16 @@
 			<when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
 				<return-response>
                     <set-status code="202" />
-                    <include-fragment fragment-id="hmi-mock-generic-response" />
+                    <set-header name="Content-Type">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>@{
+                        return new JObject(
+                        new JProperty("response code", 202),
+                        new JProperty("description", "The request was received successfully.")
+                        ).ToString();
+                        }
+                    </set-body>
 		        </return-response>
 		    </when>
 			<otherwise>

@@ -1,4 +1,5 @@
 <fragment>
+    <set-status code="202" />
     <set-header name="Content-Type">
         <value>application/json</value>
     </set-header>
