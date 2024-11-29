@@ -6,7 +6,7 @@
 				<cache-lookup-value key="snlAuth" variable-name="snlAuthToken" />
                 <choose>
 					<when condition="@(context.Variables.GetValueOrDefault("snlAuthToken","") == "")">
-					<include-fragment fragment-id="hmi-snl-token-generation-policy-fragment" />
+					<include-fragment fragment-id="hmi-snl-auth-token-generation" />
 					<!-- <cache-store-value key="snlAuth" value="@(context.Request.Headers.GetValueOrDefault("Authorization", ""))" duration="2700" /> -->
                     </when>
                     <otherwise>
@@ -31,17 +31,7 @@
 			</when>
 			<when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
 				<return-response>
-					<set-status code="202" />
-					<set-header name="Content-Type">
-						<value>application/json</value>
-					</set-header>
-					<set-body>@{
-					return new JObject(
-						new JProperty("response code", 202),
-						new JProperty("description", "The request was received successfully.")
-					).ToString();
-					}
-		       		</set-body>
+					<include-fragment fragment-id="hmi-mock-generic-response" />
 		        </return-response>
 		    </when>
 			<otherwise>
