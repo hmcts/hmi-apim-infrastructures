@@ -31,6 +31,7 @@
 			</when>
 			<when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
 				<return-response>
+                    <set-status code="202" />
                     <include-fragment fragment-id="hmi-mock-generic-response" />
 		        </return-response>
 		    </when>
