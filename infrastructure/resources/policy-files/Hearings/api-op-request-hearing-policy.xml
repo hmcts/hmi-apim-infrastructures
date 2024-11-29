@@ -6,8 +6,8 @@
 				<cache-lookup-value key="snlAuth" variable-name="snlAuthToken" />
                 <choose>
 					<when condition="@(context.Variables.GetValueOrDefault("snlAuthToken","") == "")">
-                    <include-fragment fragment-id="hmi-snl-auth-token-generation" />
-                     <!--<cache-store-value key="snlAuth" value="@(context.Request.Headers.GetValueOrDefault("Authorization", ""))" duration="2700" /> -->
+                        <include-fragment fragment-id="hmi-snl-auth-token-generation" />
+                         <!--<cache-store-value key="snlAuth" value="@(context.Request.Headers.GetValueOrDefault("Authorization", ""))" duration="2700" /> -->
                     </when>
                     <otherwise>
                         <set-header name="Authorization" exists-action="override">
@@ -45,18 +45,7 @@
          <choose>
             <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
                 <cache-remove-value key="snlAuth" />
-                <return-response>
-						<set-status code="502" />
-						<set-header name="Content-Type">
-							<value>application/json</value>
-						</set-header>
-						<set-body>@{
-						return new JObject(
-							new JProperty("message", "Successfully authenticated by HMI, however target system failed to authenticate. Please try again.")
-						    ).ToString();
-						}
-					</set-body>
-				</return-response>
+				<include-fragment fragment-id="hmi-failed-destination-authentication-response" />
             </when>
         </choose>
     </outbound>
