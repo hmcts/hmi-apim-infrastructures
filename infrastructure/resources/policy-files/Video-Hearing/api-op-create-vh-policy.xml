@@ -53,9 +53,9 @@
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
                 <mock-response status-code="201" content-type="application/json" />
             </when>
-            <otherwise>
+            <!--<otherwise>
                 <include-fragment fragment-id="hmi-invalid-destination-response" />
-            </otherwise>
+            </otherwise>-->
         </choose>
     </inbound>
     <backend>
@@ -66,7 +66,7 @@
         <choose>
             <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
                 <cache-remove-value key="vhAuth" />
-                <include-fragment fragment-id="hmi-failed-destination-authentication-response" />
+                <!--<include-fragment fragment-id="hmi-failed-destination-authentication-response" />-->
             </when>
         </choose>
     </outbound>
