@@ -67,18 +67,7 @@
         <choose>
             <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
                 <cache-remove-value key="vhAuth" />
-                <return-response>
-                    <set-status code="502" />
-                    <set-header name="Content-Type">
-                        <value>application/json</value>
-                    </set-header>
-                    <set-body>@{
-                        return new JObject(
-                        new JProperty("message", "Successfully authenticated by HMI, however target system failed to authenticate. Please try again.")
-                        ).ToString();
-                        }
-                    </set-body>
-                </return-response>
+                <include-fragment fragment-id="hmi-failed-destination-authentication-response" />
             </when>
         </choose>
     </outbound>
