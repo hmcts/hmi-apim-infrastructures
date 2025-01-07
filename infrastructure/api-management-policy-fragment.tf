@@ -31,3 +31,11 @@ resource "azurerm_api_management_policy_fragment" "failed_destination_authentica
   description       = "This fragment contains code which send error response if destination fails to authenticate HMI request"
   value             = file("${path.module}/resources/policy-fragments/failed-destination-authentication-response-fragment.xml")
 }
+
+resource "azurerm_api_management_policy_fragment" "vh_get_api_version" {
+  api_management_id = data.azurerm_api_management.sds_apim.id
+  name              = "${var.product}-vh-get-api-version"
+  format            = "rawxml"
+  description       = "This fragment contains code to which is used by video hearing to get api version"
+  value             = file("${path.module}/resources/policy-fragments/vh-get-api-version-fragment.xml")
+}
