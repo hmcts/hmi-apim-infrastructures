@@ -16,7 +16,14 @@
                         </set-header>
                     </otherwise>
                 </choose>
-                <rewrite-uri template="/{hearingId}" copy-unmatched-params="true" />
+                <when condition="@((bool)context.Variables["versionRequest"])">
+                    <set-variable name="heardIdFromParam"
+                                  value="@{hearingId}" />
+                    <rewrite-uri template="/@((string)context.Variables["heardIdFromParam"])" copy-unmatched-params="true" />
+                </when>
+                <otherwise>
+                    <set-backend-service base-url="#vhHost#/hearings" />
+                </otherwise>
                 <choose>
                     <when condition="@((bool)context.Variables["versionRequest"])">
                         <set-backend-service base-url="#vhHost#/v2/hearings" />
