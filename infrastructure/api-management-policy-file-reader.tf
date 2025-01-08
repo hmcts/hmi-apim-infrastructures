@@ -4,10 +4,11 @@ locals {
   policy_file_template = [for policy in local.policies_data.policies :
     {
       operation_id = policy.operationId
-      xml_content = replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(file("${path.module}/resources/policy-files/${policy.templateFile}"),
+      xml_content = replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(file("${path.module}/resources/policy-files/${policy.templateFile}"),
         "#keyVaultHost#", var.key_vault_host),
         "#pihHost#", length(data.azurerm_key_vault_secret.pip_client_host) > 0 ? data.azurerm_key_vault_secret.pip_client_host[0].value : ""),
         "#vhHost#", length(data.azurerm_key_vault_secret.vh_client_host) > 0 ? data.azurerm_key_vault_secret.vh_client_host[0].value : ""),
+        "#vhOauthUrl#", length(data.azurerm_key_vault_secret.vh_OAuth_url) > 0 ? data.azurerm_key_vault_secret.vh_OAuth_url[0].value : ""),
         "#cftHost#", length(data.azurerm_key_vault_secret.cft_client_host) > 0 ? data.azurerm_key_vault_secret.cft_client_host[0].value : ""),
         "#cftOauthUrl#", length(data.azurerm_key_vault_secret.cft_OAuth_url) > 0 ? data.azurerm_key_vault_secret.cft_OAuth_url[0].value : ""),
         "#crimeHost#", length(data.azurerm_key_vault_secret.crime_client_host) > 0 ? data.azurerm_key_vault_secret.crime_client_host[0].value : ""),
