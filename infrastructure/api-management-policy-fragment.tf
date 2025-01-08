@@ -36,6 +36,6 @@ resource "azurerm_api_management_policy_fragment" "vh_get_api_version" {
   api_management_id = data.azurerm_api_management.sds_apim.id
   name              = "${var.product}-vh-get-api-version"
   format            = "rawxml"
-  description       = "This fragment contains code to which is used by video hearing to get api version"
+  description       = "This fragment contains code which is used by video hearing to extract api version from url"
   value             = file("${path.module}/resources/policy-fragments/vh-get-api-version-fragment.xml")
 }
