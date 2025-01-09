@@ -3,7 +3,47 @@
         <base />
         <choose>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "VH")">
-                <include-fragment fragment-id="hmi-vh-auth-token-generation" />
+                <cache-lookup-value key="vhAuth" variable-name="vhAuthToken" default-value="" />
+                <choose>
+                    <when condition="@(context.Variables.GetValueOrDefault("vhAuthToken","") == "")">
+                        <send-request ignore-error="false" timeout="20" response-variable-name="vhClientResponse" mode="new">
+                            <set-url>https://#keyVaultHost#/secrets/vh-client-id/?api-version=7.0</set-url>
+                            <set-method>GET</set-method>
+                            <authentication-managed-identity resource="https://vault.azure.net" />
+                        </send-request>
+                        <set-variable name="vhClient" value="@{
+                            var secret = ((IResponse)context.Variables["vhClientResponse"]).Body.As<JObject>();
+                            return secret["value"].ToString();
+                        }" />
+                        <send-request ignore-error="false" timeout="20" response-variable-name="vhSecretResponse" mode="new">
+                            <set-url>https://#keyVaultHost#/secrets/vh-client-pwd/?api-version=7.0</set-url>
+                            <set-method>GET</set-method>
+                            <authentication-managed-identity resource="https://vault.azure.net" />
+                        </send-request>
+                        <set-variable name="vhSecret" value="@{
+                            var secret = ((IResponse)context.Variables["vhSecretResponse"]).Body.As<JObject>();
+                            return secret["value"].ToString();
+                        }" />
+                        <send-request ignore-error="true" timeout="20" response-variable-name="vhBearerToken" mode="new">
+                            <set-url>#vhOauthUrl#</set-url>
+                            <set-method>POST</set-method>
+                            <set-header name="Content-Type" exists-action="override">
+                                <value>application/x-www-form-urlencoded</value>
+                            </set-header>
+                            <set-body>@{
+                            return "client_id=" + (string)context.Variables["vhClient"] + "&client_secret=" + (string)context.Variables["vhSecret"] + "&grant_type=client_credentials&resource=#vhHost#";}</set-body>
+                        </send-request>
+                        <set-header name="Authorization" exists-action="override">
+                            <value>@("Bearer " + (String)((IResponse)context.Variables["vhBearerToken"]).Body.As<JObject>()["access_token"])</value>
+                        </set-header>
+                        <cache-store-value key="vhAuth" value="@(context.Request.Headers.GetValueOrDefault("Authorization", ""))" duration="2700" />
+                    </when>
+                    <otherwise>
+                        <set-header name="Authorization" exists-action="override">
+                            <value>@((String)context.Variables["vhAuthToken"])</value>
+                        </set-header>
+                    </otherwise>
+                </choose>
                 <rewrite-uri template="/{hearingId}/participants/{participantId}" copy-unmatched-params="true" />
                 <set-backend-service base-url="#vhHost#/hearings" />
             </when>
@@ -11,7 +51,17 @@
                 <mock-response status-code="204" content-type="application/json" />
             </when>
             <otherwise>
-                <include-fragment fragment-id="hmi-invalid-destination-response" />
+                <return-response>
+                    <set-status code="400" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>@{
+                    return new JObject(
+                    new JProperty("message", context.Request.Headers.GetValueOrDefault("Destination-System","") + " destination doesn't support this functionality")
+                    ).ToString();
+                    }</set-body>
+                </return-response>
             </otherwise>
         </choose>
     </inbound>
@@ -23,7 +73,18 @@
         <choose>
             <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
                 <cache-remove-value key="vhAuth" />
-                <include-fragment fragment-id="hmi-failed-destination-authentication-response" />
+                <return-response>
+                    <set-status code="502" />
+                    <set-header name="Content-Type">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>@{
+                        return new JObject(
+                        new JProperty("message", "Successfully authenticated by HMI, however target system failed to authenticate. Please try again.")
+                        ).ToString();
+                        }
+                    </set-body>
+                </return-response>
             </when>
         </choose>
     </outbound>
