@@ -4,18 +4,7 @@
         <include-fragment fragment-id="hmi-vh-get-api-version" />
         <choose>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "VH")">
-                <cache-lookup-value key="vhAuth" variable-name="vhAuthToken" default-value="" />
-                <choose>
-                    <when condition="@(context.Variables.GetValueOrDefault("vhAuthToken","") == "")">
-                        <include-fragment fragment-id="hmi-vh-auth-token-generation" />
-                        <cache-store-value key="vhAuth" value="@(context.Request.Headers.GetValueOrDefault("Authorization", ""))" duration="2700" />
-                    </when>
-                    <otherwise>
-                        <set-header name="Authorization" exists-action="override">
-                            <value>@((String)context.Variables["vhAuthToken"])</value>
-                        </set-header>
-                    </otherwise>
-                </choose>
+                <include-fragment fragment-id="hmi-vh-auth-token-generation" />
                 <rewrite-uri template="/" copy-unmatched-params="false" />
                 <choose>
                     <when condition="@((bool)context.Variables["versionRequest"])">
