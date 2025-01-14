@@ -75,7 +75,7 @@ class PostCloneVideoHearingTest {
                 HeaderHelper.createHeaders("VH"),
                 "/hearings/invalid/clone",
                 "",
-                400
+                404
         );
     }
 }

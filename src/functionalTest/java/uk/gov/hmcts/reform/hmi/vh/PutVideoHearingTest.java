@@ -18,14 +18,12 @@ import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsStri
 
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
-public class PutVideoHearingTest {
+class PutVideoHearingTest {
 
     @Value("${apim_url}")
     private String apimUrl;
     @Autowired
     RestClientHelper restClientHelper;
-
-    private String validHearingId = "";
 
     @BeforeEach
     void setup() {
@@ -45,7 +43,7 @@ public class PutVideoHearingTest {
                 201
         );
 
-        validHearingId = getHearingId(response);
+        String validHearingId = getHearingId(response);
 
         restClientHelper.performSecurePutRequestAndValidate(
                 getJsonPayloadFileAsString("vh/update-vh-hearing.json"),
