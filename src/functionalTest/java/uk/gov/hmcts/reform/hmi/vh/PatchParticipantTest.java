@@ -17,6 +17,9 @@ import java.io.IOException;
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getHearingId;
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
 
+/**
+ * Functional tests for the VH endpoint (/hearings/{hearingId}/participants/{participantId}).
+ */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
 @SuppressWarnings("PMD.LawOfDemeter")
@@ -69,7 +72,7 @@ class PatchParticipantTest {
     }
 
     /**
-     * Test with an invalid hearing id and a valid set of headers and valid payload, expect 400.
+     * Test with an invalid hearing and participant id and a valid set of headers and valid payload, expect 400.
      */
     @Test
     void vhPatchParticipantTestInvalidId() throws IOException {

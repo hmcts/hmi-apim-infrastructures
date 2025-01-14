@@ -16,6 +16,9 @@ import java.io.IOException;
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getHearingId;
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
 
+/**
+ * Functional tests for the VH endpoint (/hearings/{hearingId}).
+ */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
 class PutVideoHearingTest {
@@ -31,7 +34,7 @@ class PutVideoHearingTest {
     }
 
     /**
-     * Test update valid hearing.
+     * Test update valid hearing with valid hearing.
      */
     @Test
     void vhPutUpdateVideoHearingsSuccessful() throws IOException {
@@ -55,6 +58,9 @@ class PutVideoHearingTest {
 
     }
 
+    /**
+     * Test with an invalid hearing id, expect 404.
+     */
     @Test
     void vhPutUpdateInvalidVideoHearingsSuccessful() throws IOException {
         restClientHelper.performSecurePutRequestAndValidate(
