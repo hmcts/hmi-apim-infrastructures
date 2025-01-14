@@ -13,6 +13,9 @@ import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
 import uk.gov.hmcts.reform.hmi.helper.RestClientHelper;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Random;
 
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getHearingId;
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
@@ -29,6 +32,12 @@ class PatchParticipantTest {
     private String apimUrl;
     @Autowired
     RestClientHelper restClientHelper;
+
+    private final Random rand;
+
+    public PatchParticipantTest()  throws NoSuchAlgorithmException {
+        rand = SecureRandom.getInstanceStrong();
+    }
 
     @BeforeEach
     void setup() {
@@ -48,8 +57,11 @@ class PatchParticipantTest {
                 201
         );
 
+        int randomId = rand.nextInt(99_999);
+
         Response participantResponse = restClientHelper.performSecurePostRequestAndValidateWithResponse(
-                getJsonPayloadFileAsString("vh/create-participant.json"),
+                getJsonPayloadFileAsString("vh/create-participant.json")
+                        .replace("EMAILID", Integer.toString(randomId)),
                 HeaderHelper.createHeaders("VH"),
                 String.format("/%s/participants%s", getHearingId(response),
                         "?version=v2"),

@@ -32,6 +32,7 @@ class PostCloneVideoHearingTest {
     RestClientHelper restClientHelper;
 
     private String apiVersion = "";
+    private Integer invalidHearingIdReturnStatus = 400;
 
     @BeforeEach
     void setup() {
@@ -40,6 +41,7 @@ class PostCloneVideoHearingTest {
 
         if (apimUrl.contains("test")) {
             apiVersion = "?version=v2";
+            invalidHearingIdReturnStatus = 404;
         }
     }
 
@@ -75,7 +77,7 @@ class PostCloneVideoHearingTest {
                 HeaderHelper.createHeaders("VH"),
                 "/hearings/invalid/clone",
                 "",
-                404
+                invalidHearingIdReturnStatus
         );
     }
 }
