@@ -1,0 +1,10 @@
+{
+  "participant_id": "PARTICIPANT_ID",
+  "first_name":"HMI f",
+  "last_name":"HMI l",
+  "contact_email":"test_HMI4@test.com",
+  "telephone_number":"07112345678",
+  "display_name": "HMI Test 1",
+  "hearing_role_code": "APPL"
+
+}

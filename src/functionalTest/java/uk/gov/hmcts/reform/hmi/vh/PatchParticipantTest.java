@@ -1,6 +1,7 @@
 package uk.gov.hmcts.reform.hmi.vh;
 
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,17 +13,14 @@ import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
 import uk.gov.hmcts.reform.hmi.helper.RestClientHelper;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getHearingId;
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
 
-/**
- * Functional tests for the VH endpoint (/resources/video-hearing/{id}).
- */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
-class GetRetrieveVideoHearingsTest {
+@SuppressWarnings("PMD.LawOfDemeter")
+class PatchParticipantTest {
 
     @Value("${apim_url}")
     private String apimUrl;
@@ -35,10 +33,10 @@ class GetRetrieveVideoHearingsTest {
     }
 
     /**
-     * Test with a valid hearing id and a valid set of headers, response should return the hearing.
+     * Test with a valid participant id and update it with valid payload, expect 200.
      */
     @Test
-    void vhGetRetrieveVideoHearingsSuccessful() throws IOException {
+    void vhPatchParticipantTestSuccessful() throws IOException {
         Response response = restClientHelper.performSecurePostRequestAndValidateWithResponse(
                 getJsonPayloadFileAsString("vh/create-vh-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
@@ -47,37 +45,41 @@ class GetRetrieveVideoHearingsTest {
                 201
         );
 
-        restClientHelper.performSecureGetRequestAndValidate(
+        Response participantResponse = restClientHelper.performSecurePostRequestAndValidateWithResponse(
+                getJsonPayloadFileAsString("vh/create-participant.json"),
                 HeaderHelper.createHeaders("VH"),
-                "/resources/video-hearing/" + getHearingId(response) + "?version=v2",
-                "2030-08-17T09:00:00Z",
+                String.format("/%s/participants%s", getHearingId(response),
+                        "?version=v2"),
+                "",
+                200
+        );
+
+        String participantResponseBody = participantResponse.getBody().asString();
+        JsonPath jsonPath = new JsonPath(participantResponseBody);
+
+        restClientHelper.performSecurePatchRequestAndValidate(
+                getJsonPayloadFileAsString("vh/update-participant.json")
+                        .replace("PARTICIPANT_ID", jsonPath.getString("id[0]")),
+                HeaderHelper.createHeaders("VH"),
+                String.format("/%s/participants/%s?version=v2", getHearingId(response),
+                        jsonPath.getString("id[0]")),
+                "",
                 200
         );
     }
 
     /**
-     * Test with an invalid hearing id and a valid set of headers, response should return 400.
+     * Test with an invalid hearing id and a valid set of headers and valid payload, expect 400.
      */
     @Test
-    void vhGetRetrieveVideoHearingsInvalid() throws UnknownHostException {
-        restClientHelper.performSecureGetRequestAndValidate(
-                HeaderHelper.createHeaders("VH"),
-                "/resources/video-hearing/abcdef?version=v2",
-                "The value 'abcdef' is not valid.",
-                400
-        );
-    }
+    void vhPatchParticipantTestInvalidId() throws IOException {
 
-    /**
-     * Test with a non-existent hearing id and a valid set of headers, response should return 404.
-     */
-    @Test
-    void vhGetRetrieveVideoHearingsNotFound() throws UnknownHostException {
-        restClientHelper.performSecureGetRequestAndValidate(
+        restClientHelper.performSecurePatchRequestAndValidate(
+                "",
                 HeaderHelper.createHeaders("VH"),
-                "/resources/video-hearing/f761c4ee-3eb8-45f2-b5fe-011bbf800f25?version=v2",
-                "Not Found",
-                404
+                "/test/participants/test?version=v2",
+                "The value 'test' is not valid.",
+                400
         );
     }
 }
