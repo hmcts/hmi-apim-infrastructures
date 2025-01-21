@@ -12,7 +12,6 @@ import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
 import uk.gov.hmcts.reform.hmi.helper.RestClientHelper;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getHearingId;
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
@@ -26,12 +25,22 @@ class PostJohVideoHearingTest {
 
     @Value("${apim_url}")
     private String apimUrl;
+
     @Autowired
     RestClientHelper restClientHelper;
 
+    private String invalidJohnExpectedError = "invalid";
+    private Integer invalidJohnExpectedStatusCode = 400;
+
     @BeforeEach
     void setup() {
+
         RestAssured.baseURI = apimUrl;
+
+        if (apimUrl.contains("test")) {
+            invalidJohnExpectedError = "";
+            invalidJohnExpectedStatusCode = 404;
+        }
     }
 
     /**
@@ -61,13 +70,13 @@ class PostJohVideoHearingTest {
      * Test with an invalid hearing id and a valid set of headers, response should return 400.
      */
     @Test
-    void vhPostAddJohVideoHearingInvalidId() throws UnknownHostException {
+    void vhPostAddJohVideoHearingInvalidId() throws IOException {
         restClientHelper.performSecurePostRequestAndValidate(
-                "{}",
+                getJsonPayloadFileAsString("vh/create-joh-video-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
                 "/hearings/invalid/joh",
-                "",
-                404
+                invalidJohnExpectedError,
+                invalidJohnExpectedStatusCode
         );
     }
 }
