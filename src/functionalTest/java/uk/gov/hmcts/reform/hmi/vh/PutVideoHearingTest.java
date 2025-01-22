@@ -1,6 +1,5 @@
 package uk.gov.hmcts.reform.hmi.vh;
 
-
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,69 +12,64 @@ import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
 import uk.gov.hmcts.reform.hmi.helper.RestClientHelper;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getHearingId;
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
 
 /**
- * Functional tests for the VH endpoint (/hearings/{id}/clone).
+ * Functional tests for the VH endpoint (/hearings/{hearingId}).
  */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
-class PostCloneVideoHearingTest {
+class PutVideoHearingTest {
 
     @Value("${apim_url}")
     private String apimUrl;
-
     @Autowired
     RestClientHelper restClientHelper;
 
-    private String apiVersion = "";
-
     @BeforeEach
     void setup() {
-
         RestAssured.baseURI = apimUrl;
-
-        if (apimUrl.contains("test")) {
-            apiVersion = "?version=v2";
-        }
     }
 
     /**
-     * Test with a valid hearing id and a valid set of headers, response should return 200.
+     * Test update valid hearing with valid hearing.
      */
     @Test
-    void vhPostCloneVideoHearingSuccessful() throws IOException {
+    void vhPutUpdateVideoHearingsSuccessful() throws IOException {
         Response response = restClientHelper.performSecurePostRequestAndValidateWithResponse(
                 getJsonPayloadFileAsString("vh/create-vh-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
-                "/resources/video-hearing" + apiVersion,
+                "/resources/video-hearing?version=v2",
                 "id",
                 201
         );
 
-        restClientHelper.performSecurePostRequestAndValidate(
-                "{}",
+        String validHearingId = getHearingId(response);
+
+        restClientHelper.performSecurePutRequestAndValidate(
+                getJsonPayloadFileAsString("vh/update-vh-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
-                String.format("/hearings/%s/clone", getHearingId(response)) + apiVersion,
-                "",
+                "/resources/video-hearing/" +  validHearingId + "?version=v2",
+                "id",
                 200
         );
+
     }
 
     /**
-     * Test with an invalid hearing id and a valid set of headers, response should return 400.
+     * Test with an invalid hearing id, expect 404.
      */
     @Test
-    void vhPostCloneVideoHearingInvalidId() throws UnknownHostException {
-        restClientHelper.performSecurePostRequestAndValidate(
-                "{}",
+    void vhPutUpdateInvalidVideoHearingsSuccessful() throws IOException {
+        restClientHelper.performSecurePutRequestAndValidate(
+                getJsonPayloadFileAsString("vh/update-vh-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
-                "/hearings/invalid/clone",
+                "/resources/video-hearing/f761c4ee-3eb8-45f2-b5fe-011bbf800f25?version=v2",
                 "",
-                400
+                404
         );
+
     }
 }

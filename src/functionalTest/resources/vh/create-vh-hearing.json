@@ -2,9 +2,11 @@
   "scheduled_date_time":"2030-08-17T10:00:00+01:00",
   "scheduled_duration":60,
   "hearing_venue_name":"Blackpool Magistrates and Civil Court",
+  "hearing_venue_code": " 765324",
   "hearing_room_name":"Blackpool Magistrates Courtroom 03",
   "other_information":null,
   "is_multi_day_hearing": true,
+  "service_id": " AAA6",
   "cases":[
     {
       "number":"VH_RETEST_CANCEL",
@@ -30,7 +32,8 @@
       "hearing_role_name":"Judge",
       "organisation":null,
       "representee":null,
-      "linked_participants":null
+      "linked_participants":null,
+      "hearing_role_code": "WITN"
     },
     {
       "display_name":"Sona Lewis",
@@ -46,7 +49,8 @@
       "hearing_role_name":"Litigant in person",
       "organisation":null,
       "representee":null,
-      "linked_participants":null
+      "linked_participants":null,
+      "hearing_role_code": "WITN"
     }
   ],
   "created_date":null,
