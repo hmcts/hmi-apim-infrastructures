@@ -32,3 +32,21 @@ resource "azurerm_api_management_policy_fragment" "vh_get_api_version" {
   description       = "This fragment contains code which is used by video hearing to extract api version from url"
   value             = file("${path.module}/resources/policy-fragments/vh-get-api-version-fragment.xml")
 }
+
+resource "azurerm_api_management_policy_fragment" "invalid_query_parameters_response" {
+  api_management_id = data.azurerm_api_management.sds_apim.id
+  name              = "${var.product}-invalid-query-parameters-response"
+  format            = "rawxml"
+  description       = "This fragment contains code which send error response if request contains invalid query parameters"
+  value             = file("${path.module}/resources/policy-fragments/invalid-query-parameters-response-fragment.xml")
+}
+
+resource "azurerm_api_management_policy_fragment" "elinks_auth_token_generation" {
+  api_management_id = data.azurerm_api_management.sds_apim.id
+  name              = "${var.product}-elinks-auth-token-generation"
+  format            = "rawxml"
+  description       = "This fragment contains code to generate the authentication token to communicate with Video Hearing"
+  value = replace(replace(file("${path.module}/resources/policy-fragments/elinks-auth-token-generation-fragment.xml"),
+    "#keyVaultHost#", var.key_vault_host),
+    "#elinksHost#", var.elinks_host)
+}
