@@ -20,35 +20,35 @@
             "retirement_date": "2024-09-04",
             "leaving_on": null,
             "appointments": [
-            {
-            "appointment_id": 80041,
-            "role": "Deputy District Judge (Magistrate's Courts)",
-            "role_name": "Deputy District Judge (MC)- Fee paid",
-            "role_name_id": null,
-            "type": "Courts",
-            "court_name": "Bristol Magistrates Court",
-            "court_type": "County Court",
-            "circuit": "South West",
-            "bench": null,
-            "advisory_committee_area": null,
-            "location": null,
-            "base_location": "Bristol Magistrates Court",
-            "base_location_id": 1120,
-            "is_principal": true,
-            "start_date": "2014-10-01",
-            "end_date": null,
-            "superseded": false,
-            "contract_type": "fee_paid",
-            "contract_type_id": 1,
-            "work_pattern": "Fee Paid Judiciary 5 Days Mon - Fri",
-            "work_pattern_id": 10,
-            "fte_percent": 100
-            }
+                {
+                    "appointment_id": 80041,
+                    "role": "Deputy District Judge (Magistrate's Courts)",
+                    "role_name": "Deputy District Judge (MC)- Fee paid",
+                    "role_name_id": null,
+                    "type": "Courts",
+                    "court_name": "Bristol Magistrates Court",
+                    "court_type": "County Court",
+                    "circuit": "South West",
+                    "bench": null,
+                    "advisory_committee_area": null,
+                    "location": null,
+                    "base_location": "Bristol Magistrates Court",
+                    "base_location_id": 1120,
+                    "is_principal": true,
+                    "start_date": "2014-10-01",
+                    "end_date": null,
+                    "superseded": false,
+                    "contract_type": "fee_paid",
+                    "contract_type_id": 1,
+                    "work_pattern": "Fee Paid Judiciary 5 Days Mon - Fri",
+                    "work_pattern_id": 10,
+                    "fte_percent": 100
+                }
             ],
             "training_records": [],
             "authorisations": [],
             "authorisations_with_dates": []
-            }
+        }
         </set-body>
     </return-response>
 </fragment>
