@@ -1,0 +1,11 @@
+<fragement>
+    <return-response>
+        <set-status code="400" reason="Malformed request." />
+        <set-body>@{
+            return new JObject(
+            new JProperty("statusCode", 400),
+            new JProperty("message", "Invalid query parameter/s in the request URL.")
+            ).ToString();
+            }</set-body>
+    </return-response>
+</fragement>
