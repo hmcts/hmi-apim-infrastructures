@@ -45,7 +45,7 @@ resource "azurerm_api_management_policy_fragment" "missing_mandatory_updated_sin
   api_management_id = data.azurerm_api_management.sds_apim.id
   name              = "${var.product}-missing-mandatory-updated-since-response"
   format            = "rawxml"
-  description       = "This fragment contains code which send error response if request contains invalid query parameters"
+  description       = "This fragment contains code which send error response if request is missing mandatory fields"
   value             = file("${path.module}/resources/policy-fragments/missing-mandatory-updated-since-response-fragment.xml")
 }
 
@@ -53,7 +53,7 @@ resource "azurerm_api_management_policy_fragment" "elinks_mock_person_response" 
   api_management_id = data.azurerm_api_management.sds_apim.id
   name              = "${var.product}-elinks-mock-person-response"
   format            = "rawxml"
-  description       = "This fragment contains code which send error response if request contains invalid query parameters"
+  description       = "This fragment contains code which send a mock personal record response"
   value             = file("${path.module}/resources/policy-fragments/elinks-mock-person-response-fragment.xml")
 }
 
@@ -61,7 +61,7 @@ resource "azurerm_api_management_policy_fragment" "elinks_mock_multi_person_resp
   api_management_id = data.azurerm_api_management.sds_apim.id
   name              = "${var.product}-elinks-mock-multi-person-response"
   format            = "rawxml"
-  description       = "This fragment contains code which send error response if request contains invalid query parameters"
+  description       = "This fragment contains code which send a mock list of personal records response"
   value             = file("${path.module}/resources/policy-fragments/elinks-mock-multi-person-response-fragment.xml")
 }
 
@@ -69,8 +69,8 @@ resource "azurerm_api_management_policy_fragment" "elinks_auth_token_generation"
   api_management_id = data.azurerm_api_management.sds_apim.id
   name              = "${var.product}-elinks-auth-token-generation"
   format            = "rawxml"
-  description       = "This fragment contains code to generate the authentication token to communicate with Video Hearing"
+  description       = "This fragment contains code to generate the authentication token to communicate with eLinks"
   value = replace(replace(file("${path.module}/resources/policy-fragments/elinks-auth-token-generation-fragment.xml"),
     "#keyVaultHost#", var.key_vault_host),
-    "#elinksHost#", var.elinks_host)
+    "#elinksHost#", length(data.azurerm_key_vault_secret.elinks_client_host) > 0 ? data.azurerm_key_vault_secret.elinks_client_host[0].value : ""),
 }
