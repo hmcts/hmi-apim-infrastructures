@@ -11,6 +11,4 @@
     <set-header name="Authorization" exists-action="override">
         <value>@("Bearer " + (String)context.Variables["elinksToken"])</value>
     </set-header>
-    <rewrite-uri template="/people" copy-unmatched-params="true" />
-    <set-backend-service base-url="https://#elinksHost#/api/v5" />
 </fragment>
