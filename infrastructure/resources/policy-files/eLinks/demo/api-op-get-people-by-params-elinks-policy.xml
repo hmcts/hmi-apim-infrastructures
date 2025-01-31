@@ -41,6 +41,8 @@
             </when>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "ELINKS")">
                 <include-fragment fragment-id="elinks_auth_token" />
+                <rewrite-uri template="/people" copy-unmatched-params="true" />
+                <set-backend-service base-url="https://#elinksHost#/api/v5" />
             </when>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
                 <include-fragment fragment-id="elinks_mock_multi_person_response" />

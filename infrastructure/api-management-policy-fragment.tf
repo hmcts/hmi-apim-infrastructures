@@ -70,9 +70,8 @@ resource "azurerm_api_management_policy_fragment" "elinks_auth_token_generation"
   name              = "${var.product}-elinks-auth-token-generation"
   format            = "rawxml"
   description       = "This fragment contains code to generate the authentication token to communicate with eLinks"
-  value = replace(replace(file("${path.module}/resources/policy-fragments/elinks-auth-token-generation-fragment.xml"),
-    "#keyVaultHost#", var.key_vault_host),
-  "#elinksHost#", length(data.azurerm_key_vault_secret.elinks_client_host) > 0 ? data.azurerm_key_vault_secret.elinks_client_host[0].value : "")
+  value = replace(file("${path.module}/resources/policy-fragments/elinks-auth-token-generation-fragment.xml"),
+    "#keyVaultHost#", var.key_vault_host)
 }
 
 resource "azurerm_api_management_policy_fragment" "elinks_auth_token" {
@@ -80,7 +79,6 @@ resource "azurerm_api_management_policy_fragment" "elinks_auth_token" {
   name              = "${var.product}-elinks-auth-token"
   format            = "rawxml"
   description       = "This fragment contains code to generate the authentication token to communicate with eLinks"
-  value = replace(replace(file("${path.module}/resources/policy-fragments/elinks-auth-token-fragment.xml"),
-    "#keyVaultHost#", var.key_vault_host),
-  "#elinksHost#", length(data.azurerm_key_vault_secret.elinks_client_host) > 0 ? data.azurerm_key_vault_secret.elinks_client_host[0].value : "")
+  value = replace(file("${path.module}/resources/policy-fragments/elinks-auth-token-fragment.xml"),
+    "#keyVaultHost#", var.key_vault_host)
 }
