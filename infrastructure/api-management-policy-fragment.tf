@@ -71,7 +71,7 @@ resource "azurerm_api_management_policy_fragment" "elinks_auth_token_generation"
   format            = "rawxml"
   description       = "This fragment contains code to generate the authentication token to communicate with eLinks"
   value = replace(file("${path.module}/resources/policy-fragments/elinks-auth-token-generation-fragment.xml"),
-    "#keyVaultHost#", var.key_vault_host)
+  "#keyVaultHost#", var.key_vault_host)
 }
 
 resource "azurerm_api_management_policy_fragment" "elinks_auth_token" {
@@ -80,5 +80,5 @@ resource "azurerm_api_management_policy_fragment" "elinks_auth_token" {
   format            = "rawxml"
   description       = "This fragment contains code to generate the authentication token to communicate with eLinks"
   value = replace(file("${path.module}/resources/policy-fragments/elinks-auth-token-fragment.xml"),
-    "#keyVaultHost#", var.key_vault_host)
+  "#keyVaultHost#", var.key_vault_host)
 }
