@@ -45,7 +45,7 @@ class DeleteJohVideoHearingTest {
         Response response = restClientHelper.performSecurePostRequestAndValidateWithResponse(
                 getJsonPayloadFileAsString("vh/create-vh-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
-                "/resources/video-hearing",
+                "/resources/video-hearing?version=v2",
                 "id",
                 201
         );

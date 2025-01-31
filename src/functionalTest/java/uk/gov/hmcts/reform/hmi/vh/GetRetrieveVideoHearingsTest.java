@@ -42,14 +42,14 @@ class GetRetrieveVideoHearingsTest {
         Response response = restClientHelper.performSecurePostRequestAndValidateWithResponse(
                 getJsonPayloadFileAsString("vh/create-vh-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
-                "/resources/video-hearing",
+                "/resources/video-hearing?version=v2",
                 "id",
                 201
         );
 
         restClientHelper.performSecureGetRequestAndValidate(
                 HeaderHelper.createHeaders("VH"),
-                "/resources/video-hearing/" + getHearingId(response),
+                "/resources/video-hearing/" + getHearingId(response) + "?version=v2",
                 "2030-08-17T09:00:00Z",
                 200
         );
@@ -62,7 +62,7 @@ class GetRetrieveVideoHearingsTest {
     void vhGetRetrieveVideoHearingsInvalid() throws UnknownHostException {
         restClientHelper.performSecureGetRequestAndValidate(
                 HeaderHelper.createHeaders("VH"),
-                "/resources/video-hearing/abcdef",
+                "/resources/video-hearing/abcdef?version=v2",
                 "The value 'abcdef' is not valid.",
                 400
         );
@@ -75,7 +75,7 @@ class GetRetrieveVideoHearingsTest {
     void vhGetRetrieveVideoHearingsNotFound() throws UnknownHostException {
         restClientHelper.performSecureGetRequestAndValidate(
                 HeaderHelper.createHeaders("VH"),
-                "/resources/video-hearing/f761c4ee-3eb8-45f2-b5fe-011bbf800f25",
+                "/resources/video-hearing/f761c4ee-3eb8-45f2-b5fe-011bbf800f25?version=v2",
                 "Not Found",
                 404
         );
