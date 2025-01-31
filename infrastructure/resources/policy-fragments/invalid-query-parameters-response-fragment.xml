@@ -1,4 +1,4 @@
-<fragement>
+<fragment>
     <return-response>
         <set-status code="400" reason="Malformed request." />
         <set-body>@{
@@ -8,4 +8,4 @@
             ).ToString();
             }</set-body>
     </return-response>
-</fragement>
+</fragment>
