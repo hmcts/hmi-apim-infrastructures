@@ -45,15 +45,7 @@
             }" />
         <choose>
             <when condition="@(context.Request.Url.Query.Count > 3 || (bool)context.Variables["invalidQueryParams"])">
-                <return-response>
-                    <set-status code="400" reason="Malformed request." />
-                    <set-body>@{
-                        return new JObject(
-                        new JProperty("statusCode", 400),
-                        new JProperty("message", "Invalid query parameter/s in the request URL.")
-                        ).ToString();
-                        }</set-body>
-                </return-response>
+                <include-fragment fragment-id="hmi-invalid-query-parameters-response" />
             </when>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "ELINKS")">
                 <include-fragment fragment-id="hmi-elinks-auth-token" />
