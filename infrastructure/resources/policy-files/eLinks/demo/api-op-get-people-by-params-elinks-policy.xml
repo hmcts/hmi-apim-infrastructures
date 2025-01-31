@@ -8,15 +8,7 @@
             }" />
         <choose>
             <when condition="@((bool)context.Variables["mandatoryMissing"])">
-                <return-response>
-                    <set-status code="400" reason="Malformed request." />
-                    <set-body>@{
-                        return new JObject(
-                            new JProperty("statusCode", 400),
-                            new JProperty("message", "Please supply ‘updated_since’ date in iso8601 form")
-                        ).ToString();
-                        }</set-body>
-                </return-response>
+                <include-fragment fragment-id="hmi-missing-mandatory-updated-since-response" />
             </when>
         </choose>
         <set-variable name="invalidQueryParams" value="@{
