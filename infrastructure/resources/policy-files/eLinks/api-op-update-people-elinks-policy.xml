@@ -3,13 +3,15 @@
         <base />
         <choose>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "ELINKS")">
-                <include-fragment fragment-id="elinks_auth_token_generation" />
+                <include-fragment fragment-id="hmi-elinks-auth-bearer" />
+                <rewrite-uri template="/people/{id}" copy-unmatched-params="true" />
+                <set-backend-service base-url="https://#elinksHost#/api/v5" />
             </when>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
                 <mock-response status-code="204" content-type="application/json" />
             </when>
             <otherwise>
-                <include-fragment fragment-id="invalid_destination_response" />
+                <include-fragment fragment-id="hmi-invalid-destination-response" />
             </otherwise>
         </choose>
     </inbound>
@@ -20,7 +22,7 @@
     <base />
     <choose>
         <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
-            <include-fragment fragment-id="failed_destination_authentication_response" />
+            <include-fragment fragment-id="hmi-failed-destination-authentication-response" />
         </when>
     </choose>
     </outbound>

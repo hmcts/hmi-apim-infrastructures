@@ -3,13 +3,66 @@
         <base />
         <choose>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "ELINKS")">
-                <include-fragment fragment-id="elinks_auth_token_generation" />
+                <include-fragment fragment-id="hmi-elinks-auth-bearer" />
+                <rewrite-uri template="/people/{id}" copy-unmatched-params="true" />
+                <set-backend-service base-url="https://#elinksHost#/api/v5" />
             </when>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
-                <include-fragment fragment-id="elinks_mock_person_response" />
+                <return-response>
+                    <set-status code="200" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>{
+                        "id": "7d4d5ccb-b19f-405c-8e2a-808616c93192",
+                        "per_id": 46413,
+                        "personal_code": "4911272",
+                        "title": "Mr",
+                        "known_as": "John",
+                        "surname": "Smith",
+                        "fullname": "Mr John Smith",
+                        "post_nominals": null,
+                        "email": "DDJMC.Hugo.Lockett@judiciarystaging.onmicrosoft.com",
+                        "sex": "male",
+                        "work_phone": null,
+                        "disability": false,
+                        "retirement_date": "2024-09-04",
+                        "leaving_on": null,
+                        "appointments": [
+                            {
+                                "appointment_id": 80041,
+                                "role": "Deputy District Judge (Magistrate's Courts)",
+                                "role_name": "Deputy District Judge (MC)- Fee paid",
+                                "role_name_id": null,
+                                "type": "Courts",
+                                "court_name": "Bristol Magistrates Court",
+                                "court_type": "County Court",
+                                "circuit": "South West",
+                                "bench": null,
+                                "advisory_committee_area": null,
+                                "location": null,
+                                "base_location": "Bristol Magistrates Court",
+                                "base_location_id": 1120,
+                                "is_principal": true,
+                                "start_date": "2014-10-01",
+                                "end_date": null,
+                                "superseded": false,
+                                "contract_type": "fee_paid",
+                                "contract_type_id": 1,
+                                "work_pattern": "Fee Paid Judiciary 5 Days Mon - Fri",
+                                "work_pattern_id": 10,
+                                "fte_percent": 100
+                            }
+                        ],
+                        "training_records": [],
+                        "authorisations": [],
+                        "authorisations_with_dates": []
+                    }
+                    </set-body>
+                </return-response>
             </when>
             <otherwise>
-                <include-fragment fragment-id="invalid_destination_response" />
+                <include-fragment fragment-id="hmi-invalid-destination-response" />
             </otherwise>
         </choose>
     </inbound>
@@ -20,7 +73,7 @@
 <base />
     <choose>
         <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
-            <include-fragment fragment-id="failed_destination_authentication_response" />
+            <include-fragment fragment-id="hmi-failed-destination-authentication-response" />
         </when>
     </choose>
     </outbound>
