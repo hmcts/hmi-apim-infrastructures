@@ -74,7 +74,7 @@ class PostJohVideoHearingTest {
         restClientHelper.performSecurePostRequestAndValidate(
                 getJsonPayloadFileAsString("vh/create-joh-video-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
-                "/hearings/invalid/joh",
+                "/hearings/invalid/joh?version=v2",
                 invalidJohnExpectedError,
                 invalidJohnExpectedStatusCode
         );
