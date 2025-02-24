@@ -6,7 +6,7 @@
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "VH")">
                 <include-fragment fragment-id="hmi-vh-auth-token-generation" />
                 <rewrite-uri template="/{hearingId}/joh" copy-unmatched-params="true" />
-                <when>
+                <choose>
                     <when condition="@((bool)context.Variables["versionRequest"])">
                         <set-backend-service base-url="#vhHost#/v2/hearings" />
                     </when>
