@@ -37,10 +37,7 @@ class PostCloneVideoHearingTest {
     void setup() {
 
         RestAssured.baseURI = apimUrl;
-
-        if (apimUrl.contains("test")) {
-            apiVersion = "?version=v2";
-        }
+        apiVersion = "?version=v2";
     }
 
     /**

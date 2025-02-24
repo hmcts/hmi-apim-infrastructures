@@ -60,7 +60,7 @@ class PostJohVideoHearingTest {
         restClientHelper.performSecurePostRequestAndValidate(
                 getJsonPayloadFileAsString("vh/create-joh-video-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
-                String.format("/hearings/%s/joh", getHearingId(response)),
+                String.format("/hearings/%s/joh?version=v2", getHearingId(response)),
                 "",
                 404
         );
