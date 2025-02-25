@@ -408,7 +408,6 @@
                     }
                     </set-body>
                 </return-response>
-                <include-fragment fragment-id="elinks_mock_multi_person_response" />
             </when>
             <otherwise>
                 <include-fragment fragment-id="hmi-invalid-destination-response" />
