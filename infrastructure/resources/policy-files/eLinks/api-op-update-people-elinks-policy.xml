@@ -3,18 +3,7 @@
         <base />
         <choose>
             <when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "ELINKS")">
-                <send-request ignore-error="false" timeout="20" response-variable-name="elinksTokenResponse" mode="new">
-                    <set-url>https://#keyVaultHost#/secrets/elinks-client-token/?api-version=7.0</set-url>
-                    <set-method>GET</set-method>
-                    <authentication-managed-identity resource="https://vault.azure.net" />
-                </send-request>
-                <set-variable name="elinksToken" value="@{
-                    var secret = ((IResponse)context.Variables["elinksTokenResponse"]).Body.As<JObject>();
-                    return secret["value"].ToString();
-                }" />
-                <set-header name="Authorization" exists-action="override">
-                    <value>@("Bearer " + (String)context.Variables["elinksToken"])</value>
-                </set-header>
+                <include-fragment fragment-id="hmi-elinks-auth-bearer" />
                 <rewrite-uri template="/people/{id}" copy-unmatched-params="true" />
                 <set-backend-service base-url="https://#elinksHost#/api/v5" />
             </when>
@@ -22,17 +11,7 @@
                 <mock-response status-code="204" content-type="application/json" />
             </when>
             <otherwise>
-                <return-response>
-                    <set-status code="400" />
-                    <set-header name="Content-Type" exists-action="override">
-                        <value>application/json</value>
-                    </set-header>
-                    <set-body>@{
-                    return new JObject(
-                    new JProperty("message", context.Request.Headers.GetValueOrDefault("Destination-System","") + " destination doesn't support this functionality")
-                    ).ToString();
-                    }</set-body>
-                </return-response>
+                <include-fragment fragment-id="hmi-invalid-destination-response" />
             </otherwise>
         </choose>
     </inbound>
@@ -43,18 +22,7 @@
     <base />
     <choose>
         <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
-            <return-response>
-                <set-status code="502" />
-                <set-header name="Content-Type">
-                    <value>application/json</value>
-                </set-header>
-                <set-body>@{
-                    return new JObject(
-                    new JProperty("message", "Successfully authenticated by HMI, however target system failed to authenticate. Please try again.")
-                    ).ToString();
-                    }
-                </set-body>
-            </return-response>
+            <include-fragment fragment-id="hmi-failed-destination-authentication-response" />
         </when>
     </choose>
     </outbound>
