@@ -32,3 +32,21 @@ resource "azurerm_api_management_policy_fragment" "vh_get_api_version" {
   description       = "This fragment contains code which is used by video hearing to extract api version from url"
   value             = file("${path.module}/resources/policy-fragments/vh-get-api-version-fragment.xml")
 }
+
+resource "azurerm_api_management_policy_fragment" "elinks_auth_bearer" {
+  api_management_id = data.azurerm_api_management.sds_apim.id
+  name              = "${var.product}-elinks-auth-bearer"
+  format            = "rawxml"
+  description       = "This fragment contains code to generate the authentication token to communicate with eLinks"
+  value = replace(file("${path.module}/resources/policy-fragments/elinks-auth-bearer-fragment.xml"),
+  "#keyVaultHost#", var.key_vault_host)
+}
+
+resource "azurerm_api_management_policy_fragment" "elinks_auth_token" {
+  api_management_id = data.azurerm_api_management.sds_apim.id
+  name              = "${var.product}-elinks-auth-token"
+  format            = "rawxml"
+  description       = "This fragment contains code to generate the authentication token to communicate with eLinks"
+  value = replace(file("${path.module}/resources/policy-fragments/elinks-auth-token-fragment.xml"),
+  "#keyVaultHost#", var.key_vault_host)
+}
