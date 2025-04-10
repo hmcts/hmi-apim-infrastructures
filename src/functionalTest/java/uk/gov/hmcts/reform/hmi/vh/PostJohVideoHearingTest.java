@@ -66,7 +66,7 @@ class PostJohVideoHearingTest {
                 getJsonPayloadFileAsString("vh/create-joh-video-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
                 String.format("/hearings/invalid/joh?version=v2"),
-                "",
+                "invalid",
                 400
         );
     }
