@@ -12,7 +12,6 @@ import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
 import uk.gov.hmcts.reform.hmi.helper.RestClientHelper;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getHearingId;
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
