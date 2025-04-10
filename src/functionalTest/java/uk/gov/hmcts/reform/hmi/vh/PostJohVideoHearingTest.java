@@ -12,6 +12,7 @@ import uk.gov.hmcts.reform.hmi.helper.HeaderHelper;
 import uk.gov.hmcts.reform.hmi.helper.RestClientHelper;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getHearingId;
 import static uk.gov.hmcts.reform.hmi.helper.FileHelper.getJsonPayloadFileAsString;
@@ -29,18 +30,9 @@ class PostJohVideoHearingTest {
     @Autowired
     RestClientHelper restClientHelper;
 
-    private String invalidJohnExpectedError = "invalid";
-    private Integer invalidJohnExpectedStatusCode = 400;
-
     @BeforeEach
     void setup() {
-
         RestAssured.baseURI = apimUrl;
-
-        if (apimUrl.contains("test")) {
-            invalidJohnExpectedError = "";
-            invalidJohnExpectedStatusCode = 404;
-        }
     }
 
     /**
@@ -74,9 +66,9 @@ class PostJohVideoHearingTest {
         restClientHelper.performSecurePostRequestAndValidate(
                 getJsonPayloadFileAsString("vh/create-joh-video-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
-                "/hearings/invalid/joh?version=v2",
-                invalidJohnExpectedError,
-                invalidJohnExpectedStatusCode
+                String.format("/hearings/invalid/joh?version=v2"),
+                "",
+                400
         );
     }
 }
