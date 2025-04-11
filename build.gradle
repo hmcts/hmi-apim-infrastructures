@@ -137,6 +137,9 @@ dependencyCheck {
     // Disable scanning of .NET related binaries
     assemblyEnabled = false
   }
+
+  skipTestGroups = false
+
   skipConfigurations = [
     "checkstyle",
     "compileOnly",
