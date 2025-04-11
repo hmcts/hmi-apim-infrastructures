@@ -139,16 +139,6 @@ dependencyCheck {
   }
 
   skipTestGroups = false
-
-  skipConfigurations = [
-    "checkstyle",
-    "compileOnly",
-    "pmd",
-    "functionalTest",
-    "smokeTest",
-    "contractTestRuntimeClasspath",
-    "contractTestCompileClasspath"
-  ]
 }
 
 repositories {
