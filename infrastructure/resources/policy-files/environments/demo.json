@@ -88,7 +88,7 @@
       "templateFile": "HMI-Health-Check/api-op-auth-health-check-policy.xml",
       "display_name": "HMI Private Health Check",
       "method": "GET",
-      "url_template": "/hmi-health",
+      "url_template": "/health",
       "description": "Health private check for HMI",
       "response":
       {
