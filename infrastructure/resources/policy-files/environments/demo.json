@@ -84,6 +84,23 @@
       }
     },
     {
+      "operationId": "hmi-auth-health-check",
+      "templateFile": "HMI-Health-Check/api-op-auth-health-check-policy.xml",
+      "display_name": "HMI Private Health Check",
+      "method": "GET",
+      "url_template": "/hmi-health",
+      "description": "Health private check for HMI",
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
+      "tag": {
+        "name": "health-check",
+        "display_name": "health-check"
+      }
+    },
+    {
       "operationId": "request-video-hearing",
       "templateFile": "Video-Hearing/api-op-create-vh-policy.xml",
       "display_name": "Request Video Hearing",
