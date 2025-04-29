@@ -29,18 +29,9 @@ class PostJohVideoHearingTest {
     @Autowired
     RestClientHelper restClientHelper;
 
-    private String invalidJohnExpectedError = "invalid";
-    private Integer invalidJohnExpectedStatusCode = 400;
-
     @BeforeEach
     void setup() {
-
         RestAssured.baseURI = apimUrl;
-
-        if (apimUrl.contains("test")) {
-            invalidJohnExpectedError = "";
-            invalidJohnExpectedStatusCode = 404;
-        }
     }
 
     /**
@@ -74,9 +65,9 @@ class PostJohVideoHearingTest {
         restClientHelper.performSecurePostRequestAndValidate(
                 getJsonPayloadFileAsString("vh/create-joh-video-hearing.json"),
                 HeaderHelper.createHeaders("VH"),
-                "/hearings/invalid/joh?version=v2",
-                invalidJohnExpectedError,
-                invalidJohnExpectedStatusCode
+                String.format("/hearings/invalid/joh?version=v2"),
+                "invalid",
+                400
         );
     }
 }
