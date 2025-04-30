@@ -89,7 +89,7 @@
       "display_name": "HMI Private Health Check",
       "method": "GET",
       "url_template": "/health",
-      "description": "Health private check for HMI",
+      "description": "Private health check for HMI",
       "response":
       {
         "status_code": "200",
