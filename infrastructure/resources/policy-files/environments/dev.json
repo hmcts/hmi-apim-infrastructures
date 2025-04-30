@@ -90,11 +90,6 @@
       "method": "GET",
       "url_template": "/health",
       "description": "Private health check for HMI",
-      "response":
-      {
-        "status_code": "200",
-        "description": ""
-      },
       "headers": [
         {
           "name": "Source-System",
@@ -121,6 +116,11 @@
           "default_value": "application/json"
         }
       ],
+      "response":
+      {
+        "status_code": "200",
+        "description": ""
+      },
       "tag": {
         "name": "health-check",
         "display_name": "health-check"
