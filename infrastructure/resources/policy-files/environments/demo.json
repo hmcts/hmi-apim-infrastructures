@@ -116,16 +116,11 @@
           "default_value": "application/json"
         }
       ],
-      "response": [
-        {
-          "status_code": "200",
-          "description": "Up"
-        },
-        {
-          "status_code": "401",
-          "description": "Access denied due to invalid OAuth information"
-        }
-      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": "Up"
+      },
       "tag": {
         "name": "health-check",
         "display_name": "health-check"
