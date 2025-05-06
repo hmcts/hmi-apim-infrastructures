@@ -27,12 +27,10 @@ locals {
           default_value = header.default_value
         }
       ] : null
-      response = can(policy.response) ? [for endPointResponse in policy.response :
-        {
-          status_code = endPointResponse.status_code
-          description = endPointResponse.description
-        }
-      ] : null
+      response = can(policy.response) ? {
+        status_code = policy.response.status_code
+        description = policy.response.description
+      } : null
       query_parameters = can(policy.query_parameters) ? [for query_parameter in policy.query_parameters :
         {
           name          = query_parameter.name
