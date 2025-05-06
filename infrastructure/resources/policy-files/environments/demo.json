@@ -119,13 +119,21 @@
       "responses": {
         "200": {
           "description": "Successful health check response",
-          "headers": {},
-          "representations": []
+          "representations": [
+            {
+              "content_type": "application/json",
+              "sample": "{\"status\":\"OK\",\"components\":[]}"
+            }
+          ]
         },
         "401": {
           "description": "Unauthorized - Invalid or missing authentication credentials",
-          "headers": {},
-          "representations": []
+          "representations": [
+            {
+              "content_type": "application/json",
+              "sample": "{\"error\":\"Unauthorized\",\"message\":\"Missing or invalid credentials\"}"
+            }
+          ]
         }
       },
       "tag": {
