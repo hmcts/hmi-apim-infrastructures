@@ -116,14 +116,13 @@
           "default_value": "application/json"
         }
       ],
-      "response":
-      [
+      "response": [
         {
           "status_code": "200",
           "description": "Up"
         },
         {
-          "statusCode": "401",
+          "status_code": "401",
           "description": "Access denied due to invalid OAuth information"
         }
       ],

@@ -32,7 +32,7 @@ locals {
           status_code = endPointResponse.status_code
           description = endPointResponse.description
         }
-      ]: null
+      ] : null
       query_parameters = can(policy.query_parameters) ? [for query_parameter in policy.query_parameters :
         {
           name          = query_parameter.name
