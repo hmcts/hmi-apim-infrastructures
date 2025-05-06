@@ -116,7 +116,7 @@
           "default_value": "application/json"
         }
       ],
-      "responses":
+      "response":
       [
         {
           "status_code": "200",
