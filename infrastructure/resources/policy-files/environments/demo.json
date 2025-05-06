@@ -116,17 +116,18 @@
           "default_value": "application/json"
         }
       ],
-      "responses":
-      [
-        {
-          "status_code": "200",
-          "description": "Up"
+      "responses": {
+        "200": {
+          "description": "Successful health check response",
+          "headers": {},
+          "representations": []
         },
-        {
-          "statusCode": "401",
-          "message": "Access denied due to invalid OAuth information"
+        "401": {
+          "description": "Unauthorized - Invalid or missing authentication credentials",
+          "headers": {},
+          "representations": []
         }
-      ],
+      },
       "tag": {
         "name": "health-check",
         "display_name": "health-check"
