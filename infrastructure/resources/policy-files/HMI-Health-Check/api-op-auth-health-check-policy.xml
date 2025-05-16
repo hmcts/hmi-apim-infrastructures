@@ -1,9 +1,14 @@
 <policies>
     <inbound>
+        <set-header name="Host" exists-action="override">
+            <value>#hmiHost#</value>
+        </set-header>
         <set-header name="Content-Type" exists-action="override">
             <value>application/json</value>
         </set-header>
         <base />
+        <rewrite-uri template="/" copy-unmatched-params="true" />
+        <set-backend-service base-url="https://127.0.0.1/hmi/" />
     </inbound>
     <backend>
         <base />

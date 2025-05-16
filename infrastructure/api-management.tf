@@ -14,6 +14,7 @@ module "apim_apis" {
   api_content_format = "openapi+json"
   api_content_value = replace(file("${path.module}/resources/api-spec/hmi-api-health.json"),
   "#apimUrl#", var.apim_url)
+  api_service_url = "https://${var.apim_url}"
 
   policy_xml_content = replace(file("${path.module}/resources/policy-files/api-policy.xml"),
   "#oAuthRole#", var.oauth_role)
