@@ -15,7 +15,7 @@ locals {
         "#sAndLHost#", length(data.azurerm_key_vault_secret.snl_client_host) > 0 ? data.azurerm_key_vault_secret.snl_client_host[0].value : ""),
         "#sAndLOauthUrl#", length(data.azurerm_key_vault_secret.snl_OAuth_url) > 0 ? data.azurerm_key_vault_secret.snl_OAuth_url[0].value : ""),
         "#enableCrimeNewHealthCheck#", var.enable-crime-new-health-check),
-        "#hmiHost#", var.apim_url)
+      "#hmiHost#", var.apim_url)
       display_name = policy.display_name
       method       = policy.method
       url_template = policy.url_template
