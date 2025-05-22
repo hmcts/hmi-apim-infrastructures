@@ -2,6 +2,7 @@ package uk.gov.hmcts.reform.hmi.helper;
 
 import io.restassured.http.ContentType;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
@@ -12,28 +13,29 @@ import static org.hamcrest.Matchers.containsString;
 /**
  * Class to help with sending http requests.
  */
+@Service
 @SuppressWarnings("HideUtilityClassConstructor")
 public final class RestClientHelper {
 
     @Value("${token_url}")
-    private static String tokenUrl;
+    private String tokenUrl;
 
     @Value("${token_tenant_id}")
-    private static String tokenTenantId;
+    private String tokenTenantId;
 
     @Value("${grant_type}")
-    private static String grantType;
+    private String grantType;
 
     @Value("${client_id}")
-    private static String clientId;
+    private String clientId;
 
     @Value("${client_secret}")
-    private static String clientSecret;
+    private String clientSecret;
 
     @Value("${scope}")
-    private static String scope;
+    private String scope;
 
-    public static void performGetRequestAndValidate(String path, String expectedBody,
+    public void performGetRequestAndValidate(String path, String expectedBody,
                                                     int expectedStatusCode) {
 
         when().request("GET", path)
@@ -45,7 +47,7 @@ public final class RestClientHelper {
                 .statusCode(expectedStatusCode);
     }
 
-    public static void performSecureGetRequestAndValidate(String path, String expectedBody,
+    public void performSecureGetRequestAndValidate(String path, String expectedBody,
                                                     int expectedStatusCode, Map<String, String> headers) {
         given().headers(headers).auth().oauth2(generateOAuthToken())
                 .when().request("GET", path).then()
@@ -59,9 +61,9 @@ public final class RestClientHelper {
      *
      * @return A bearer token that can be used in the requests to hmi.
      */
-    private static String generateOAuthToken() {
+    private String generateOAuthToken() {
         String fullTokenApiUrl = String.format(tokenUrl, tokenTenantId);
-        final String bodyForToken = String.format("grant_type=%s&client_id=%s&client_secret=%s&scope=%s",
+        final String bodyForToken = String.format("grant_type=%s&client_id=%s&client_secret=%s&scope=%s/.default",
                 grantType, clientId, clientSecret, scope);
 
         return given()

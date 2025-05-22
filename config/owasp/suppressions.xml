@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <suppress>
+        <notes>This exists in Apache Tomcat which is included from springboot dependency. Should be removed once we updated springboot to 3.4.5</notes>
+        <cve>CVE-2025-31650</cve>
+    </suppress>
+    <suppress>
+        <notes>This exists in Apache Tomcat which is included from springboot dependency. Should be removed once we updated springboot to 3.4.5</notes>
+        <cve>CVE-2025-31651</cve>
+    </suppress>
 </suppressions>

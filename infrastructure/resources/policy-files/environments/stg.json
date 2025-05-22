@@ -84,6 +84,49 @@
       }
     },
     {
+      "operationId": "hmi-auth-health-check",
+      "templateFile": "HMI-Health-Check/api-op-auth-health-check-policy.xml",
+      "display_name": "HMI Private Health Check",
+      "method": "GET",
+      "url_template": "/health",
+      "description": "Private health check for HMI",
+      "headers": [
+        {
+          "name": "Source-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "CFT"
+        },
+        {
+          "name": "Destination-System",
+          "required": "true",
+          "type": "string",
+          "default_value": "HMI"
+        },
+        {
+          "name": "Request-Created-At",
+          "required": "true",
+          "type": "string",
+          "default_value": "2019-10-12T07:20:00Z"
+        },
+        {
+          "name": "Accept",
+          "required": "true",
+          "type": "string",
+          "default_value": "application/json"
+        }
+      ],
+      "response":
+      {
+        "status_code": "200",
+        "description": "Up"
+      },
+      "tag": {
+        "name": "health-check",
+        "display_name": "health-check"
+      }
+    },
+    {
       "operationId": "request-video-hearing",
       "templateFile": "Video-Hearing/api-op-create-vh-policy.xml",
       "display_name": "Request Video Hearing",
