@@ -30,7 +30,7 @@
             <value>true</value>
         </set-header>
         <set-header name="Strict-Transport-Security" exists-action="override">
-            <value>max-age=31536000</value>
+            <value>max-age=31536000; includeSubDomains; preload</value>
         </set-header>
         <set-header name="Content-Security-Policy" exists-action="override">
             <value>script-src 'self'</value>
@@ -127,7 +127,7 @@
     <outbound>
         <base />
         <set-header name="Strict-Transport-Security" exists-action="override">
-            <value>max-age=31536000</value>
+            <value>max-age=31536000; includeSubDomains; preload</value>
         </set-header>
     </outbound>
     <on-error>
