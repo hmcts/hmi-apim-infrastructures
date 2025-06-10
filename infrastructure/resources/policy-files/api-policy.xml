@@ -126,6 +126,9 @@
     </backend>
     <outbound>
         <base />
+        <set-header name="Strict-Transport-Security" exists-action="override">
+            <value>max-age=31536000</value>
+        </set-header>
     </outbound>
     <on-error>
         <base />
