@@ -42,8 +42,8 @@ class PostPublicationTest {
     private static final String PUBLIC = "PUBLIC";
     private static final String ENGLISH = "ENGLISH";
     private static final String COURT_ID = "5555";
-    private static final String CARE_STANDARDS_LIST = "CARE_STANDARDS_LIST";
-    private static final String SUCCESSFUL_TEST_FILE = "pip/successful-care-standards-list.json";
+    private static final String CIVIL_DAILY_CAUSE_LIST = "CIVIL_DAILY_CAUSE_LIST";
+    private static final String SUCCESSFUL_TEST_FILE = "pip/successful-civil-daily-cause-list.json";
     private static final String ENDPOINT = "/pih/publication";
 
     @BeforeEach
@@ -64,7 +64,7 @@ class PostPublicationTest {
                 ENGLISH,
                 CURRENT_DATETIME.toString(),
                 CURRENT_DATETIME.plusDays(1).toString(),
-                CARE_STANDARDS_LIST,
+                CIVIL_DAILY_CAUSE_LIST,
                 COURT_ID,
                 CURRENT_DATETIME.toString()
         );
@@ -91,13 +91,13 @@ class PostPublicationTest {
                 ENGLISH,
                 CURRENT_DATETIME.toString(),
                 CURRENT_DATETIME.plusDays(1).toString(),
-                CARE_STANDARDS_LIST,
+                CIVIL_DAILY_CAUSE_LIST,
                 COURT_ID,
                 CURRENT_DATETIME.toString()
         );
 
         restClientHelper.performSecurePostRequestAndValidate(
-                getJsonPayloadFileAsString("pip/invalid-care-standards-list.json"),
+                getJsonPayloadFileAsString("pip/invalid-civil-daily-cause-list.json"),
                 requestHeaders,
                 ENDPOINT,
                 "$.document: required property 'publicationDate' not found",
@@ -119,7 +119,7 @@ class PostPublicationTest {
                 ENGLISH,
                 CURRENT_DATETIME.toString(),
                 CURRENT_DATETIME.plusDays(1).toString(),
-                CARE_STANDARDS_LIST,
+                CIVIL_DAILY_CAUSE_LIST,
                 COURT_ID,
                 CURRENT_DATETIME.toString()
         );
@@ -146,7 +146,7 @@ class PostPublicationTest {
                 ENGLISH,
                 CURRENT_DATETIME.toString(),
                 CURRENT_DATETIME.plusDays(1).toString(),
-                CARE_STANDARDS_LIST,
+                CIVIL_DAILY_CAUSE_LIST,
                 COURT_ID,
                 CURRENT_DATETIME.toString()
         );
@@ -173,7 +173,7 @@ class PostPublicationTest {
                 ENGLISH,
                 CURRENT_DATETIME.toString(),
                 CURRENT_DATETIME.plusDays(1).toString(),
-                CARE_STANDARDS_LIST,
+                CIVIL_DAILY_CAUSE_LIST,
                 COURT_ID,
                 CURRENT_DATETIME.toString()
         );
@@ -200,7 +200,7 @@ class PostPublicationTest {
                 null,
                 CURRENT_DATETIME.toString(),
                 CURRENT_DATETIME.plusDays(1).toString(),
-                CARE_STANDARDS_LIST,
+                CIVIL_DAILY_CAUSE_LIST,
                 COURT_ID,
                 CURRENT_DATETIME.toString()
         );
@@ -227,7 +227,7 @@ class PostPublicationTest {
                 ENGLISH,
                 null,
                 CURRENT_DATETIME.plusDays(1).toString(),
-                CARE_STANDARDS_LIST,
+                CIVIL_DAILY_CAUSE_LIST,
                 COURT_ID,
                 CURRENT_DATETIME.toString()
         );
@@ -254,7 +254,7 @@ class PostPublicationTest {
                 ENGLISH,
                 CURRENT_DATETIME.toString(),
                 null,
-                CARE_STANDARDS_LIST,
+                CIVIL_DAILY_CAUSE_LIST,
                 COURT_ID,
                 CURRENT_DATETIME.toString()
         );
@@ -308,7 +308,7 @@ class PostPublicationTest {
                 ENGLISH,
                 CURRENT_DATETIME.toString(),
                 CURRENT_DATETIME.plusDays(1).toString(),
-                CARE_STANDARDS_LIST,
+                CIVIL_DAILY_CAUSE_LIST,
                 null,
                 CURRENT_DATETIME.toString()
         );
@@ -335,7 +335,7 @@ class PostPublicationTest {
                 ENGLISH,
                 CURRENT_DATETIME.toString(),
                 CURRENT_DATETIME.plusDays(1).toString(),
-                CARE_STANDARDS_LIST,
+                CIVIL_DAILY_CAUSE_LIST,
                 COURT_ID,
                 null
         );
@@ -359,7 +359,7 @@ class PostPublicationTest {
                 ENGLISH,
                 CURRENT_DATETIME.toString(),
                 CURRENT_DATETIME.plusDays(1).toString(),
-                CARE_STANDARDS_LIST,
+                CIVIL_DAILY_CAUSE_LIST,
                 COURT_ID,
                 CURRENT_DATETIME.toString()
         );
@@ -383,7 +383,7 @@ class PostPublicationTest {
      * @param language The language of the publication e.g. ENGLISH.
      * @param displayFrom The date to display the publication from.
      * @param displayTo The date to display the publication to.
-     * @param listType The type of list e.g. CARE_STANDARDS_LIST.
+     * @param listType The type of list e.g. CIVIL_DAILY_CAUSE_LIST.
      * @param courtId The id of the court to send the publication to.
      * @param contentDate The content date of the publication.
      * @return The same input map with the updated pip headers.
