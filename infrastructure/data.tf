@@ -3,8 +3,6 @@ locals {
   resource_group_name = "${local.prefix}-sharedinfra-sds-${var.env}-rg"
   key_vault_name      = "${local.prefix}-sds-kv-${var.env}"
   pip_client_host     = "pip-client-host"
-  vh_client_host      = "vh-client-host"
-  vh_OAuth_url        = "vh-OAuth-url"
   cft_client_host     = "cft-client-host"
   cft_OAuth_url       = "cft-OAuth-url"
   crime_client_host   = "crime-client-host"
@@ -25,18 +23,6 @@ data "azurerm_key_vault" "kv" {
 data "azurerm_key_vault_secret" "pip_client_host" {
   count        = local.deploy_apim
   name         = local.pip_client_host
-  key_vault_id = data.azurerm_key_vault.kv.id
-}
-
-data "azurerm_key_vault_secret" "vh_client_host" {
-  count        = local.deploy_apim
-  name         = local.vh_client_host
-  key_vault_id = data.azurerm_key_vault.kv.id
-}
-
-data "azurerm_key_vault_secret" "vh_OAuth_url" {
-  count        = local.deploy_apim
-  name         = local.vh_OAuth_url
   key_vault_id = data.azurerm_key_vault.kv.id
 }
 
