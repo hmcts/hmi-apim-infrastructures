@@ -1,7 +1,5 @@
 {
   "document": {
-    "version": "",
-    "publicationDate": "2016-09-13T23:30:52.123Z"
   },
   "venue": {
     "venueName": "PRESTON",
@@ -11,15 +9,15 @@
     },
     "venueAddress": {
       "line": [
-        "THE LAW COURTS"
+        "Address Line 1"
       ],
-      "town": "town name",
-      "postCode": ""
+      "postCode": "Postcode"
     }
   },
   "courtLists": [
     {
       "courtHouse": {
+        "courtHouseName": "PRESTON",
         "courtHouseAddress": {
           "line": [
             "Address Line 1"
@@ -32,35 +30,60 @@
             "session": [
               {
                 "sessionChannel": [
-                  "VIDEO HEARING",
-                  ""
+                  "VIDEO HEARING"
                 ],
                 "sittings": [
                   {
-                    "sittingStart": "",
-                    "sittingEnd": "",
+                    "sittingStart": "2023-05-15T16:00:00.000Z",
+                    "sittingEnd": "2023-05-15T16:00:00.000Z",
                     "hearing": [
                       {
-                        "hearingType": "",
+                        "hearingType": "Hearing Type",
+                        "party": [
+                          {
+                            "partyRole": "APPLICANT",
+                            "individualDetails": {
+                              "individualSurname": "Applicant Surname"
+                            }
+                          },
+                          {
+                            "partyRole": "RESPONDENT",
+                            "organisationDetails": {
+                              "organisationName": "Respondent Org Name"
+                            }
+                          },
+                          {
+                            "partyRole": "APPLICANT_REPRESENTATIVE",
+                            "individualDetails": {
+                              "individualSurname": "Applicant Rep Surname"
+                            }
+                          },
+                          {
+                            "partyRole": "RESPONDENT_REPRESENTATIVE",
+                            "organisationDetails": {
+                              "organisationName": "Respondent Rep Surname"
+                            }
+                          }
+                        ],
                         "case": [
                           {
-                            "caseName": "",
-                            "caseNumber": "45684548"
+                            "caseName": "This is a case name",
+                            "caseNumber": "45684548",
+                            "caseType": "Case Type"
                           }
                         ]
                       },
                       {
-                        "hearingType": "mda",
+                        "hearingType": "Hearing Type",
                         "case": [
                           {
                             "caseName": "A Vs B",
-                            "caseNumber": ""
+                            "caseNumber": "12345678",
+                            "caseSequenceIndicator": "2 of 3",
+                            "caseType": "Case Type"
                           }
                         ]
                       }
-                    ],
-                    "channel": [
-                      ""
                     ]
                   }
                 ]
@@ -72,30 +95,36 @@
             "session": [
               {
                 "sessionChannel": [
-                  ""
+                  "Session Channel"
+                ],
+                "judiciary": [
+                  {
+                    "johNameSurname": "Test Name",
+                    "johTitle": "District Judge"
+                  }
                 ],
                 "sittings": [
                   {
-                    "sittingStart": "",
-                    "sittingEnd": "",
+                    "sittingStart": "2023-05-15T16:00:00.000Z",
+                    "sittingEnd": "2023-05-15T16:00:00.000Z",
                     "hearing": [
                       {
-                        "hearingType": "",
+                        "hearingType": "Hearing Type",
                         "case": [
                           {
-                            "caseName": "",
-                            "caseNumber": "45684548"
+                            "caseName": "John Smith v Jane Doe",
+                            "caseNumber": "45684548",
+                            "caseType": "Case Type"
                           },
                           {
-                            "caseName": "",
-                            "caseNumber": "",
-                            "caseSequenceIndicator": "2 of 3"
+                            "caseName": "This is another case name",
+                            "caseNumber": "This is a case number",
+                            "caseType": "Case Type"
                           }
                         ]
                       }
                     ],
                     "channel": [
-                      "",
                       "VIDEO HEARING"
                     ]
                   }
