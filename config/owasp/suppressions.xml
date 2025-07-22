@@ -16,4 +16,9 @@
         <notes>To be fixed once upgrade for Spring Boot</notes>
         <cve>CVE-2025-46701</cve>
     </suppress>
+    <suppress>
+        <notes><![CDATA[ Suppressing false positives for tomcat-embed-core 10.1.41 ]]></notes>
+        <cve>CVE-2025-49124</cve>
+        <cve>CVE-2025-49125</cve>
+    </suppress>
 </suppressions>
