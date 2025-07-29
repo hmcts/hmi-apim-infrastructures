@@ -8,4 +8,12 @@
         <notes>This exists in Apache Tomcat which is included from springboot dependency. Should be removed once we updated springboot to 3.4.5</notes>
         <cve>CVE-2025-31651</cve>
     </suppress>
+    <suppress>
+        <notes>To be fixed once upgrade for Spring Boot</notes>
+        <cve>CVE-2025-48988</cve>
+    </suppress>
+    <suppress>
+        <notes>To be fixed once upgrade for Spring Boot</notes>
+        <cve>CVE-2025-46701</cve>
+    </suppress>
 </suppressions>
