@@ -25,9 +25,4 @@
         <notes>commons-lang3 library brought in by a number of dependencies</notes>
         <cve>CVE-2025-48924</cve>
     </suppress>
-    <suppress>
-        <notes><![CDATA[file name: tomcat-embed-core-10.1.42.jar]]></notes>
-        <cve>CVE-2025-52520</cve>
-        <cve>CVE-2025-53506</cve>
-    </suppress>
 </suppressions>
