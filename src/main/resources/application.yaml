@@ -11,10 +11,6 @@ management:
       exposure:
         include: health, info, prometheus
 
-springdoc:
-  packagesToScan: uk.gov.hmcts.reform.apim-infrastructures.controllers
-  writer-with-order-by-keys: true
-
 spring:
   config:
     import: "optional:configtree:/mnt/secrets/hmi/"
