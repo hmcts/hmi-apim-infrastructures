@@ -6,7 +6,50 @@
                 <set-header name="Host" exists-action="override">
                     <value>#pihHost#</value>
                 </set-header>
-                <include-fragment fragment-id="hmi-cath-auth-token-generation" />
+                <cache-lookup-value key="pihAuth" variable-name="pihAuthToken" />
+                <choose>
+                    <when condition="@(context.Variables.GetValueOrDefault("pihAuthToken", "") == "")">
+                        <send-request ignore-error="false" timeout="20" response-variable-name="pipClientResponse" mode="new">
+                            <set-url>https://#keyVaultHost#/secrets/pip-client-id/?api-version=7.0</set-url>
+                            <set-method>GET</set-method>
+                            <authentication-managed-identity resource="https://vault.azure.net" />
+                        </send-request>
+                        <set-variable name="pipClient" value="@{
+                            var secret = ((IResponse)context.Variables["pipClientResponse"]).Body.As<JObject>();
+                            return secret["value"].ToString();
+                        }" />
+                        <send-request ignore-error="false" timeout="20" response-variable-name="pipSecretResponse" mode="new">
+                            <set-url>https://#keyVaultHost#/secrets/pip-client-pwd/?api-version=7.0</set-url>
+                            <set-method>GET</set-method>
+                            <authentication-managed-identity resource="https://vault.azure.net" />
+                        </send-request>
+                        <set-variable name="pipSecret" value="@{
+                            var secret = ((IResponse)context.Variables["pipSecretResponse"]).Body.As<JObject>();
+                            return secret["value"].ToString();
+                        }" />
+                        <send-request ignore-error="false" timeout="20" response-variable-name="pipScopeResponse" mode="new">
+                            <set-url>https://#keyVaultHost#/secrets/pip-client-scope/?api-version=7.0</set-url>
+                            <set-method>GET</set-method>
+                            <authentication-managed-identity resource="https://vault.azure.net" />
+                        </send-request>
+                        <set-variable name="pipScope" value="@{
+                            var secret = ((IResponse)context.Variables["pipScopeResponse"]).Body.As<JObject>();
+                            return secret["value"].ToString();
+                        }" />
+                        <send-request ignore-error="true" timeout="20" response-variable-name="pipBearerToken" mode="new">
+                            <set-url>https://login.microsoftonline.com/531ff96d-0ae9-462a-8d2d-bec7c0b42082/oauth2/v2.0/token</set-url>
+                            <set-method>POST</set-method>
+                            <set-header name="Content-Type" exists-action="override">
+                                <value>application/x-www-form-urlencoded</value>
+                            </set-header>
+                            <set-body>@{
+                            return "client_id=" + (string)context.Variables["pipClient"] + "&scope=" + (string)context.Variables["pipScope"] + "/.default&client_secret=" + (string)context.Variables["pipSecret"] + "&grant_type=client_credentials";
+                            }</set-body>
+                        </send-request>
+                        <set-variable name="pihAuthToken" value="@("Bearer " + (String)((IResponse)context.Variables["pipBearerToken"]).Body.As<JObject>()["access_token"])" />
+                        <cache-store-value key="pihAuth" value="@((String)context.Variables["pihAuthToken"])" duration="2700" />
+                    </when>
+                </choose>
                 <set-header name="Authorization" exists-action="override">
                     <value>@((String)context.Variables["pihAuthToken"])</value>
                 </set-header>
@@ -20,7 +63,17 @@
                 <mock-response status-code="201" content-type="application/json" />
             </when>
             <otherwise>
-                <include-fragment fragment-id="hmi-invalid-destination-response" />
+                <return-response>
+                    <set-status code="400" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>@{
+                    return new JObject(
+                    new JProperty("message", context.Request.Headers.GetValueOrDefault("Destination-System","") + " destination doesn't support this functionality")
+                    ).ToString();
+                    }</set-body>
+                </return-response>
             </otherwise>
         </choose>
     </inbound>
@@ -32,7 +85,18 @@
         <choose>
             <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
                 <cache-remove-value key="pihAuth" />
-                <include-fragment fragment-id="hmi-failed-destination-authentication-response" />
+                <return-response>
+                    <set-status code="502" />
+                    <set-header name="Content-Type">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>@{
+                        return new JObject(
+                        new JProperty("message", "Successfully authenticated by HMI, however target system failed to authenticate. Please try again.")
+                        ).ToString();
+                        }
+                    </set-body>
+                </return-response>
             </when>
         </choose>
     </outbound>

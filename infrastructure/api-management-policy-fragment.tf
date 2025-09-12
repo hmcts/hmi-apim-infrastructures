@@ -31,12 +31,3 @@ resource "azurerm_api_management_policy_fragment" "elinks_auth_token" {
   value = replace(file("${path.module}/resources/policy-fragments/elinks-auth-token-fragment.xml"),
   "#keyVaultHost#", var.key_vault_host)
 }
-
-resource "azurerm_api_management_policy_fragment" "cath-auth-token-generation" {
-  api_management_id = data.azurerm_api_management.sds_apim.id
-  name              = "${var.product}-cath-auth-token-generation"
-  format            = "rawxml"
-  description       = "This fragment contains code to generate the authentication token to communicate with CaTH"
-  value = replace(file("${path.module}/resources/policy-fragments/cath-auth-token-generation-fragment.xml"),
-  "#keyVaultHost#", var.key_vault_host)
-}
