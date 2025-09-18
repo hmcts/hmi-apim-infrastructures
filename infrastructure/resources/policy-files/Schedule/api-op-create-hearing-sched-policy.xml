@@ -3,76 +3,16 @@
         <base />
         <choose>
 			<when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "SNL")">
-                <cache-lookup-value key="snlAuth" variable-name="snlAuthToken" />
-                <choose>
-                    <when condition="@(context.Variables.GetValueOrDefault("snlAuthToken","") == "")">
-                        <send-request ignore-error="false" timeout="20" response-variable-name="snlClientResponse" mode="new">
-                            <set-url>https://#keyVaultHost#/secrets/snl-client-id/?api-version=7.0</set-url>
-                            <set-method>GET</set-method>
-                            <authentication-managed-identity resource="https://vault.azure.net" />
-                        </send-request>
-                        <set-variable name="snlClient" value="@{
-                            var secret = ((IResponse)context.Variables["snlClientResponse"]).Body.As<JObject>();
-                            return secret["value"].ToString();
-                        }" />
-                        <send-request ignore-error="false" timeout="20" response-variable-name="snlSecretResponse" mode="new">
-                            <set-url>https://#keyVaultHost#/secrets/snl-client-pwd/?api-version=7.0</set-url>
-                            <set-method>GET</set-method>
-                            <authentication-managed-identity resource="https://vault.azure.net" />
-                        </send-request>
-                        <set-variable name="snlSecret" value="@{
-                            var secret = ((IResponse)context.Variables["snlSecretResponse"]).Body.As<JObject>();
-                            return secret["value"].ToString();
-                        }" />
-                        <send-request ignore-error="true" timeout="20" response-variable-name="snlBearerToken" mode="new">
-                            <set-url>#sAndLOauthUrl#</set-url>
-                            <set-method>POST</set-method>
-                            <set-header name="Content-Type" exists-action="override">
-                                <value>application/x-www-form-urlencoded</value>
-                            </set-header>
-                            <set-body>@{
-                                return "username=" + (string)context.Variables["snlClient"] + "&password=" + (string)context.Variables["snlSecret"] + "&grant_type=password_credentials";}</set-body>
-                        </send-request>
-                        <set-header name="Authorization" exists-action="override">
-                            <value>@("Bearer " + (String)((IResponse)context.Variables["snlBearerToken"]).Body.As<JObject>()["idToken"])</value>
-                        </set-header>
-                        <cache-store-value key="snlAuth" value="@(context.Request.Headers.GetValueOrDefault("Authorization", ""))" duration="2700" />
-                    </when>
-                    <otherwise>
-                        <set-header name="Authorization" exists-action="override">
-                            <value>@((String)context.Variables["snlAuthToken"])</value>
-                        </set-header>
-                    </otherwise>
-                </choose>
+                <include-fragment fragment-id="hmi-snl-auth-token-generation" />
                 <rewrite-uri template="/" copy-unmatched-params="true" />
-                <set-header name="Content-Type" exists-action="override">
-                    <value>application/json; charset=utf-8</value>
-                </set-header>
-                <set-header name="Request-Type" exists-action="override">	
-                    <value>text</value>
-                </set-header>
-                <set-header name="Subscription-Key" exists-action="override">
-                    <value>@(context.Request.Headers.GetValueOrDefault("Ocp-Apim-Subscription-Key","unknown"))</value>
-                </set-header>
-                <!--  Don't expose APIM subscription key to the backend. -->
-                <set-header name="Ocp-Apim-Subscription-Key" exists-action="delete" />
+                <include-fragment fragment-id="hmi-snl-headers" />
                 <set-backend-service base-url="https://#sAndLHost#/rest/hmcts/resources/assignJohs" />
 			</when>
 			<when condition="@(context.Request.Headers.GetValueOrDefault("Destination-System","") == "MOCK")">
 				<mock-response status-code="201" content-type="application/json" />		
         	</when>
             <otherwise>
-                <return-response>
-                    <set-status code="400" />
-                    <set-header name="Content-Type" exists-action="override">
-                        <value>application/json</value>
-                    </set-header>
-                    <set-body>@{
-                    return new JObject(
-                    new JProperty("message", context.Request.Headers.GetValueOrDefault("Destination-System","") + " destination doesn't support this functionality")
-                    ).ToString();
-                    }</set-body>
-                </return-response>
+                <include-fragment fragment-id="hmi-invalid-destination-response" />
             </otherwise>
 		</choose>
     </inbound>
@@ -84,18 +24,7 @@
     <choose>
         <when condition="@(context.Response.StatusCode == 401 || context.Response.StatusCode == 403)">
             <cache-remove-value key="snlAuth" />
-            <return-response>
-                <set-status code="502" />
-                <set-header name="Content-Type">
-                    <value>application/json</value>
-                </set-header>
-                <set-body>@{
-                    return new JObject(
-                    new JProperty("message", "Successfully authenticated by HMI, however target system failed to authenticate. Please try again.")
-                    ).ToString();
-                    }
-                </set-body>
-            </return-response>
+            <include-fragment fragment-id="hmi-failed-destination-authentication-response" />
         </when>
     </choose>
     </outbound>
