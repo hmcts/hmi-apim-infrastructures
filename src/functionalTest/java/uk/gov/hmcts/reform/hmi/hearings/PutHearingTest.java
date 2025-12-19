@@ -32,21 +32,6 @@ class PutHearingTest {
     }
 
     /**
-     * Test with an empty payload for CRIME, a valid set of headers and valid payload, expect 404.
-     */
-    @Test
-    @Disabled
-    void putHearingCrimeFail() throws IOException {
-        restClientHelper.performSecurePutRequestAndValidate(
-                "{}",
-                HeaderHelper.createHeaders("CRIME"),
-                "/hearings/123",
-                "",
-                404
-        );
-    }
-
-    /**
      * Test with a empty payload for CFT, a valid set of headers and valid payload, expect 404.
      */
     @Test
@@ -66,7 +51,7 @@ class PutHearingTest {
     @Test
     
     void putHearingInvalidHeaderFail() throws IOException {
-        Map<String, String> requestHeader =  HeaderHelper.createHeaders("CRIME");
+        Map<String, String> requestHeader =  HeaderHelper.createHeaders("CFT");
         requestHeader.remove("Destination-System");
 
         restClientHelper.performSecurePutRequestAndValidate(
