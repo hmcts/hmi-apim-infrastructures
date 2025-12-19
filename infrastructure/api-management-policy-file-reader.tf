@@ -4,16 +4,14 @@ locals {
   policy_file_template = [for policy in local.policies_data.policies :
     {
       operation_id = policy.operationId
-      xml_content = replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(file("${path.module}/resources/policy-files/${policy.templateFile}"),
+      xml_content = replace(replace(replace(replace(replace(replace(replace(replace(file("${path.module}/resources/policy-files/${policy.templateFile}"),
         "#keyVaultHost#", var.key_vault_host),
         "#pihHost#", length(data.azurerm_key_vault_secret.pip_client_host) > 0 ? data.azurerm_key_vault_secret.pip_client_host[0].value : ""),
         "#cftHost#", length(data.azurerm_key_vault_secret.cft_client_host) > 0 ? data.azurerm_key_vault_secret.cft_client_host[0].value : ""),
         "#cftOauthUrl#", length(data.azurerm_key_vault_secret.cft_OAuth_url) > 0 ? data.azurerm_key_vault_secret.cft_OAuth_url[0].value : ""),
-        "#crimeHost#", length(data.azurerm_key_vault_secret.crime_client_host) > 0 ? data.azurerm_key_vault_secret.crime_client_host[0].value : ""),
         "#elinksHost#", length(data.azurerm_key_vault_secret.elinks_client_host) > 0 ? data.azurerm_key_vault_secret.elinks_client_host[0].value : ""),
         "#sAndLHost#", length(data.azurerm_key_vault_secret.snl_client_host) > 0 ? data.azurerm_key_vault_secret.snl_client_host[0].value : ""),
         "#sAndLOauthUrl#", length(data.azurerm_key_vault_secret.snl_OAuth_url) > 0 ? data.azurerm_key_vault_secret.snl_OAuth_url[0].value : ""),
-        "#enableCrimeNewHealthCheck#", var.enable-crime-new-health-check),
       "#hmiHost#", var.apim_url)
       display_name = policy.display_name
       method       = policy.method
