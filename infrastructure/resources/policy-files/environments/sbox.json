@@ -127,23 +127,6 @@
       }
     },
     {
-      "operationId": "crime-health",
-      "templateFile": "Crime/api-op-crime-health-policy.xml",
-      "display_name": "Crime Health Check",
-      "method": "GET",
-      "url_template": "/crime-health",
-      "description": "Health check for Crime",
-      "response":
-      {
-        "status_code": "200",
-        "description": ""
-      },
-      "tag": {
-        "name": "health-check",
-        "display_name": "health-check"
-      }
-    },
-    {
       "operationId": "elinks-health",
       "templateFile": "eLinks/sbox/api-op-elinks-health-policy.xml",
       "display_name": "eLinks API Health Check",
