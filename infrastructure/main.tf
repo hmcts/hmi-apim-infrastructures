@@ -22,7 +22,7 @@ data "azurerm_api_management" "sds_apim" {
   resource_group_name = local.apim_rg
 }
 
-resource "azurerm_resource_group" "rg" {
+data "azurerm_resource_group" "rg" {
   name     = local.resource_group_name
   location = var.location
   tags     = var.common_tags
