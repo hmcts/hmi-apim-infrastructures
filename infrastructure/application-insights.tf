@@ -4,7 +4,7 @@ module "application_insights" {
   env     = var.env
   product = var.product
 
-  resource_group_name = data.azurerm_resource_group.rg.name
+  resource_group_name = local.apim_rg
   sampling_percentage = var.sampling_percentage
   common_tags         = var.common_tags
 }
