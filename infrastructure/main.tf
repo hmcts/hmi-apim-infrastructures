@@ -9,7 +9,7 @@ locals {
   env_subdomain = local.env_long_name == "prod" ? "" : "${local.env_long_name}."
 
   apim_name_prefix = "sds-api-mgmt"
-  apim_name = "sds-api-mgmt-${local.env}"
+  apim_name = "${local.apim_name_prefix}-${local.env}"
   apim_rg   = "ss-${local.env}-network-rg"
 
 
