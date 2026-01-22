@@ -8,7 +8,7 @@ locals {
   elinks_client_host  = "elinks-client-host"
   snl_client_host     = "snl-client-host"
   snl_OAuth_url       = "snl-OAuth-url"
-  apim_resource_name = "ss-${var.env}-network-rg"
+  apim_resource_name  = "ss-${var.env}-network-rg"
 }
 
 data "azurerm_client_config" "current" {}
