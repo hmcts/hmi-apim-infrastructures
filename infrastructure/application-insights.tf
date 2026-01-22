@@ -2,7 +2,7 @@ module "application_insights" {
   source = "git@github.com:hmcts/terraform-module-application-insights?ref=4.x"
 
   env     = var.env
-  name    = "${var.product}-${local.apim_name}"
+  name    = "${var.product}-${local.apim_name_prefix}"
   product = var.product
 
   resource_group_name = local.apim_rg
