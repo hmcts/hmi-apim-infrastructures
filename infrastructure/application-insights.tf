@@ -14,7 +14,7 @@ module "application_insights" {
 resource "azurerm_api_management_logger" "ai-logger" {
   name                = "${var.product}-${local.apim_name}-logger"
   api_management_name = local.apim_name
-  resource_group_name = local.apim_resource_name
+  resource_group_name = local.apim_rg
   count               = local.env == "prod" ? 0 : 1
 
   application_insights {
