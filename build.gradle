@@ -91,7 +91,7 @@ checkstyle {
 }
 
 pmd {
-  toolVersion = "7.18.0"
+  toolVersion = "7.20.0"
   sourceSets = [sourceSets.main, sourceSets.test, sourceSets.functionalTest, sourceSets.smokeTest]
   reportsDir = file("${layout.buildDirectory.get()}/reports/pmd")
   // https://github.com/pmd/pmd/issues/876
