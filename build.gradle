@@ -86,7 +86,7 @@ tasks.register('smoke', Test) {
 
 checkstyle {
   maxWarnings = 0
-  toolVersion = '12.1.1'
+  toolVersion = '13.0.0'
   getConfigDirectory().set(new File(rootDir, 'config/checkstyle'))
 }
 
