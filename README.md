@@ -1,4 +1,4 @@
-# hmi-apim-infrastructures.
+# hmi-apim-infrastructures
 
 ## Building and deploying the application
 
