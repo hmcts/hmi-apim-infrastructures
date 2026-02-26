@@ -41,3 +41,7 @@ variable "apim_url" {
   type        = string
   description = "The url of the apim"
 }
+
+variable "sampling_percentage" {
+  default = "100"
+}
