@@ -12,6 +12,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public final class HeaderHelper {
 
+    private HeaderHelper() {
+    }
+
     public static Map<String, String> createHeaders(String destinationSystem) {
 
         final LocalDateTime now = LocalDateTime.now();

@@ -8,6 +8,9 @@ import java.nio.file.Path;
 
 public class FileHelper {
 
+    private FileHelper() {
+    }
+
     /**
      * Takes in a file name and returns it as a string, used to extract json from payload.
      *

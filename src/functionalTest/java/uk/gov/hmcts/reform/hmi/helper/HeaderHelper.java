@@ -14,6 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public final class HeaderHelper {
 
+    private HeaderHelper() {
+    }
+
     /**
      * Create the standard set of headers required to send data into HMI APIM.
      *
