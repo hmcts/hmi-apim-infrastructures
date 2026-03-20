@@ -25,7 +25,6 @@ import static uk.gov.hmcts.reform.hmi.helper.HeaderHelper.putIfNotNullOrEmpty;
  */
 @SpringBootTest
 @ActiveProfiles(profiles = "functional")
-@SuppressWarnings({"PMD.TooManyMethods", "PMD.AvoidReassigningParameters", "PMD.LawOfDemeter"})
 class PostPublicationTest {
 
     @Value("${apim_url}")
@@ -387,7 +386,6 @@ class PostPublicationTest {
      * @param contentDate The content date of the publication.
      * @return The same input map with the updated pip headers.
      */
-    @SuppressWarnings("PMD.ExcessiveParameterList")
     private Map<String, String> updateHeadersWithPipSpecific(Map<String, String> headers,
                                                              String provenance,
                                                              String type,

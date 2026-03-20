@@ -10,7 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Helper class for creating the headers required to send requests into HMI.
  */
-@SuppressWarnings("HideUtilityClassConstructor")
 public final class HeaderHelper {
 
     public static Map<String, String> createHeaders(String destinationSystem) {
