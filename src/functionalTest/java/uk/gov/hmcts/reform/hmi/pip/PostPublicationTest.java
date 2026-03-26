@@ -98,7 +98,7 @@ class PostPublicationTest {
                 getJsonPayloadFileAsString("pip/invalid-civil-daily-cause-list.json"),
                 requestHeaders,
                 ENDPOINT,
-                "$.document: required property 'publicationDate' not found",
+                "/document: required property 'publicationDate' not found",
                 400
         );
     }
