@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-@SuppressWarnings({"HideUtilityClassConstructor", "PMD.LawOfDemeter"})
 public class FileHelper {
+
+    private FileHelper() {
+    }
 
     /**
      * Takes in a file name and returns it as a string, used to extract json from payload.

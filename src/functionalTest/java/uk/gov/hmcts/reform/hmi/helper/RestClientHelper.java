@@ -14,7 +14,6 @@ import static org.hamcrest.Matchers.containsString;
  * Helper class to send http requests and validate the responses.
  */
 @Service
-@SuppressWarnings("HideUtilityClassConstructor")
 public final class RestClientHelper {
 
     @Value("${token_url}")
