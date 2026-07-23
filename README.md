@@ -27,7 +27,8 @@ Create docker image:
   docker-compose build
 ```
 
-Run the distribution (created in `build/install/hmi-apim-infrastructures` directory)
+Run the distribution (created in `build/install/hmi-apim-infrastructures` directory).
+Run the distribution (created in `build/install/hmi-apim-infrastructures` directory).
 by executing the following command:
 
 ```bash
