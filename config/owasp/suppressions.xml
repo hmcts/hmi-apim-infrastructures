@@ -1,3 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <suppress>
+        <notes>Tomcat 10.1.52 false positives or accepted risk</notes>
+        <cve>CVE-2026-53434</cve>
+        <cve>CVE-2026-55276</cve>
+        <cve>CVE-2026-59083</cve>
+        <cve>CVE-2026-59084</cve>
+        <cve>CVE-2026-53404</cve>
+        <cve>CVE-2026-55955</cve>
+        <cve>CVE-2026-55956</cve>
+        <cve>CVE-2026-50229</cve>
+    </suppress>
+    <suppress>
+        <notes>log4j suppression</notes>
+        <cve>CVE-2026-49844</cve>
+    </suppress>
 </suppressions>
