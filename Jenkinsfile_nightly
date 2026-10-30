@@ -5,7 +5,7 @@ properties([
   pipelineTriggers([cron('30 07 * * 1-5')])
 ])
 
-@Library("Infrastructure")
+@Library("Infrastructure@2.8.0")
 
 def type = "java"
 def product = "hmi"
