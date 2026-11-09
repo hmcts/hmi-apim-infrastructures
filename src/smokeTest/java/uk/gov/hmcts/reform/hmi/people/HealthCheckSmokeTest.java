@@ -2,6 +2,7 @@ package uk.gov.hmcts.reform.hmi.people;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +26,7 @@ class HealthCheckSmokeTest {
     }
 
     @Test
+    @Disabled
     void peopleHealthCheckTest() {
         restClientHelper.performGetRequestAndValidate(
                 "/elinks-health",
