@@ -2,7 +2,6 @@ package uk.gov.hmcts.reform.hmi.people;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,7 +38,6 @@ class PeopleTest {
     }
 
     @Test
-    @Disabled
     void peopleGetSuccessful() throws IOException {
         Map<String, String> queryParameters = new ConcurrentHashMap<>();
         queryParameters.put(UPDATE_SINCE, "2019-01-29");
@@ -58,7 +56,6 @@ class PeopleTest {
      * Ticket cannot be moved to done column until this test will be enabled.
      */
     @Test
-    @Disabled
     void peopleGetByIdSuccessful() throws IOException {
         Map<String, String> requestHeader =  HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         getPeopleById = String.format(getPeopleById, "PPLN1");
@@ -70,7 +67,6 @@ class PeopleTest {
     }
 
     @Test
-    @Disabled
     void peopleGetMissingDestinationHeader() throws IOException {
         Map<String, String> requestHeader = HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         requestHeader.remove("Destination-System");
@@ -88,7 +84,6 @@ class PeopleTest {
     }
 
     @Test
-    @Disabled
     void peopleGetInvalidQueryParams() throws IOException {
         Map<String, String> queryParameters = new ConcurrentHashMap<>();
         queryParameters.put(UPDATE_SINCE, "2019-02-29");
@@ -105,7 +100,6 @@ class PeopleTest {
     }
 
     @Test
-    @Disabled
     void peopleGetMissingOAuth() throws IOException {
         Map<String, String> requestHeader = HeaderHelper.createHeaders(DESTINATION_SYSTEM);
 
@@ -116,7 +110,6 @@ class PeopleTest {
     }
 
     @Test
-    @Disabled
     void peopleGeByIdtMissingOAuth() throws IOException {
         Map<String, String> requestHeader = HeaderHelper.createHeaders(DESTINATION_SYSTEM);
         getPeopleById = String.format(getPeopleById, "PPLN2");
@@ -128,7 +121,6 @@ class PeopleTest {
     }
 
     @Test
-    @Disabled
     void peopleGetByIdInvalidRequest() throws IOException {
         Map<String, String> requestHeader = HeaderHelper.createHeaders(DESTINATION_SYSTEM);
 
