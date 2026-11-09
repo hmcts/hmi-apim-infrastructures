@@ -105,7 +105,7 @@ class PeopleTest {
     }
 
     @Test
-    Disabled
+    @Disabled
     void peopleGetMissingOAuth() throws IOException {
         Map<String, String> requestHeader = HeaderHelper.createHeaders(DESTINATION_SYSTEM);
 
