@@ -3,7 +3,7 @@ plugins {
   id 'checkstyle'
   id 'jacoco'
   id 'io.spring.dependency-management' version '1.1.7'
-  id 'org.springframework.boot' version '4.1.0'
+  id 'org.springframework.boot' version '4.1.2'
   id 'org.owasp.dependencycheck' version '12.2.1'
   id 'com.github.ben-manes.versions' version '0.54.0'
   id 'org.sonarqube' version '7.3.1.8318'
@@ -144,10 +144,12 @@ repositories {
 }
 
 ext {
-  log4JVersion = "2.26.0"
+  log4JVersion = "2.26.1"
 }
 
-ext['snakeyaml.version'] = '2.0'
+// logback-classic directory traversal (SNYK-JAVA-CHQOSLOGBACK-19882330) is only fixed in 1.6.3;
+// remove once Spring Boot manages logback 1.6.x
+ext['logback.version'] = '1.6.3'
 
 dependencies {
   implementation "org.springframework.boot:spring-boot-starter-webmvc"
